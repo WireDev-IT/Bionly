@@ -4,109 +4,109 @@
       "scale": "2x",
       "size": "20x20",
       "idiom": "iphone",
-      "filename": "Icon40.png"
+      "filename": "bionly_square_40.png"
     },
     {
       "scale": "3x",
       "size": "20x20",
       "idiom": "iphone",
-      "filename": "Icon60.png"
+      "filename": "bionly_square_60.png"
+    },
+    {
+      "scale": "2x",
+      "size": "20x20",
+      "idiom": "ipad",
+      "filename": "bionly_square_402.png"
+    },
+    {
+      "scale": "1x",
+      "size": "40x40",
+      "idiom": "ipad",
+      "filename": "bionly_square_401.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
       "idiom": "iphone",
-      "filename": "Icon58.png"
+      "filename": "bionly_square_58.png"
     },
     {
       "scale": "3x",
       "size": "29x29",
       "idiom": "iphone",
-      "filename": "Icon87.png"
+      "filename": "bionly_square_87.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "Icon80.png"
+      "filename": "bionly_square_80.png"
     },
     {
       "scale": "3x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "Icon120.png"
+      "filename": "bionly_square_120.png"
     },
     {
       "scale": "2x",
       "size": "60x60",
       "idiom": "iphone",
-      "filename": "Icon120.png"
+      "filename": "bionly_square_1201.png"
     },
     {
       "scale": "3x",
       "size": "60x60",
       "idiom": "iphone",
-      "filename": "Icon180.png"
+      "filename": "bionly_square_1801.png"
     },
     {
       "scale": "1x",
       "size": "20x20",
       "idiom": "ipad",
-      "filename": "Icon20.png"
-    },
-    {
-      "scale": "2x",
-      "size": "20x20",
-      "idiom": "ipad",
-      "filename": "Icon40.png"
+      "filename": "bionly_square_20.png"
     },
     {
       "scale": "1x",
       "size": "29x29",
       "idiom": "ipad",
-      "filename": "Icon29.png"
+      "filename": "bionly_square_29.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
       "idiom": "ipad",
-      "filename": "Icon58.png"
-    },
-    {
-      "scale": "1x",
-      "size": "40x40",
-      "idiom": "ipad",
-      "filename": "Icon40.png"
+      "filename": "bionly_square_581.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "Icon80.png"
+      "filename": "bionly_square_801.png"
     },
     {
       "scale": "1x",
       "size": "76x76",
       "idiom": "ipad",
-      "filename": "Icon76.png"
+      "filename": "bionly_square_76.png"
     },
     {
       "scale": "2x",
       "size": "76x76",
       "idiom": "ipad",
-      "filename": "Icon152.png"
+      "filename": "bionly_square_152.png"
     },
     {
       "scale": "2x",
       "size": "83.5x83.5",
       "idiom": "ipad",
-      "filename": "Icon167.png"
+      "filename": "bionly_square_167.png"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
       "idiom": "ios-marketing",
-      "filename": "Icon1024.png"
+      "filename": "bionly_square_1024.png"
     }
   ],
   "properties": {},
