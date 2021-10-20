@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             x:Class="Bionly.Views.DashboardPage"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:DashboardViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Text="Aktualisieren"/>
+                </Grid>
+                <ScrollView HorizontalOptions="Fill" Orientation="Horizontal" Padding="5">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame Grid.Row="0" BorderColor="Gray" Margin="20" Padding="0" MinimumWidthRequest="500">
+                            <Grid HorizontalOptions="Start" Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="Nistkasten 1" FontSize="Subtitle"/>
+                                        <Label Grid.Row="1" Text="Online" FontSize="Caption"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1" Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Sensoren" FontSize="Small"/>
+                                    <Frame Grid.Row="1" BorderColor="Gray">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="Temperatur:"/>
+                                            <Label Grid.Column="0" Grid.Row="1" Text="Luftfeuchtigkeit:"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="00,00°C"/>
+                                            <Label Grid.Column="1" Grid.Row="1" Text="00%"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                                <Grid Grid.Row="2" Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Livebild Vorschau" FontSize="Small"/>
+                                    <Frame Grid.Row="1" BackgroundColor="DarkGray" HeightRequest="100" CornerRadius="0"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                        <Frame Grid.Row="0" BorderColor="Gray" Margin="20" Padding="0" MinimumWidthRequest="500">
+                            <Grid HorizontalOptions="Start" Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="Nistkasten 2" FontSize="Subtitle"/>
+                                        <Label Grid.Row="1" Text="Online" FontSize="Caption"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1" Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Sensoren" FontSize="Small"/>
+                                    <Frame Grid.Row="1" BorderColor="Gray">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="Temperatur:"/>
+                                            <Label Grid.Column="0" Grid.Row="1" Text="Luftfeuchtigkeit:"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="00,00°C"/>
+                                            <Label Grid.Column="1" Grid.Row="1" Text="00%"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                                <Grid Grid.Row="2" Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Livebild Vorschau" FontSize="Small"/>
+                                    <Frame Grid.Row="1" BackgroundColor="DarkGray" HeightRequest="100" CornerRadius="0"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                        <Frame Grid.Row="0" BorderColor="Gray" Margin="20" Padding="0" MinimumWidthRequest="500">
+                            <Grid HorizontalOptions="Start" Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="Nistkasten 3" FontSize="Subtitle"/>
+                                        <Label Grid.Row="1" Text="Online" FontSize="Caption"/>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1" Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Sensoren" FontSize="Small"/>
+                                    <Frame Grid.Row="1" BorderColor="Gray">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Column="0" Grid.Row="0" Text="Temperatur:"/>
+                                            <Label Grid.Column="0" Grid.Row="1" Text="Luftfeuchtigkeit:"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="00,00°C"/>
+                                            <Label Grid.Column="1" Grid.Row="1" Text="00%"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                                <Grid Grid.Row="2" Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="Livebild Vorschau" FontSize="Small"/>
+                                    <Frame Grid.Row="1" BackgroundColor="DarkGray" HeightRequest="100" CornerRadius="0"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

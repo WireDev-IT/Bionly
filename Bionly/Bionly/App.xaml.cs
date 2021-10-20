@@ -1,5 +1,4 @@
-﻿using Bionly.Services;
-using Bionly.Views;
+﻿using Bionly.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,7 +12,6 @@ namespace Bionly
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
