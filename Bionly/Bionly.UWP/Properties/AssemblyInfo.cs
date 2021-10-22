@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Bionly.UWP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("tomo2403")]
 [assembly: AssemblyProduct("Bionly.UWP")]
 [assembly: AssemblyCopyright("Copyright © tomo2403")]
 [assembly: AssemblyTrademark("")]

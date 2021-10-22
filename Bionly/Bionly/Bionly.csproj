@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <ApplicationIcon />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Authors>tomo2403</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright © tomo2403</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageIcon>bionly_square_512.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/tomo2403/Bionly</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +19,14 @@
     <None Remove="Resources\bionly_logo_svg.svg" />
     <None Remove="Resources\bionly_square.ico" />
     <None Remove="Resources\bionly_square_1024.png" />
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="Resources\bionly_square_512.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
