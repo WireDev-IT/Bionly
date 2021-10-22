@@ -63,7 +63,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -78,16 +78,24 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <FlyoutItem Title="Dashboard" Icon="Home">
+    <FlyoutItem Title="Dashboard" Icon="icon_Home.png">
         <ShellContent Route="DashboardPage" ContentTemplate="{DataTemplate local:DashboardPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="About" Icon="icon_about.png">
+    <FlyoutItem Title="Live Ansicht" Icon="icon_VideoCamera.png">
+        <ShellContent Route="LiveviewPage" ContentTemplate="{DataTemplate local:LiveviewPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Datenverwaltung" Icon="icon_Documents.png">
+        <ShellContent Route="FileManagerPage" ContentTemplate="{DataTemplate local:FileManagerPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Einstellungen" Icon="icon_Settings.png">
+        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Über" Icon="icon_Info.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
-    </MenuItem>
+    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked"/>
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
@@ -100,6 +108,29 @@
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </TabBar>
 
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <Grid Margin="0" Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="bionly_square_1024.png" WidthRequest="100" HorizontalOptions="Center" Margin="10,0,10,0"/>
+                    <StackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Bionly" TextColor="White" FontSize="Title"/>
+                        <Label Text="Copyright © tomo_2403" TextColor="White" FontSize="Caption"/>
+                    </StackLayout>
+                </Grid>
+                <Button Text="Systemverwalter" Margin="10,0,10,10"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+   
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
 

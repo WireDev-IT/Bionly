@@ -21,26 +21,67 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <Image Source="bionly_logo.png" VerticalOptions="Fill" HeightRequest="200" HorizontalOptions="Fill" />
+            <Image Source="bionly_logo.png" HeightRequest="180" WidthRequest="180" HorizontalOptions="Fill" Margin="10"/>
+            <Label Text="Copyright © tomo_2403" HorizontalOptions="Center" TextColor="DarkSlateGray" Margin="0,-10,0,10"/>
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Bionly" FontSize="Title"/>
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
-                <Label FontSize="16" Padding="0,24,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Learn more at "/>
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
-                        Command="{Binding OpenWebCommand}"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Margin="0,10,0,0" Text="Projekt auf GitHub"
+                        Command="{Binding OpenWebCommand}" CommandParameter="{Binding RepoLink}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"/>
+                    <Button Grid.Column="1" Margin="0,10,0,0" Text="Entwickler auf GitHub"
+                        Command="{Binding OpenWebCommand}" CommandParameter="{Binding DeveloperLink}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"/>
+                    <Button Grid.Column="2" Margin="0,10,0,0" Text="Website Schulbiologiezentrum Leipzig"
+                        Command="{Binding OpenWebCommand}" CommandParameter="{Binding ProjectLeaderLink}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"/>
+                </Grid>
+                <Label Text="{Binding AboutText}" FontSize="16" Margin="0,20,0,0"/>
+                <Label Text="Abhängigkeiten" FontSize="Large" Margin="0,50,0,0"/>
+                <ScrollView Orientation="Horizontal" HorizontalOptions="Fill" Padding="0,0,0,20">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
+                            <StackLayout>
+                                <Label Text="Xamarin.Forms" FontSize="Title"/>
+                                <Label Text="Version 5.0.0" FontSize="Micro"/>
+                                <Label Text="MIT License (MIT)" FontSize="Micro"/>
+                                <Label Text="Copyright (c) .NET Foundation Contributors" FontSize="Micro"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
+                            <StackLayout>
+                                <Label Text="Xamarin.Essentials" FontSize="Title"/>
+                                <Label Text="Version 1.7.0" FontSize="Micro"/>
+                                <Label Text="MIT License (MIT)" FontSize="Micro"/>
+                                <Label Text="Copyright (c) Microsoft Corporation" FontSize="Micro"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
+                            <StackLayout>
+                                <Label Text="Microcharts.Forms" FontSize="Title"/>
+                                <Label Text="Version 0.9.5" FontSize="Micro"/>
+                                <Label Text="MIT License (MIT)" FontSize="Micro"/>
+                                <Label Text="Copyright (c) Aloïs Deniel" FontSize="Micro"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
+                            <StackLayout>
+                                <Label Text="Visual Studio 2019 Image Library" FontSize="Title"/>
+                                <Label Text="MICROSOFT SOFTWARE LICENSE TERMS" FontSize="Micro"/>
+                                <Label Text="Copyright (c) Microsoft Corporation" FontSize="Micro"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
             </StackLayout>
         </ScrollView>
     </Grid>

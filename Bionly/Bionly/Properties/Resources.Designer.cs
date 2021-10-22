@@ -61,21 +61,20 @@ namespace Bionly.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bionly ist eine Anwendung zur Auswertung von Livebildern und von Sensoren erfassten Messwerten, die im Rahmen eines Projekts am Schulbiologiezentrum Leipzig (Deutschland) generiert werden. Infrarotkameras und Sensoren, die in Nistkästen für Vögel platziert sind, können über diese App abgerufen und verwaltet werden. Darüber hinaus kann die App Schnappschüsse der Kameras erstellen, gespeicherte Messwerte verwalten und den Speicherverbrauch der einzelnen Sensorgeräte im Netzwerk überwachen. Sie wurde von einem [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
-        internal static byte[] bionly_logo {
+        internal static string AboutText {
             get {
-                object obj = ResourceManager.GetObject("bionly_logo", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("AboutText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
-        internal static byte[] bionly_logo_svg {
+        internal static byte[] bionly_logo {
             get {
-                object obj = ResourceManager.GetObject("bionly_logo_svg", resourceCulture);
+                object obj = ResourceManager.GetObject("bionly_logo", resourceCulture);
                 return ((byte[])(obj));
             }
         }

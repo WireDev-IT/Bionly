@@ -11,29 +11,6 @@
     <None Remove="Resources\bionly_logo_svg.svg" />
     <None Remove="Resources\bionly_square.ico" />
     <None Remove="Resources\bionly_square_1024.png" />
-    <None Remove="Resources\bionly_square_108.png" />
-    <None Remove="Resources\bionly_square_120.png" />
-    <None Remove="Resources\bionly_square_144.png" />
-    <None Remove="Resources\bionly_square_152.png" />
-    <None Remove="Resources\bionly_square_162.png" />
-    <None Remove="Resources\bionly_square_167.png" />
-    <None Remove="Resources\bionly_square_180.png" />
-    <None Remove="Resources\bionly_square_192.png" />
-    <None Remove="Resources\bionly_square_20.png" />
-    <None Remove="Resources\bionly_square_216.png" />
-    <None Remove="Resources\bionly_square_29.png" />
-    <None Remove="Resources\bionly_square_324.png" />
-    <None Remove="Resources\bionly_square_40.png" />
-    <None Remove="Resources\bionly_square_432.png" />
-    <None Remove="Resources\bionly_square_48.png" />
-    <None Remove="Resources\bionly_square_512.png" />
-    <None Remove="Resources\bionly_square_58.png" />
-    <None Remove="Resources\bionly_square_60.png" />
-    <None Remove="Resources\bionly_square_72.png" />
-    <None Remove="Resources\bionly_square_76.png" />
-    <None Remove="Resources\bionly_square_80.png" />
-    <None Remove="Resources\bionly_square_87.png" />
-    <None Remove="Resources\bionly_square_96.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,75 +24,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\bionly_square_1024.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_108.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_120.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_144.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_152.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_162.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_167.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_180.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_192.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_20.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_216.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_29.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_324.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_40.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_432.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_48.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_512.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_58.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_60.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_72.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_76.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_80.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_87.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\bionly_square_96.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -140,6 +48,15 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\DashboardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\FileManagerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LiveviewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
