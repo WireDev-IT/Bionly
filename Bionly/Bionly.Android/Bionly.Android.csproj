@@ -94,15 +94,29 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bionly_square.png" />
+    <Content Include="Resources\drawable\bionly_square.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\drawable\bionly_square_1024.png" />
-    <Content Include="Resources\drawable\icon_Documents.png" />
-    <Content Include="Resources\drawable\icon_Home.png" />
-    <Content Include="Resources\drawable\icon_Info.png" />
-    <Content Include="Resources\drawable\icon_Settings.png" />
-    <Content Include="Resources\drawable\icon_VideoCamera.png" />
+    <Content Include="Resources\drawable\bionly_square_1024.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\drawable\icon_Documents.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\drawable\icon_Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\drawable\icon_Info.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\drawable\icon_Settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\drawable\icon_VideoCamera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
