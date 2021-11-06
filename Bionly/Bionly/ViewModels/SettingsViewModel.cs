@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -11,7 +9,7 @@ namespace Bionly.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         public ObservableCollection<Models.Device> Devices { get; set; } = new();
-        public static readonly string[] strings = new string[7];
+        public static readonly string[] strings = new string[10];
 
         public ICommand LoadAllDevices => new Command(async () =>
         {
@@ -62,17 +60,7 @@ namespace Bionly.ViewModels
 
                 if (!cancel)
                 {
-                    byte[] codebytes = new byte[8];
-                    string code;
-                    do
-                    {
-                        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
-                        {
-                            rng.GetBytes(codebytes);
-                        }
-                        code = BitConverter.ToString(codebytes).ToLower().Replace("-", "");
-                    } while (File.Exists(Models.Device.path + $"/Devices/{code}.json"));
-                    d.Id = code;
+                    _ = d.NewId();
                     _ = await d.Save();
                     Devices.Add(d);
                 }
@@ -89,6 +77,8 @@ namespace Bionly.ViewModels
             strings[4] = "Name";
             strings[5] = "Beschreibung";
             strings[6] = "IP-Adresse";
+            strings[7] = "Kamera Port";
+            strings[8] = "FTP Port";
         }
 
         public static async Task<bool> SetIpAdress(Models.Device d, string input)

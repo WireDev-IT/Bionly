@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -60,7 +61,7 @@ namespace Bionly.Models
             get => _ipAdress;
             set
             {
-                if (_ipAdress != value && CheckAdress(value))
+                if (_ipAdress != value)
                 {
                     _ipAdress = value;
                     OnPropertyChanged(nameof(IpAddress));
@@ -68,10 +69,35 @@ namespace Bionly.Models
             }
         }
 
-        public Device()
+        private ushort _camPort;
+        public ushort CameraPort
         {
-
+            get => _camPort;
+            set
+            {
+                if (_camPort != value)
+                {
+                    _camPort = value;
+                    OnPropertyChanged(nameof(CameraPort));
+                }
+            }
         }
+
+        private ushort _ftpPort;
+        public ushort FtpPort
+        {
+            get => _ftpPort;
+            set
+            {
+                if (_ftpPort != value)
+                {
+                    _ftpPort = value;
+                    OnPropertyChanged(nameof(FtpPort));
+                }
+            }
+        }
+
+        public Device() { }
 
         public async Task<bool> Delete()
         {
@@ -138,14 +164,36 @@ namespace Bionly.Models
         {
             if (IPAddress.TryParse(input, out IPAddress address))
             {
-                _ipAdress = address.ToString();
+                IpAddress = address.ToString();
                 return true;
             }
             return false;
         }
         public IPAddress GetAdress()
         {
-            return IPAddress.Parse(IpAddress);
+            if (IPAddress.TryParse(IpAddress, out IPAddress adress))
+            {
+                return adress;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string NewId()
+        {
+            byte[] codebytes = new byte[8];
+            string code;
+            do
+            {
+                using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+                {
+                    rng.GetBytes(codebytes);
+                }
+                code = BitConverter.ToString(codebytes).ToLower().Replace("-", "");
+            } while (File.Exists(path + $"/Devices/{code}.json"));
+            Id = code;
+            return Id;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

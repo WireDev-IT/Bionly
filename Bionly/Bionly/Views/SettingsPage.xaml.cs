@@ -16,7 +16,7 @@ namespace Bionly.Views
         {
             Models.Device d = (Models.Device)e.Item;
 
-            string action = await DisplayActionSheet(d.Name + $" bearbeiten", strings[0], strings[3], strings[4], strings[5], strings[6]);
+            string action = await DisplayActionSheet(d.Name + $" bearbeiten", strings[0], strings[3], strings[4], strings[5], strings[6], strings[7], strings[8]);
             if (action == strings[3])
             {
                 bool answer = await DisplayAlert(d.Name, "Möchten Sie das Gerät wirklich löschen?", "Ja", "Nein");
@@ -38,7 +38,7 @@ namespace Bionly.Views
             }
             else if (action == strings[5])
             {
-                string result = await DisplayPromptAsync(strings[5] + " bearbeiten", $"Geben Sie eine neue {strings[5]} für {d.Name} ein", strings[2], strings[0], "Beschreibung");
+                string result = await DisplayPromptAsync(strings[5] + " bearbeiten", $"Geben Sie eine neue {strings[5]} für {d.Name} ein", strings[2], strings[0], strings[5]);
                 d.Description = result;
             }
             else if (action == strings[6])
@@ -57,6 +57,23 @@ namespace Bionly.Views
                     }
                 } while (!valid);
             }
+            else if (action == strings[7])
+            {
+                string result = await DisplayPromptAsync(strings[7] + " bearbeiten", $"Geben Sie einen neuen {strings[7]} für {d.Name} ein", strings[2], strings[0], keyboard: Keyboard.Numeric, initialValue: "2678");
+                if (ushort.TryParse(result, out ushort port))
+                {
+                    d.CameraPort = port;
+                }
+            }
+            else if (action == strings[8])
+            {
+                string result = await DisplayPromptAsync(strings[8] + " bearbeiten", $"Geben Sie einen neuen {strings[8]} für {d.Name} ein", strings[2], strings[0], keyboard: Keyboard.Numeric, initialValue: "21");
+                if (ushort.TryParse(result, out ushort port))
+                {
+                    d.FtpPort = port;
+                }
+            }
+
             _ = await d.Save();
         }
     }
