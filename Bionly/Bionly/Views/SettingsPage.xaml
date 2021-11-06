@@ -9,11 +9,73 @@
         <vm:SettingsViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Neues Gerät" Command="{Binding AddNewDevice}"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding LoadAllDevices}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="DevicesView" ItemsSource="{Binding Devices}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
+                <ListView.Header>
+                    <Grid BackgroundColor="Gray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="ID" HorizontalOptions="Fill"  Grid.Column="0" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <Label Text="Name" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <Label Text="Beschreibung" HorizontalOptions="Fill"  Grid.Column="2" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <Label Text="IP-Adresse" HorizontalOptions="Fill"  Grid.Column="3" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <Label Text="Kamera Port" HorizontalOptions="Fill"  Grid.Column="4" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                        <Label Text="FTP Port" HorizontalOptions="Fill"  Grid.Column="5" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text ="{Binding Id}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                    <Line Grid.Column="1" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                                    <Label Grid.Column="2" Text ="{Binding Name}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                    <Line Grid.Column="3" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                                    <Label Grid.Column="4" Text ="{Binding Description}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                    <Line Grid.Column="5" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                                    <Label Grid.Column="6" Text ="{Binding IpAddress}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                    <Line Grid.Column="7" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                                    <Label Grid.Column="8" Text ="{Binding CameraPort}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                    <Line Grid.Column="9" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                                    <Label Grid.Column="10" Text ="{Binding FtpPort}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                </Grid>
+                                <Line Grid.Row="1" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
