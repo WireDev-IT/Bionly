@@ -8,7 +8,7 @@ namespace Bionly.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public ObservableCollection<Models.Device> Devices { get; set; } = new();
+        public static ObservableCollection<Models.Device> Devices { get; set; } = new();
         public static readonly string[] strings = new string[10];
 
         public ICommand LoadAllDevices => new Command(async () =>

@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="DevicesView" ItemsSource="{Binding Devices}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
+            <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
                 <ListView.Header>
                     <Grid BackgroundColor="Gray">
                         <Grid.ColumnDefinitions>
