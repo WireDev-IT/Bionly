@@ -11,12 +11,12 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Neues Gerät" Command="{Binding AddNewDevice}"/>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding LoadAllDevices}"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="DevicesView" ItemsSource="{Binding Devices}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
+            <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
                 <ListView.Header>
                     <Grid BackgroundColor="Gray">
                         <Grid.ColumnDefinitions>
