@@ -11,189 +11,63 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Aktualisieren"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Margin="10">
-                <StackLayout>
-                    <Label Text="Geräte" FontSize="Title" Margin="20,0,0,0"/>
-                    <ScrollView HorizontalOptions="Fill" Orientation="Horizontal" Padding="05">
-                        <StackLayout Orientation="Horizontal">
-                            <Frame Grid.Row="0" BorderColor="Gray" Margin="20" Padding="0" MinimumWidthRequest="500">
-                                <Grid HorizontalOptions="Start" Margin="20">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Text="Nistkasten 1" FontSize="Subtitle"/>
-                                            <Label Grid.Row="1" Text="Online" FontSize="Caption"/>
+        <StackLayout Margin="10" Padding="0">
+            <StackLayout.Orientation>
+                <OnIdiom x:TypeArguments="StackOrientation" Default="Horizontal" Phone="Vertical"/>
+            </StackLayout.Orientation>
+            <StackLayout HorizontalOptions="Start" VerticalOptions="Start">
+                <Label Text="Geräte" FontSize="Title" HorizontalOptions="Start" VerticalOptions="Start">
+                    <Label.Margin>
+                        <OnIdiom x:TypeArguments="Thickness" Desktop="20,0,0,0" Default="10,0,0,0"/>
+                    </Label.Margin>
+                </Label>
+                <ListView ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" SelectionMode="None" WidthRequest="270" HorizontalOptions="Start">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="0">
+                                    <Grid.Margin>
+                                        <OnIdiom x:TypeArguments="Thickness" Default="20" Phone="10"/>
+                                    </Grid.Margin>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="Subtitle"/>
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="00,00°C" Margin="0,0,10,0" FontSize="Caption"/>
+                                            <Label Grid.Column="1" Text="00%" Margin="10,0,0,0" FontSize="Caption"/>
                                         </Grid>
                                     </Grid>
-                                    <Grid Grid.Row="1" Margin="0,10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="Sensoren" FontSize="Small"/>
-                                        <Frame Grid.Row="1" BorderColor="Gray">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-                                                <Label Grid.Column="0" Grid.Row="0" Text="Temperatur:"/>
-                                                <Label Grid.Column="0" Grid.Row="1" Text="Luftfeuchtigkeit:"/>
-                                                <Label Grid.Column="1" Grid.Row="0" Text="00,00°C"/>
-                                                <Label Grid.Column="1" Grid.Row="1" Text="00%"/>
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
-                                    <Grid Grid.Row="2" Margin="0,10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="Livebild Vorschau" FontSize="Small"/>
-                                        <Frame Grid.Row="1" BackgroundColor="DarkGray" HeightRequest="100" CornerRadius="0"/>
-                                    </Grid>
                                 </Grid>
-                            </Frame>
-                            <Frame Grid.Row="0" BorderColor="Gray" Margin="20" Padding="0" MinimumWidthRequest="500">
-                                <Grid HorizontalOptions="Start" Margin="20">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Text="Nistkasten 2" FontSize="Subtitle"/>
-                                            <Label Grid.Row="1" Text="Online" FontSize="Caption"/>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Row="1" Margin="0,10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="Sensoren" FontSize="Small"/>
-                                        <Frame Grid.Row="1" BorderColor="Gray">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-                                                <Label Grid.Column="0" Grid.Row="0" Text="Temperatur:"/>
-                                                <Label Grid.Column="0" Grid.Row="1" Text="Luftfeuchtigkeit:"/>
-                                                <Label Grid.Column="1" Grid.Row="0" Text="00,00°C"/>
-                                                <Label Grid.Column="1" Grid.Row="1" Text="00%"/>
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
-                                    <Grid Grid.Row="2" Margin="0,10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="Livebild Vorschau" FontSize="Small"/>
-                                        <Frame Grid.Row="1" BackgroundColor="DarkGray" HeightRequest="100" CornerRadius="0"/>
-                                    </Grid>
-                                </Grid>
-                            </Frame>
-                            <Frame Grid.Row="0" BorderColor="Gray" Margin="20" Padding="0" MinimumWidthRequest="500">
-                                <Grid HorizontalOptions="Start" Margin="20">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Rectangle Grid.Column="0" Fill="red" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Text="Nistkasten 3" FontSize="Subtitle"/>
-                                            <Label Grid.Row="1" Text="Offline" FontSize="Caption"/>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Row="1" Margin="0,10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="Sensoren" FontSize="Small"/>
-                                        <Frame Grid.Row="1" BorderColor="Gray">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-                                                <Label Grid.Column="0" Grid.Row="0" Text="Temperatur:"/>
-                                                <Label Grid.Column="0" Grid.Row="1" Text="Luftfeuchtigkeit:"/>
-                                                <Label Grid.Column="1" Grid.Row="0" Text="00,00°C"/>
-                                                <Label Grid.Column="1" Grid.Row="1" Text="00%"/>
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
-                                    <Grid Grid.Row="2" Margin="0,10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="Livebild Vorschau" FontSize="Small"/>
-                                        <Frame Grid.Row="1" BackgroundColor="DarkGray" HeightRequest="100" CornerRadius="0"/>
-                                    </Grid>
-                                </Grid>
-                            </Frame>
-                        </StackLayout>
-                    </ScrollView>
-                </StackLayout>
-                <StackLayout Margin="20,40,0,0">
-                    <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
-                    <microcharts:ChartView x:Name="chartView" HeightRequest="500" Margin="10"/>
-                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
-        </ScrollView>
+            <Line WidthRequest="1" VerticalOptions="Fill" HorizontalOptions="Fill" Background="Gray" Margin="0,10">
+                <Line.IsVisible>
+                    <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False"/>
+                </Line.IsVisible>
+            </Line>
+            <StackLayout  HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+                <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
+                <microcharts:ChartView x:Name="chartView" HeightRequest="500" Margin="10"/>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

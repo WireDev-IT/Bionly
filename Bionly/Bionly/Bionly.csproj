@@ -12,6 +12,7 @@
     <PackageIcon>bionly_square_512.png</PackageIcon>
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/tomo2403/Bionly</RepositoryUrl>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
