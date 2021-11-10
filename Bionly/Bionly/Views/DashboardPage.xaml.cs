@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bionly.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Bionly.Views
         public DashboardPage()
         {
             InitializeComponent();
+            SettingsViewModel.LoadAllDevices.Execute(null);
         }
     }
 }
