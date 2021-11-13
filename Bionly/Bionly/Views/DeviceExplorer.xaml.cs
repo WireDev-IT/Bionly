@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Bionly.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FileManagerPage : ContentPage
+    public partial class DeviceExplorer : TabbedPage
     {
-        public FileManagerPage()
+        public DeviceExplorer()
         {
             InitializeComponent();
         }

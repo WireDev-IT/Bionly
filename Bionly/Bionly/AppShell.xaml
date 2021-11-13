@@ -84,9 +84,6 @@
     <FlyoutItem Title="Live Ansicht" Icon="icon_VideoCamera.png">
         <ShellContent Route="LiveviewPage" ContentTemplate="{DataTemplate local:LiveviewPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Datenverwaltung" Icon="icon_Documents.png">
-        <ShellContent Route="FileManagerPage" ContentTemplate="{DataTemplate local:FileManagerPage}" />
-    </FlyoutItem>
     <FlyoutItem Title="Einstellungen" Icon="icon_Settings.png">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>

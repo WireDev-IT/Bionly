@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:vm="clr-namespace:Bionly.ViewModels"
+            x:Class="Bionly.Views.DeviceExplorer" Title="Gerät 1">
+
+    <TabbedPage.BindingContext>
+        <vm:FileManagerViewModel />
+    </TabbedPage.BindingContext>
+
+    <ContentPage Title="Bilder">
+        <CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding ImageUrl}"
+                       Aspect="AspectFill"
+                       HeightRequest="60"
+                       WidthRequest="60" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage>
+    <ContentPage Title="Messwerte">
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="00.00.0000, 00:00 Uhr"/>
+                            <Label Grid.Column="1" Text="00°C"/>
+                            <Label Grid.Column="2" Text="00%"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage>
+    <ContentPage Title="Dateien">
+
+    </ContentPage>
+</TabbedPage>
