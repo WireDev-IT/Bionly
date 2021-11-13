@@ -25,7 +25,7 @@
                         <OnIdiom x:TypeArguments="Thickness" Desktop="20,0,0,0" Default="10,0,0,0"/>
                     </Label.Margin>
                 </Label>
-                <ListView ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" SelectionMode="None" WidthRequest="270" HorizontalOptions="Start">
+                <ListView ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" SelectionMode="None" WidthRequest="270" HorizontalOptions="Start" ItemTapped="ListView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
