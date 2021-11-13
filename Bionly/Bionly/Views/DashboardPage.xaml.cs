@@ -18,5 +18,10 @@ namespace Bionly.Views
             InitializeComponent();
             SettingsViewModel.LoadAllDevices.Execute(null);
         }
+
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            await Navigation.PushAsync(new DeviceExplorer());
+        }
     }
 }
