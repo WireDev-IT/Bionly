@@ -11,7 +11,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Neues Gerät" Command="{Binding AddNewDevice}"/>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding LoadAllDevices}"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

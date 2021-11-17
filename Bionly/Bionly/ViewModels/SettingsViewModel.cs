@@ -11,7 +11,7 @@ namespace Bionly.ViewModels
         public static ObservableCollection<Models.Device> Devices { get; set; } = new();
         public static readonly string[] strings = new string[10];
 
-        public ICommand LoadAllDevices => new Command(async () =>
+        public static ICommand LoadAllDevices => new Command(async () =>
         {
             Devices.Clear();
             foreach (string file in Directory.GetFiles(Models.Device.path + "\\Devices\\", "*.json", SearchOption.TopDirectoryOnly))
