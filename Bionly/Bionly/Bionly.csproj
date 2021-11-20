@@ -46,9 +46,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentFTP" Version="35.1.0" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />  
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
 
@@ -57,6 +58,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DeviceSettingsPage.xaml.cs">
+      <DependentUpon>DeviceSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\DeviceExplorer.xaml.cs">
       <DependentUpon>DeviceExplorer.xaml</DependentUpon>
@@ -71,7 +75,7 @@
     <EmbeddedResource Update="Views\DashboardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\DeviceDetailPage.xaml">
+    <EmbeddedResource Update="Views\DeviceSettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LiveviewPage.xaml">

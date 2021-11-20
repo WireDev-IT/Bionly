@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
-             x:Class="Bionly.Views.DeviceDetailPage"
-             Title="{Binding Title}" Appearing="ContentPage_Appearing">
+             x:Class="Bionly.Views.DeviceSettingsPage"
+             Title="{Binding Title}">
 
     <ContentPage.BindingContext>
-        <vm:DeviceDetailViewModel />
+        <vm:DeviceSettingsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
@@ -14,7 +14,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <TableView Intent="Settings" BindingContext="{Binding Source={x:Static vm:DeviceDetailViewModel.Device}}" Margin="10">
+        <TableView Intent="Settings" BindingContext="{Binding Source={x:Static vm:DeviceSettingsViewModel.Device}}" Margin="10">
             <TableRoot>
                 <TableSection Title="Einstellungen" TextColor="Black">
                     <EntryCell Label="Name" Text="{Binding Name}" LabelColor="Black"/>

@@ -21,6 +21,7 @@ namespace Bionly.Views
 
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            DeviceExplorerViewModel.Device = (Models.Device)e.Item;
             await Navigation.PushAsync(new DeviceExplorer());
         }
     }

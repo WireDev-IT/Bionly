@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bionly.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace Bionly.Views
         public DeviceExplorer()
         {
             InitializeComponent();
+        }
+
+        private new void Appearing(object sender, EventArgs e)
+        {
+            ((DeviceExplorerViewModel)BindingContext).ConnectFTPS.Execute(null);
         }
     }
 }

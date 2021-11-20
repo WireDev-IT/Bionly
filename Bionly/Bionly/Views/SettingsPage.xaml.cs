@@ -15,14 +15,14 @@ namespace Bionly.Views
 
         private async void DevicesView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            DeviceDetailViewModel.Device = (Models.Device)e.Item;
-            await Navigation.PushAsync(new DeviceDetailPage());
+            DeviceSettingsViewModel.Device = (Models.Device)e.Item;
+            await Navigation.PushAsync(new DeviceSettingsPage());
         }
 
         private async void CreateDevice(object sender, EventArgs e)
         {
-            DeviceDetailViewModel.Device = new();
-            await Navigation.PushAsync(new DeviceDetailPage());
+            DeviceSettingsViewModel.Device = new();
+            await Navigation.PushAsync(new DeviceSettingsPage());
         }
 
         private void ContentPage_Appearing(object sender, EventArgs e)

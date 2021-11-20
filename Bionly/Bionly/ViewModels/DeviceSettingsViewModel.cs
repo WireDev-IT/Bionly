@@ -6,14 +6,9 @@ using Xamarin.Forms;
 
 namespace Bionly.ViewModels
 {
-    public class DeviceDetailViewModel : BaseViewModel
+    public class DeviceSettingsViewModel : BaseViewModel
     {
         public static Models.Device Device{ get; internal set; } = new();
-
-        public ICommand Refresh => new Command(() =>
-        {
-            Title = Device.Name;
-        });
 
         public ICommand SaveDevice => new Command(async () =>
         {
@@ -21,9 +16,9 @@ namespace Bionly.ViewModels
             SettingsViewModel.LoadAllDevices.Execute(null);
         });
 
-        public DeviceDetailViewModel()
+        public DeviceSettingsViewModel()
         {
-
+            Title = "Gerät bearbeiten";
         }
     }
 }

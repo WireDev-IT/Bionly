@@ -2,8 +2,12 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm="clr-namespace:Bionly.ViewModels"
-            x:Class="Bionly.Views.DeviceExplorer" Title="Gerät 1">
+            x:Class="Bionly.Views.DeviceExplorer" Title="{Binding progress}" Appearing="Appearing">
 
+    <TabbedPage.BindingContext>
+        <vm:DeviceExplorerViewModel/>
+    </TabbedPage.BindingContext>
+    
     <ContentPage Title="Bilder">
         <CollectionView>
             <CollectionView.ItemTemplate>

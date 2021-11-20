@@ -11,16 +11,11 @@ using Xamarin.Forms.Xaml;
 namespace Bionly.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DeviceDetailPage : ContentPage
+    public partial class DeviceSettingsPage : ContentPage
     {
-        public DeviceDetailPage()
+        public DeviceSettingsPage()
         {
             InitializeComponent();
-        }
-
-        private void ContentPage_Appearing(object sender, EventArgs e)
-        {
-            ((DeviceDetailViewModel)BindingContext).Refresh.Execute(null);
         }
     }
 }
