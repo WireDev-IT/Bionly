@@ -11,7 +11,7 @@ namespace Bionly.Models
 {
     public class Device : INotifyPropertyChanged
     {
-        public static string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create);
+        public static string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Devices/";
 
         private string _id;
         public string Id
@@ -97,13 +97,27 @@ namespace Bionly.Models
             }
         }
 
+        private bool[] _settings = new bool[2];
+        public bool[] Settings
+        {
+            get => _settings;
+            set
+            {
+                if (_settings != value)
+                {
+                    _settings = value;
+                    OnPropertyChanged(nameof(Settings));
+                }
+            }
+        }
+
         public Device() { }
 
         public async Task<bool> Delete()
         {
             try
             {
-                File.Delete(path + $"/Devices/{Id}.json");
+                File.Delete(path + $"{Id}.json");
                 return true;
             }
             catch (DirectoryNotFoundException)
@@ -124,8 +138,9 @@ namespace Bionly.Models
         {
             try
             {
-                _ = Directory.CreateDirectory(path + $"/Devices");
-                File.WriteAllText(path + $"/Devices/{Id}.json", JsonConvert.SerializeObject(this, Formatting.Indented));
+                if (string.IsNullOrEmpty(Id)) NewId();
+                _ = Directory.CreateDirectory(path);
+                File.WriteAllText(path + $"{Id}.json", JsonConvert.SerializeObject(this, Formatting.Indented));
                 return true;
             }
             catch (UnauthorizedAccessException)
@@ -142,7 +157,7 @@ namespace Bionly.Models
         {
             try
             {
-                _ = Directory.CreateDirectory(path + $"/Devices");
+                _ = Directory.CreateDirectory(path);
                 return JsonConvert.DeserializeObject<Device>(File.ReadAllText(file));
             }
             catch (UnauthorizedAccessException)
@@ -191,7 +206,7 @@ namespace Bionly.Models
                     rng.GetBytes(codebytes);
                 }
                 code = BitConverter.ToString(codebytes).ToLower().Replace("-", "");
-            } while (File.Exists(path + $"/Devices/{code}.json"));
+            } while (File.Exists(path + $"{code}.json"));
             Id = code;
             return Id;
         }

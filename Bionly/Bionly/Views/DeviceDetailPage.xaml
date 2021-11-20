@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             x:Class="Bionly.Views.DeviceDetailPage"
+             Title="{Binding Title}" Appearing="ContentPage_Appearing">
+
+    <ContentPage.BindingContext>
+        <vm:DeviceDetailViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Speichern" Command="{Binding SaveDevice}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <TableView Intent="Settings" BindingContext="{Binding Source={x:Static vm:DeviceDetailViewModel.Device}}" Margin="10">
+            <TableRoot>
+                <TableSection Title="Einstellungen" TextColor="Black">
+                    <EntryCell Label="Name" Text="{Binding Name}" LabelColor="Black"/>
+                    <EntryCell Label="Beschreibung" Text="{Binding Description}" LabelColor="Black"/>
+                    <SwitchCell Text="Kamera verwenden" On="{Binding Settings[0]}"/>
+                    <SwitchCell Text="Messwerte verwenden" On="{Binding Settings[1]}"/>
+                </TableSection>
+                <TableSection x:Name="connectionsection" Title="Verbindung" TextColor="Black">
+                    <EntryCell Label="IP-Adresse / Domain" Text="{Binding IpAddress}" LabelColor="Black" Keyboard="Url"/>
+                    <EntryCell Label="RSTP Port" Text="{Binding CameraPort}" LabelColor="Black" Keyboard="Numeric"/>
+                    <EntryCell Label="FTP Port" Text="{Binding FtpPort}" LabelColor="Black" Keyboard="Numeric"/>
+                </TableSection>
+                <TableSection Title="Entwickler" TextColor="Black">
+                    <TextCell Detail="{Binding Id}" Text="ID" TextColor="{StaticResource Primary}" DetailColor="Black"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

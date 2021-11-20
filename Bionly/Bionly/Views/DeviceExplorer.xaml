@@ -4,10 +4,6 @@
             xmlns:vm="clr-namespace:Bionly.ViewModels"
             x:Class="Bionly.Views.DeviceExplorer" Title="Gerät 1">
 
-    <TabbedPage.BindingContext>
-        <vm:FileManagerViewModel />
-    </TabbedPage.BindingContext>
-
     <ContentPage Title="Bilder">
         <CollectionView>
             <CollectionView.ItemTemplate>

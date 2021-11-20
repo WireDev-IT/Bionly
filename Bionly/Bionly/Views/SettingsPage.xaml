@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.SettingsPage"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
-             Title="{Binding Title}">
+             Title="{Binding Title}" Appearing="ContentPage_Appearing">
 
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Neues Gerät" Command="{Binding AddNewDevice}"/>
+        <ToolbarItem Text="Neues Gerät" Clicked="CreateDevice"/>
         <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
     </ContentPage.ToolbarItems>
 
@@ -18,10 +18,8 @@
         <StackLayout>
             <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
                 <ListView.Header>
-                    <Grid BackgroundColor="Gray">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -31,8 +29,6 @@
                         <Label Text="Name" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
                         <Label Text="Beschreibung" HorizontalOptions="Fill"  Grid.Column="2" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
                         <Label Text="IP-Adresse" HorizontalOptions="Fill"  Grid.Column="3" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                        <Label Text="Kamera Port" HorizontalOptions="Fill"  Grid.Column="4" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                        <Label Text="FTP Port" HorizontalOptions="Fill"  Grid.Column="5" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
                     </Grid>
                 </ListView.Header>
 
@@ -46,29 +42,15 @@
                                 </Grid.RowDefinitions>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="1"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text ="{Binding Id}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
-                                    <Line Grid.Column="1" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
-                                    <Label Grid.Column="2" Text ="{Binding Name}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
-                                    <Line Grid.Column="3" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
-                                    <Label Grid.Column="4" Text ="{Binding Description}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
-                                    <Line Grid.Column="5" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
-                                    <Label Grid.Column="6" Text ="{Binding IpAddress}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
-                                    <Line Grid.Column="7" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
-                                    <Label Grid.Column="8" Text ="{Binding CameraPort}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
-                                    <Line Grid.Column="9" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
-                                    <Label Grid.Column="10" Text ="{Binding FtpPort}" HorizontalOptions="Fill" HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Column="0" Text ="{Binding Id}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Column="1" Text ="{Binding Name}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Column="2" Text ="{Binding Description}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Column="3" Text ="{Binding IpAddress}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                                 </Grid>
                                 <Line Grid.Row="1" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
                             </Grid>
