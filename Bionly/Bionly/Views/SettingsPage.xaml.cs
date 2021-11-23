@@ -27,7 +27,7 @@ namespace Bionly.Views
 
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            SettingsViewModel.LoadAllDevices.Execute(null);
+            //SettingsViewModel.LoadAllDevices.Execute(null);
         }
     }
 }

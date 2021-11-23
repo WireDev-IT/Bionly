@@ -20,7 +20,7 @@ namespace Bionly.Views
 
         private new void Appearing(object sender, EventArgs e)
         {
-            ((DeviceExplorerViewModel)BindingContext).ConnectFTPS.Execute(null);
+            //((DeviceExplorerViewModel)BindingContext).ConnectFTPS.Execute(null);
         }
     }
 }

@@ -21,7 +21,21 @@
         </CollectionView>
     </ContentPage>
     <ContentPage Title="Messwerte">
-        <ListView>
+        <ListView ItemsSource="{Binding Stats}">
+            <ListView.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Zeit"/>
+                    <Label Grid.Column="1" Text="Temperatur"/>
+                    <Label Grid.Column="2" Text="Luftfeuchtigkeit"/>
+                    <Label Grid.Column="3" Text="Luftdruck"/>
+                </Grid>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -30,10 +44,12 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="00.00.0000, 00:00 Uhr"/>
-                            <Label Grid.Column="1" Text="00°C"/>
-                            <Label Grid.Column="2" Text="00%"/>
+                            <Label Grid.Column="0" Text="{Binding GetTime}"/>
+                            <Label Grid.Column="1" Text="{Binding GetTemperature}"/>
+                            <Label Grid.Column="2" Text="{Binding GetHumidity}"/>
+                            <Label Grid.Column="3" Text="{Binding GetPressure}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
