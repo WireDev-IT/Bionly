@@ -24,5 +24,12 @@ namespace Bionly.Views
             DeviceExplorerViewModel.Device = (Models.Device)e.Item;
             await Navigation.PushAsync(new DeviceExplorer());
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            OverviewChart.Chart = ((DashboardViewModel)BindingContext).lineChart;
+        }
     }
 }

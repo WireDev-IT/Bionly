@@ -99,6 +99,8 @@ namespace Bionly.ViewModels
                     Stats[index].Pressure = point.Value;
                 }
             }
+
+            DashboardViewModel.Values = Stats.ToList();
         }
 
         private void GenerateFiles()

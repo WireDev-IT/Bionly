@@ -12,6 +12,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
+        <ToolbarItem Text="Grafiken neu zeichne" Command="{Binding DrawGraphs}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -66,7 +67,7 @@
             </Line>
             <StackLayout  HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
                 <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
-                <microcharts:ChartView x:Name="chartView" HeightRequest="500" Margin="10"/>
+                <microcharts:ChartView x:Name="OverviewChart" HeightRequest="500" Margin="10" WidthRequest="800"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
