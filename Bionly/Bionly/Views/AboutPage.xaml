@@ -75,6 +75,22 @@
                         </Frame>
                         <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
                             <StackLayout>
+                                <Label Text="FluentFTP" FontSize="Title"/>
+                                <Label Text="Version 35.2.0" FontSize="Micro"/>
+                                <Label Text="MIT License (MIT)" FontSize="Micro"/>
+                                <Label Text="Copyright (c) Robin Rodricks" FontSize="Micro"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
+                            <StackLayout>
+                                <Label Text="Newtonsoft.Json" FontSize="Title"/>
+                                <Label Text="Version 13.0.1" FontSize="Micro"/>
+                                <Label Text="MIT License (MIT)" FontSize="Micro"/>
+                                <Label Text="Copyright (c) James Newton-King" FontSize="Micro"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
+                            <StackLayout>
                                 <Label Text="Visual Studio 2019 Image Library" FontSize="Title"/>
                                 <Label Text="MICROSOFT SOFTWARE LICENSE TERMS" FontSize="Micro"/>
                                 <Label Text="Copyright (c) Microsoft Corporation" FontSize="Micro"/>
