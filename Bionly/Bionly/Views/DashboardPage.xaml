@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:mch="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Bionly.Views.DashboardPage"
              Title="{Binding Title}">
 
@@ -16,11 +16,13 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Margin="10" Padding="0">
-            <StackLayout.Orientation>
-                <OnIdiom x:TypeArguments="StackOrientation" Default="Horizontal" Phone="Vertical"/>
-            </StackLayout.Orientation>
-            <StackLayout HorizontalOptions="Start" VerticalOptions="Start">
+        <Grid Margin="0,10,0,0" Padding="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start">
                 <Label Text="Geräte" FontSize="Title" HorizontalOptions="Start" VerticalOptions="Start">
                     <Label.Margin>
                         <OnIdiom x:TypeArguments="Thickness" Desktop="20,0,0,0" Default="10,0,0,0"/>
@@ -60,15 +62,38 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <Line WidthRequest="1" VerticalOptions="Fill" HorizontalOptions="Fill" Background="Gray" Margin="0,10">
+            <Line Grid.Column="1" WidthRequest="1" VerticalOptions="Fill" HorizontalOptions="Fill" Background="Gray" Margin="0,10">
                 <Line.IsVisible>
                     <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False"/>
                 </Line.IsVisible>
             </Line>
-            <StackLayout  HorizontalOptions="StartAndExpand" Margin="20,0,0,0">
+            <StackLayout Grid.Column="2" HorizontalOptions="FillAndExpand" Margin="20,0,0,0">
+                <StackLayout.IsVisible>
+                    <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False"/>
+                </StackLayout.IsVisible>
                 <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
-                <microcharts:ChartView x:Name="OverviewChart" HeightRequest="500" Margin="10" WidthRequest="800"/>
+                <ScrollView>
+                    <StackLayout>
+                        <Label Text="Temperatur" FontSize="Subtitle"/>
+                        <Grid>
+                            <ActivityIndicator IsRunning="True" Margin="0,50"/>
+                            <mch:ChartView x:Name="TempChart" HeightRequest="500"/>
+                        </Grid>
+                        <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
+                        <Label Text="Luftfeuchtigkeit" FontSize="Subtitle"/>
+                        <Grid>
+                            <ActivityIndicator IsRunning="True" Margin="0,50"/>
+                            <mch:ChartView x:Name="HumiChart" HeightRequest="500"/>
+                        </Grid>
+                        <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
+                        <Label Text="Luftdruck" FontSize="Subtitle"/>
+                        <Grid>
+                            <ActivityIndicator IsRunning="True" Margin="0,50"/>
+                            <mch:ChartView x:Name="PresChart" HeightRequest="500"/>
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
