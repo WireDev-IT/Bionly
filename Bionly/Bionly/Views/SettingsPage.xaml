@@ -20,10 +20,10 @@
                 <ListView.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Text="ID" HorizontalOptions="Fill"  Grid.Column="0" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
                         <Label Text="Name" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
@@ -35,24 +35,17 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="1"/>
-                                </Grid.RowDefinitions>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text ="{Binding Id}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Column="1" Text ="{Binding Name}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Column="2" Text ="{Binding Description}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Column="3" Text ="{Binding IpAddress}" HorizontalOptions="Fill" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                </Grid>
-                                <Line Grid.Row="1" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="Gray"/>
+                            <Grid HeightRequest="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Id}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                <Label Grid.Column="1" Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                <Label Grid.Column="2" Text="{Binding Description}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                <Label Grid.Column="3" Text="{Binding IpAddress}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

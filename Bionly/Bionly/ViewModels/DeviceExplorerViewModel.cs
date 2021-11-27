@@ -18,6 +18,7 @@ namespace Bionly.ViewModels
     {
         public static Models.Device Device { get; internal set; } = new();
         public ObservableCollection<MeasurementPoint> Stats { get; internal set; } = new();
+        public Dictionary<DateTime, ImageSource> Images { get; set; } = new();
 
         private FtpClient ftp;
         private CancellationToken token = new();
@@ -34,8 +35,8 @@ namespace Bionly.ViewModels
         {
             List<FtpRule> rules = new()
             {
-                    new FtpFileExtensionRule(true, new List<string>{ "json" })
-                };
+                new FtpFileExtensionRule(true, new List<string>{ "json" })
+            };
             Directory.CreateDirectory("Files");
 
             Progress<FtpProgress> prog = new(p => progress = p.Progress);
@@ -101,6 +102,11 @@ namespace Bionly.ViewModels
             }
 
             DashboardViewModel.Values = Stats.ToList();
+
+            for (int i = 0; i < 10; i++)
+            {
+                Images.Add(DateTime.Now, ImageSource.FromFile("Resources/bionly_logo.png"));
+            }
         }
 
         private void GenerateFiles()

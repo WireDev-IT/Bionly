@@ -9,13 +9,16 @@
     </TabbedPage.BindingContext>
     
     <ContentPage Title="Bilder">
-        <CollectionView>
+        <CollectionView ItemsSource="{Binding Images}" ItemSizingStrategy="MeasureFirstItem">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding ImageUrl}"
-                       Aspect="AspectFill"
-                       HeightRequest="60"
-                       WidthRequest="60" />
+                    <StackLayout>
+                        <Label Text="{Binding Key}" HorizontalOptions="Center"/>
+                        <Image Source="{Binding Value}" Aspect="AspectFit" HeightRequest="113" WidthRequest="200" />
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
