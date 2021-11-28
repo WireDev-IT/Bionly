@@ -47,6 +47,8 @@
 
   <ItemGroup>
     <PackageReference Include="FluentFTP" Version="35.2.0" />
+    <PackageReference Include="LibVLCSharp" Version="3.6.1" />
+    <PackageReference Include="LibVLCSharp.Forms" Version="3.6.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />  
