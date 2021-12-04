@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.LiveviewPage"
-             xmlns:vm="clr-namespace:Bionly.ViewModels" xmlns:shared="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms" x:DataType="vm:LiveviewViewModel"
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
+             x:DataType="vm:LiveviewViewModel"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -11,15 +13,29 @@
 
     <ContentPage.Content>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <shared:VideoView MediaPlayer="{Binding MediaPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+            <Label Text="Die Liveansicht ist unter Windows leider nicht verfügbar" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large">
+                <Label.IsVisible>
+                    <OnPlatform x:TypeArguments="x:Boolean" Default="False">
+                        <On Platform="UWP" Value="True"/>
+                    </OnPlatform>
+                </Label.IsVisible>
+            </Label>
+            <Grid>
+                <Grid.IsVisible>
+                    <OnPlatform x:TypeArguments="x:Boolean" Default="True">
+                        <On Platform="UWP" Value="False"/>
+                    </OnPlatform>
+                </Grid.IsVisible>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <vlc:VideoView MediaPlayer="{Binding MediaPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

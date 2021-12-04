@@ -1,18 +1,18 @@
 ﻿using LibVLCSharp.Shared;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Bionly.ViewModels
 {
     public class LiveviewViewModel : BaseViewModel
     {
-        new public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         public LiveviewViewModel()
         {
-            Title = "Live Ansicht";
+            Title = "Liveansicht";
             Initialize();
         }
 
@@ -37,19 +37,23 @@ namespace Bionly.ViewModels
             }
         }
 
-        private void Initialize()
+        private Task Initialize()
         {
-            Core.Initialize();
-
-            LibVLC = new LibVLC();
-            var media = new Media(LibVLC, new Uri("rtsp://demo:demo@ipvmdemo.dyndns.org:5541/onvif-media/media.amp?profile=profile_1_h264&sessiontimeout=60&streamtype=unicast"));
-
-            MediaPlayer = new MediaPlayer(LibVLC)
+            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
-                Media = media,
-            };
+                Core.Initialize();
 
-            media.Dispose();
+                LibVLC = new LibVLC(enableDebugLogs: true);
+                var media = new Media(LibVLC, new Uri("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"));
+
+                MediaPlayer = new MediaPlayer(LibVLC)
+                {
+                    Media = media
+                };
+
+                media.Dispose();
+            }
+            return Task.CompletedTask;
         }
 
         public void OnAppearing()
@@ -60,8 +64,8 @@ namespace Bionly.ViewModels
 
         internal void OnDisappearing()
         {
-            //MediaPlayer.Dispose();
-            //LibVLC.Dispose();
+            if (MediaPlayer != null)
+                MediaPlayer.Stop();
         }
 
         public void OnVideoViewInitialized()
@@ -77,6 +81,5 @@ namespace Bionly.ViewModels
                 MediaPlayer.Play();
             }
         }
-
     }
 }
