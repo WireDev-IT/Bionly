@@ -4,7 +4,6 @@
              x:Class="Bionly.Views.LiveviewPage"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
-             x:DataType="vm:LiveviewViewModel"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -27,14 +26,20 @@
                     </OnPlatform>
                 </Grid.IsVisible>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <vlc:VideoView MediaPlayer="{Binding MediaPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+                <ListView ItemsSource="{Binding Connections}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped" WidthRequest="200">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding Key}" VerticalTextAlignment="Center" FontSize="Medium" Margin="10,0,0,0"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayer="{Binding MPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+                <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsConnecting}" Color="Blue"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

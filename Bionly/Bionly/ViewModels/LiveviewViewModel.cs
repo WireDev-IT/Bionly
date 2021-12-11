@@ -1,7 +1,9 @@
 ﻿using LibVLCSharp.Shared;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Bionly.ViewModels
@@ -9,6 +11,8 @@ namespace Bionly.ViewModels
     public class LiveviewViewModel : BaseViewModel
     {
         public new event PropertyChangedEventHandler PropertyChanged;
+
+        public Dictionary<string, Uri> Connections { get; set; } = new();
 
         public LiveviewViewModel()
         {
@@ -37,21 +41,36 @@ namespace Bionly.ViewModels
             }
         }
 
+        public ICommand PlayStream => new Command<string>((string name) =>
+        {
+            if (Connections.TryGetValue(name, out Uri uri))
+            {
+                OnDisappearing();
+                MediaPlayer = new MediaPlayer(LibVLC) { Media = new Media(LibVLC, uri) };
+            }
+        });
+
         private Task Initialize()
         {
             if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
                 Core.Initialize();
 
-                LibVLC = new LibVLC(enableDebugLogs: true);
-                var media = new Media(LibVLC, new Uri("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"));
+                //LibVLC = new LibVLC(enableDebugLogs: true);
+                //var media = new Media(LibVLC, new Uri("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"));
 
-                MediaPlayer = new MediaPlayer(LibVLC)
+                //MediaPlayer = new MediaPlayer(LibVLC)
+                //{
+                //    Media = media
+                //};
+
+                //media.Dispose();
+
+                Connections.Clear();
+                foreach (Models.Device device in SettingsViewModel.Devices)
                 {
-                    Media = media
-                };
-
-                media.Dispose();
+                    Connections.Add(device.Name, new Uri($"{device.IpAddress}"));
+                }
             }
             return Task.CompletedTask;
         }
@@ -65,7 +84,7 @@ namespace Bionly.ViewModels
         internal void OnDisappearing()
         {
             if (MediaPlayer != null)
-                MediaPlayer.Stop();
+                MediaPlayer.Dispose();
         }
 
         public void OnVideoViewInitialized()
