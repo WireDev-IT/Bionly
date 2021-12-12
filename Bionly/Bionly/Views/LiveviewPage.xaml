@@ -38,7 +38,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayer="{Binding MPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayer="{Binding MediaPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
                 <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsConnecting}" Color="Blue"/>
             </Grid>
         </Grid>

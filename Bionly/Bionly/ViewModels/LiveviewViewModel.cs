@@ -29,9 +29,6 @@ namespace Bionly.ViewModels
             private set => Set(nameof(MediaPlayer), ref _mediaPlayer, value);
         }
 
-        private bool IsLoaded { get; set; }
-        private bool IsVideoViewInitialized { get; set; }
-
         private void Set<T>(string propertyName, ref T field, T value)
         {
             if (field == null && value != null || field != null && !field.Equals(value))
@@ -56,15 +53,15 @@ namespace Bionly.ViewModels
             {
                 Core.Initialize();
 
-                //LibVLC = new LibVLC(enableDebugLogs: true);
-                //var media = new Media(LibVLC, new Uri("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"));
+                LibVLC = new LibVLC();
+                var media = new Media(LibVLC, new Uri("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
 
-                //MediaPlayer = new MediaPlayer(LibVLC)
-                //{
-                //    Media = media
-                //};
+                MediaPlayer = new MediaPlayer(LibVLC)
+                {
+                    Media = media
+                };
 
-                //media.Dispose();
+                media.Dispose();
 
                 Connections.Clear();
                 foreach (Models.Device device in SettingsViewModel.Devices)
@@ -75,30 +72,26 @@ namespace Bionly.ViewModels
             return Task.CompletedTask;
         }
 
-        public void OnAppearing()
+        internal void OnAppearing()
         {
-            IsLoaded = true;
-            Play();
+            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
+            {
+                Core.Initialize();
+                LibVLC = new LibVLC();
+            }
         }
 
         internal void OnDisappearing()
         {
             if (MediaPlayer != null)
-                MediaPlayer.Dispose();
+            {
+                MediaPlayer.Stop();
+            }
         }
 
         public void OnVideoViewInitialized()
         {
-            IsVideoViewInitialized = true;
-            Play();
-        }
-
-        private void Play()
-        {
-            if (IsLoaded && IsVideoViewInitialized)
-            {
-                MediaPlayer.Play();
-            }
+            MediaPlayer.Play();
         }
     }
 }
