@@ -81,7 +81,7 @@
     <FlyoutItem Title="Dashboard" Icon="icon_Home.png">
         <ShellContent Route="DashboardPage" ContentTemplate="{DataTemplate local:DashboardPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Live Ansicht" Icon="icon_VideoCamera.png">
+    <FlyoutItem Title="Liveansicht" Icon="icon_VideoCamera.png">
         <ShellContent Route="LiveviewPage" ContentTemplate="{DataTemplate local:LiveviewPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Einstellungen" Icon="icon_Settings.png">

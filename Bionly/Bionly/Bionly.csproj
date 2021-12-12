@@ -13,6 +13,8 @@
     <PackageIconUrl />
     <RepositoryUrl>https://github.com/tomo2403/Bionly</RepositoryUrl>
     <LangVersion>9.0</LangVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <NeutralLanguage>de</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +25,10 @@
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
     <None Include="Resources\bionly_square_512.png">
       <Pack>True</Pack>
@@ -46,7 +52,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentFTP" Version="35.2.0" />
+    <PackageReference Include="FluentFTP" Version="35.2.1" />
+    <PackageReference Include="LibVLCSharp" Version="3.6.1" />
+    <PackageReference Include="LibVLCSharp.Forms" Version="3.6.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />  

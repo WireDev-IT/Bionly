@@ -12,7 +12,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
-        <ToolbarItem Text="Grafiken neu zeichne" Command="{Binding DrawGraphs}"/>
+        <ToolbarItem Text="Grafiken neu zeichnen" Command="{Binding DrawGraphs}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

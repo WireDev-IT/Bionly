@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.LiveviewPage"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -10,10 +11,36 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Label Text="Die Liveansicht ist unter Windows leider nicht verfügbar" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large">
+                <Label.IsVisible>
+                    <OnPlatform x:TypeArguments="x:Boolean" Default="False">
+                        <On Platform="UWP" Value="True"/>
+                    </OnPlatform>
+                </Label.IsVisible>
+            </Label>
+            <Grid>
+                <Grid.IsVisible>
+                    <OnPlatform x:TypeArguments="x:Boolean" Default="True">
+                        <On Platform="UWP" Value="False"/>
+                    </OnPlatform>
+                </Grid.IsVisible>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListView ItemsSource="{Binding Connections}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped" WidthRequest="200">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding Key}" VerticalTextAlignment="Center" FontSize="Medium" Margin="10,0,0,0"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayer="{Binding MediaPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+                <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsConnecting}" Color="Blue"/>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
