@@ -29,17 +29,24 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListView ItemsSource="{Binding Connections}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped" WidthRequest="200">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label Text="{Binding Key}" VerticalTextAlignment="Center" FontSize="Medium" Margin="10,0,0,0"/>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayer="{Binding MediaPlayer}" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
-                <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsConnecting}" Color="Blue"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="StopBtn" Grid.Row="0" Text="Video beenden" Clicked="StopButton_Clicked" Margin="5" IsEnabled="False"/>
+                    <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Connections}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped" WidthRequest="200">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label Text="{Binding Key}" VerticalTextAlignment="Center" FontSize="Medium" Margin="10,0,0,0"/>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
+                <ActivityIndicator x:Name="ActIndicator" Grid.Column="1" Color="Blue"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

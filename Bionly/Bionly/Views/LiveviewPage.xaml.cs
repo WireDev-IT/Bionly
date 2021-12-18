@@ -24,17 +24,45 @@ namespace Bionly.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            ((LiveviewViewModel)BindingContext).OnDisappearing();
+            StopButton_Clicked(new object(), new EventArgs());
         }
 
         private void VideoView_MediaPlayerChanged(object sender, MediaPlayerChangedEventArgs e)
         {
-            ((LiveviewViewModel)BindingContext).OnVideoViewInitialized();
+            ActIndicator.IsRunning = true;
+            VidView.MediaPlayer.Play();
+            StopBtn.IsEnabled = true;
+            ((LiveviewViewModel)BindingContext).IsPlaying = true;
+            //DeviceList.IsEnabled = false;
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            ((LiveviewViewModel)BindingContext).PlayStream.Execute(((KeyValuePair<string, Uri>)e.Item).Value);
+            if (((LiveviewViewModel)BindingContext).IsPlaying)
+            {
+                VidView.MediaPlayer.Stop();
+                VidView.MediaPlayer.Dispose();
+            }
+            VidView.MediaPlayer = ((LiveviewViewModel)BindingContext).GetPlayer(((KeyValuePair<string, Uri>)e.Item).Value);
+            VidView.MediaPlayer.Playing += MediaPlayer_Playing;
+        }
+
+        private void MediaPlayer_Playing(object sender, EventArgs e)
+        {
+            ActIndicator.IsRunning = false;
+        }
+
+        private void StopButton_Clicked(object sender, EventArgs e)
+        {
+            if (VidView.MediaPlayer != null)
+            {
+                VidView.MediaPlayer.Stop();
+                VidView.MediaPlayer.Dispose();
+            }
+            DeviceList.SelectedItem = null;
+            StopBtn.IsEnabled = false;
+            ((LiveviewViewModel)BindingContext).IsPlaying = false;
+            //DeviceList.IsEnabled = true;
         }
     }
 }
