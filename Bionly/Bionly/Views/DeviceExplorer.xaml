@@ -2,7 +2,7 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm="clr-namespace:Bionly.ViewModels"
-            x:Class="Bionly.Views.DeviceExplorer" Title="{Binding progress}" Appearing="Appearing">
+            x:Class="Bionly.Views.DeviceExplorer" Title="{Binding Title}" Appearing="Appearing">
 
     <TabbedPage.BindingContext>
         <vm:DeviceExplorerViewModel/>
@@ -17,7 +17,7 @@
                 <DataTemplate>
                     <StackLayout>
                         <Label Text="{Binding Key}" HorizontalOptions="Center"/>
-                        <Image Source="{Binding Value}" Aspect="AspectFit" HeightRequest="113" WidthRequest="200" />
+                        <Image Source="{Binding Value}" Aspect="AspectFit" HeightRequest="113" WidthRequest="200" Margin="0,0,0,20"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -49,10 +49,10 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding GetTime}"/>
-                            <Label Grid.Column="1" Text="{Binding GetTemperature}"/>
-                            <Label Grid.Column="2" Text="{Binding GetHumidity}"/>
-                            <Label Grid.Column="3" Text="{Binding GetPressure}"/>
+                            <Label Grid.Column="0" Text="{Binding TimeStr}"/>
+                            <Label Grid.Column="1" Text="{Binding TemperatureStr}"/>
+                            <Label Grid.Column="2" Text="{Binding HumidityStr}"/>
+                            <Label Grid.Column="3" Text="{Binding PressureStr}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

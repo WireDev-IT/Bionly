@@ -31,19 +31,19 @@ namespace Bionly.ViewModels
                 tempEntries.Add(new ChartEntry(Values[i].Temperature)
                 {
                     Label = Values[i].Time.ToShortDateString(),
-                    ValueLabel = Values[i].GetTemperature,
+                    ValueLabel = Values[i].TemperatureStr,
                     Color = new SKColor(255, 0, 0)
                 });
                 humiEntries.Add(new ChartEntry(Values[i].Humidity)
                 {
                     Label = Values[i].Time.ToShortDateString(),
-                    ValueLabel = Values[i].GetHumidity,
+                    ValueLabel = Values[i].HumidityStr,
                     Color = new SKColor(0, 0, 255)
                 });
                 presEntries.Add(new ChartEntry(Values[i].Pressure)
                 {
                     Label = Values[i].Time.ToShortDateString(),
-                    ValueLabel = Values[i].GetPressure
+                    ValueLabel = Values[i].PressureStr
                 });
             }
 

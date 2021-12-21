@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace Bionly.Models
 {
@@ -9,22 +11,56 @@ namespace Bionly.Models
         public float Humidity { get; set; }
         public float Pressure { get; set; }
 
-        public string GetTime
+        [JsonIgnore]
+        public string TimeStr
         {
             get => Time.ToShortDateString() + ", " + Time.ToShortTimeString();
         }
 
-        public string GetTemperature
+        [JsonIgnore]
+        public string TemperatureStr
         {
             get => Temperature.ToString("N1") + " °C";
         }
-        public string GetHumidity
+
+        [JsonIgnore]
+        public string HumidityStr
         {
             get => Humidity.ToString("00") + " %";
         }
-        public string GetPressure
+
+        [JsonIgnore]
+        public string PressureStr
         {
             get => Pressure.ToString() + " hPa";
         }
+
+        [JsonIgnore]
+        public bool Exists
+        {
+            get => File.Exists(Path);
+        }
+
+        [JsonIgnore]
+        private string _path = null;
+        [JsonIgnore]
+        public string Path
+        {
+            get => _path;
+            set => _path = value + $"\\{Time.Ticks}.json";
+        }
+
+        public void Save(string path = null)
+        {
+            if (!string.IsNullOrEmpty(path)) Path = path;
+
+            File.WriteAllText(Path, JsonConvert.SerializeObject(this, Formatting.Indented));
+        }
+
+        public static MeasurementPoint Load(string path)
+        {
+            return JsonConvert.DeserializeObject<MeasurementPoint>(File.ReadAllText(path));
+        }
+
     }
 }

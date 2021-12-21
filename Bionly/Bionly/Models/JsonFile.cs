@@ -15,9 +15,9 @@ namespace Bionly.Models
         [JsonProperty("value")]
         public float Value { get; set; }
 
-        public SensorType GetSensorType()
+        public SensorType SensorType
         {
-            return Sensor switch
+            get => Sensor switch
             {
                 "dht22-temperature" => SensorType.Temperature,
                 "dht22-humidity" => SensorType.Humidity,
