@@ -38,17 +38,17 @@ namespace Bionly.ViewModels
 
         private static string GetDevicePath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "\\Files\\" + Device.Id;
+            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Files/" + Device.Id;
         }
 
         private bool CheckExistingFile(DateTime time)
         {
-            return File.Exists(GetDevicePath() + $"\\{time.Ticks}.json");
+            return File.Exists(GetDevicePath() + $"/{time.Ticks}.json");
         }
 
         private static string GetTempPath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "\\temp\\" + Device.Id;
+            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/temp/" + Device.Id;
         }
 
         public ICommand ConnectFTPS => new Command(async () =>
@@ -110,7 +110,7 @@ namespace Bionly.ViewModels
         public DeviceExplorerViewModel()
         {
             Title = Device.Name;
-            //_ = GenerateFiles();
+            _ = GenerateFiles();
 
             foreach (string file in Directory.GetFiles(GetDevicePath(), "*.json"))
             {
@@ -132,7 +132,7 @@ namespace Bionly.ViewModels
 
         private Task GenerateFiles()
         {
-            Directory.CreateDirectory(GetDevicePath());
+            Directory.CreateDirectory(GetTempPath());
             string[] sensors = new string[] { "dht22-temperature", "dht22-humidity", "bmp180-temperature", "bmp180-pressure" };
             DateTime time = new();
 
@@ -144,17 +144,17 @@ namespace Bionly.ViewModels
                 j.Sensor = sensors[0];
                 j.Value = new Random().Next(10, 30);
                 j.TimeString = time.ToString("yyyy-MM-dd_HH-mm-ss");
-                File.WriteAllText(GetTempPath() + $"\\{sensors[0]}-{i}.json", JsonConvert.SerializeObject(j));
+                File.WriteAllText(GetTempPath() + $"/{sensors[0]}-{i}.json", JsonConvert.SerializeObject(j));
 
                 j.Sensor = sensors[1];
                 j.Value = new Random().Next(30, 80);
                 j.TimeString = time.ToString("yyyy-MM-dd_HH-mm-ss");
-                File.WriteAllText(GetTempPath() + $"\\{sensors[1]}-{i}.json", JsonConvert.SerializeObject(j));
+                File.WriteAllText(GetTempPath() + $"/{sensors[1]}-{i}.json", JsonConvert.SerializeObject(j));
 
                 j.Sensor = sensors[3];
                 j.Value = new Random().Next(900, 1500);
                 j.TimeString = time.ToString("yyyy-MM-dd_HH-mm-ss");
-                File.WriteAllText(GetTempPath() + $"\\{sensors[3]}-{i}.json", JsonConvert.SerializeObject(j));
+                File.WriteAllText(GetTempPath() + $"/{sensors[3]}-{i}.json", JsonConvert.SerializeObject(j));
             }
 
             RefreshFiles.Execute(this);

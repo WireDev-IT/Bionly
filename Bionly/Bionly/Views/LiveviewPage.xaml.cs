@@ -56,7 +56,6 @@ namespace Bionly.Views
         {
             if (VidView.MediaPlayer != null)
             {
-                VidView.MediaPlayer.Stop();
                 VidView.MediaPlayer.Dispose();
             }
             DeviceList.SelectedItem = null;
