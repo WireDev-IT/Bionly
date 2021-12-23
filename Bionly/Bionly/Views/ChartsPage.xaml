@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:mch="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Bionly.Views.ChartsPage" Title="Diagramme">
+    
+    <ContentPage.BindingContext>
+        <vm:DashboardViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Grafiken neu zeichnen" Command="{Binding DrawGraphs}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="Temperatur" FontSize="Subtitle"/>
+                    <Grid>
+                        <ActivityIndicator IsRunning="True" Margin="0,50"/>
+                        <mch:ChartView x:Name="TempChart" HeightRequest="500"/>
+                    </Grid>
+                    <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
+                    <Label Text="Luftfeuchtigkeit" FontSize="Subtitle"/>
+                    <Grid>
+                        <ActivityIndicator IsRunning="True" Margin="0,50"/>
+                        <mch:ChartView x:Name="HumiChart" HeightRequest="500"/>
+                    </Grid>
+                    <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
+                    <Label Text="Luftdruck" FontSize="Subtitle"/>
+                    <Grid>
+                        <ActivityIndicator IsRunning="True" Margin="0,50"/>
+                        <mch:ChartView x:Name="PresChart" HeightRequest="500"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

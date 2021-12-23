@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static Bionly.Enums.Connection;
 
 namespace Bionly.Models
 {
@@ -108,6 +109,70 @@ namespace Bionly.Models
                     _settings = value;
                     OnPropertyChanged(nameof(Settings));
                 }
+            }
+        }
+
+        private float _currentTemp = 0;
+        [JsonIgnore]
+        public float CurrentTemp
+        {
+            get => _currentTemp;
+            set
+            {
+                if (_currentTemp != value)
+                {
+                    _currentTemp = value;
+                    OnPropertyChanged(nameof(CurrentTemp));
+                }
+            }
+        }
+
+        private float _currentHumi = 0;
+        [JsonIgnore]
+        public float CurrentHumi
+        {
+            get => _currentHumi;
+            set
+            {
+                if (_currentHumi != value)
+                {
+                    _currentHumi = value;
+                    OnPropertyChanged(nameof(CurrentHumi));
+                }
+            }
+        }
+
+        private ConnectionStatus _connected = ConnectionStatus.Error;
+        [JsonIgnore]
+        public ConnectionStatus Connected
+        {
+            get => _connected;
+            set
+            {
+                if (_connected != value)
+                {
+                    _connected = value;
+                    OnPropertyChanged(nameof(Connected));
+                }
+            }
+        }
+
+        /// <returns>
+        /// Returns the matching image of the connection state.
+        /// </returns>
+        [JsonIgnore]
+        public ImageSource DeviceSymbol
+        {
+            get
+            {
+                return Connected switch
+                {
+                    ConnectionStatus.Connected => ImageSource.FromFile("Resources/icon_cloud_done.png"),
+                    ConnectionStatus.Connecting => ImageSource.FromFile("Resources/icon_cloud_sync.png"),
+                    ConnectionStatus.Disconnected => ImageSource.FromFile("Resources/icon_cloud_unavailable.png"),
+                    ConnectionStatus.Error => ImageSource.FromFile("Resources/icon_cloud_cross.png"),
+                    _ => null,
+                };
             }
         }
 

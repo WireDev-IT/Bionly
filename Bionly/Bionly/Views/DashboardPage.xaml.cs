@@ -23,9 +23,7 @@ namespace Bionly.Views
         {
             base.OnAppearing();
 
-            TempChart.Chart = ((DashboardViewModel)BindingContext).tempChart;
-            HumiChart.Chart = ((DashboardViewModel)BindingContext).humiChart;
-            PresChart.Chart = ((DashboardViewModel)BindingContext).presChart;
+            RadChart.Chart = ((DashboardViewModel)BindingContext).radChart;
         }
     }
 }

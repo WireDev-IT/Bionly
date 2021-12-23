@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Serialization;
 using Xamarin.Forms;
 using static Bionly.Enums.Sensor;
 

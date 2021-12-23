@@ -11,57 +11,70 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Refresh}"/>
         <ToolbarItem Text="Grafiken neu zeichnen" Command="{Binding DrawGraphs}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <Grid Margin="0,10,0,0" Padding="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="270"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start">
+            <Grid Grid.Column="0" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Label Text="Geräte" FontSize="Title" HorizontalOptions="Start" VerticalOptions="Start">
                     <Label.Margin>
                         <OnIdiom x:TypeArguments="Thickness" Desktop="20,0,0,0" Default="10,0,0,0"/>
                     </Label.Margin>
                 </Label>
-                <ListView ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" SelectionMode="None" WidthRequest="270" HorizontalOptions="Start" ItemTapped="ListView_ItemTapped">
+                <ListView Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" SelectionMode="None" ItemTapped="ListView_ItemTapped" IsVisible="false">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid Padding="0">
-                                    <Grid.Margin>
-                                        <OnIdiom x:TypeArguments="Thickness" Default="20" Phone="10"/>
-                                    </Grid.Margin>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
-                                    <Grid Grid.Column="1">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="Subtitle"/>
-                                        <Grid Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Text="00,00°C" Margin="0,0,10,0" FontSize="Caption"/>
-                                            <Label Grid.Column="1" Text="00%" Margin="10,0,0,0" FontSize="Caption"/>
+                                <StackLayout>
+                                    <Grid>
+                                        <Grid.Margin>
+                                            <OnIdiom x:TypeArguments="Thickness" Default="20" Phone="10"/>
+                                        </Grid.Margin>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Name}" FontSize="Subtitle"/>
+                                            <Grid Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="00,00°C" Margin="0,0,10,0" FontSize="Caption"/>
+                                                <Label Grid.Column="1" Text="00%" Margin="10,0,0,0" FontSize="Caption"/>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
+                                </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>
+                <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="None" ItemTapped="ListView_ItemTapped" IsVisible="true">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell Text="{Binding Name}" Detail="00,0 °C, 00 %" TextColor="Black" ImageSource="{Binding DeviceSymbol}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
             <Line Grid.Column="1" WidthRequest="1" VerticalOptions="Fill" HorizontalOptions="Fill" Background="Gray" Margin="0,10">
                 <Line.IsVisible>
                     <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False"/>
@@ -71,28 +84,7 @@
                 <StackLayout.IsVisible>
                     <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False"/>
                 </StackLayout.IsVisible>
-                <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
-                <ScrollView>
-                    <StackLayout>
-                        <Label Text="Temperatur" FontSize="Subtitle"/>
-                        <Grid>
-                            <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                            <mch:ChartView x:Name="TempChart" HeightRequest="500"/>
-                        </Grid>
-                        <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
-                        <Label Text="Luftfeuchtigkeit" FontSize="Subtitle"/>
-                        <Grid>
-                            <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                            <mch:ChartView x:Name="HumiChart" HeightRequest="500"/>
-                        </Grid>
-                        <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
-                        <Label Text="Luftdruck" FontSize="Subtitle"/>
-                        <Grid>
-                            <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                            <mch:ChartView x:Name="PresChart" HeightRequest="500"/>
-                        </Grid>
-                    </StackLayout>
-                </ScrollView>
+                <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="370" HorizontalOptions="Start"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

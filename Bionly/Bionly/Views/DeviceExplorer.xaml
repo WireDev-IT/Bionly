@@ -7,7 +7,11 @@
     <TabbedPage.BindingContext>
         <vm:DeviceExplorerViewModel/>
     </TabbedPage.BindingContext>
-    
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding RefreshFiles}"/>
+    </TabbedPage.ToolbarItems>
+
     <ContentPage Title="Bilder">
         <CollectionView ItemsSource="{Binding Images}" ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemsLayout>

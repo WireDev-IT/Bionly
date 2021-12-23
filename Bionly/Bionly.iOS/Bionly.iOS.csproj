@@ -159,10 +159,32 @@
   <ItemGroup>
     <Content Include="bionly_square.ico" />
     <Content Include="Resources\bionly_square_1024.png" />
-    <Content Include="Resources\icon_Documents.png" />
-    <Content Include="Resources\icon_Home.png" />
-    <Content Include="Resources\icon_Info.png" />
-    <Content Include="Resources\icon_Settings.png" />
-    <Content Include="Resources\icon_VideoCamera.png" />
+    <Content Include="Resources\icon_Chart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_cloud_cross.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_cloud_done.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_cloud_sync.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_cloud_unavailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_info.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_Settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon_VideoCamera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

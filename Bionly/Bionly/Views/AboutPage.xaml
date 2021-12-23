@@ -21,7 +21,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <Image Source="bionly_logo.png" HeightRequest="180" WidthRequest="180" HorizontalOptions="Fill" Margin="10"/>
+            <Image Source="bionly_logo.png" WidthRequest="180" Margin="10">
+                <Image.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double" Default="200">
+                        <On Platform="Android">120</On>
+                    </OnPlatform>
+                </Image.HeightRequest>
+            </Image>
             <Label Text="Copyright © tomo_2403" HorizontalOptions="Center" TextColor="DarkSlateGray" Margin="0,-10,0,10"/>
         </StackLayout>
         <ScrollView Grid.Row="1">
@@ -91,9 +97,9 @@
                         </Frame>
                         <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
                             <StackLayout>
-                                <Label Text="Visual Studio 2019 Image Library" FontSize="Title"/>
-                                <Label Text="MICROSOFT SOFTWARE LICENSE TERMS" FontSize="Micro"/>
-                                <Label Text="Copyright (c) Microsoft Corporation" FontSize="Micro"/>
+                                <Label Text="Icons" FontSize="Title"/>
+                                <Label Text="Symbole von Icons8.com" FontSize="Micro"/>
+                                <Label Text="Copyright (c) Icons8" FontSize="Micro"/>
                             </StackLayout>
                         </Frame>
                     </StackLayout>
