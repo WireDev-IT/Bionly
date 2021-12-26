@@ -7,12 +7,13 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static Bionly.Enums.Connection;
+using static Bionly.Enums.Path;
 
 namespace Bionly.Models
 {
     public class Device : INotifyPropertyChanged
     {
-        public static string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Devices/";
+        public static string GeneralPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Devices/";
 
         private string _id;
         public string Id
@@ -161,20 +162,36 @@ namespace Bionly.Models
         /// Returns the matching image of the connection state.
         /// </returns>
         [JsonIgnore]
-        public ImageSource DeviceSymbol
+        public ImageSource DeviceSymbol => Connected switch
         {
-            get
+            ConnectionStatus.Connected => ImageSource.FromFile("Resources/icon_cloud_done.png"),
+            ConnectionStatus.Connecting => ImageSource.FromFile("Resources/icon_cloud_sync.png"),
+            ConnectionStatus.Disconnected => ImageSource.FromFile("Resources/icon_cloud_unavailable.png"),
+            ConnectionStatus.Error => ImageSource.FromFile("Resources/icon_cloud_cross.png"),
+            _ => null,
+        };
+
+        /// <param name="type">The type of path that is needed.</param>
+        /// <param name="createDirectory">Creates the path so that it can be used directly.</param>
+        public string GetPath(PathType type, bool createDirectory = true)
+        {
+            string path = type switch
             {
-                return Connected switch
-                {
-                    ConnectionStatus.Connected => ImageSource.FromFile("Resources/icon_cloud_done.png"),
-                    ConnectionStatus.Connecting => ImageSource.FromFile("Resources/icon_cloud_sync.png"),
-                    ConnectionStatus.Disconnected => ImageSource.FromFile("Resources/icon_cloud_unavailable.png"),
-                    ConnectionStatus.Error => ImageSource.FromFile("Resources/icon_cloud_cross.png"),
-                    _ => null,
-                };
+                PathType.Device => GeneralPath,
+                PathType.Files => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Files/" + _id,
+                PathType.Images => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Images/" + _id,
+                PathType.Temporary => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/temp/" + _id,
+                _ => GeneralPath,
+            };
+
+            if (createDirectory)
+            {
+                try { Directory.CreateDirectory(path); } catch { }
             }
+
+            return path;
         }
+
 
         public Device() { }
 
@@ -182,7 +199,7 @@ namespace Bionly.Models
         {
             try
             {
-                File.Delete(path + $"{Id}.json");
+                File.Delete(GeneralPath + $"{Id}.json");
                 return true;
             }
             catch (DirectoryNotFoundException)
@@ -203,9 +220,13 @@ namespace Bionly.Models
         {
             try
             {
-                if (string.IsNullOrEmpty(Id)) NewId();
-                _ = Directory.CreateDirectory(path);
-                File.WriteAllText(path + $"{Id}.json", JsonConvert.SerializeObject(this, Formatting.Indented));
+                if (string.IsNullOrEmpty(Id))
+                {
+                    NewId();
+                }
+
+                _ = Directory.CreateDirectory(GeneralPath);
+                File.WriteAllText(GeneralPath + $"{Id}.json", JsonConvert.SerializeObject(this, Formatting.Indented));
                 return true;
             }
             catch (UnauthorizedAccessException)
@@ -222,7 +243,7 @@ namespace Bionly.Models
         {
             try
             {
-                _ = Directory.CreateDirectory(path);
+                _ = Directory.CreateDirectory(GeneralPath);
                 return JsonConvert.DeserializeObject<Device>(File.ReadAllText(file));
             }
             catch (UnauthorizedAccessException)
@@ -271,7 +292,7 @@ namespace Bionly.Models
                     rng.GetBytes(codebytes);
                 }
                 code = BitConverter.ToString(codebytes).ToLower().Replace("-", "");
-            } while (File.Exists(path + $"{code}.json"));
+            } while (File.Exists(GeneralPath + $"{code}.json"));
             Id = code;
             return Id;
         }

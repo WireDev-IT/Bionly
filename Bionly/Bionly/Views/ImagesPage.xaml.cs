@@ -11,16 +11,18 @@ using Xamarin.Forms.Xaml;
 namespace Bionly.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DeviceExplorer : TabbedPage
+    public partial class ImagesPage : ContentPage
     {
-        public DeviceExplorer()
+        public ImagesPage()
         {
             InitializeComponent();
         }
 
-        private new void Appearing(object sender, EventArgs e)
+        public ImagesPage(string deviceId)
         {
-            //((DeviceExplorerViewModel)BindingContext).ConnectFTPS.Execute(null);
+            InitializeComponent();
+            ((ImagesViewModel)BindingContext).Setup(deviceId);
         }
+
     }
 }

@@ -1,34 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:vm="clr-namespace:Bionly.ViewModels"
-            x:Class="Bionly.Views.DeviceExplorer" Title="{Binding Title}" Appearing="Appearing">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             x:Class="Bionly.Views.MeasurementsPage" Title="{Binding Title}">
 
-    <TabbedPage.BindingContext>
-        <vm:DeviceExplorerViewModel/>
-    </TabbedPage.BindingContext>
+    <ContentPage.BindingContext>
+        <vm:MeasurementsViewModel />
+    </ContentPage.BindingContext>
 
-    <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding RefreshFiles}"/>
-    </TabbedPage.ToolbarItems>
-
-    <ContentPage Title="Bilder">
-        <CollectionView ItemsSource="{Binding Images}" ItemSizingStrategy="MeasureFirstItem">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Key}" HorizontalOptions="Center"/>
-                        <Image Source="{Binding Value}" Aspect="AspectFit" HeightRequest="113" WidthRequest="200" Margin="0,0,0,20"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ContentPage>
-    <ContentPage Title="Messwerte">
-        <ListView ItemsSource="{Binding Stats}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Demo" Command="{Binding RefreshFiles}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Values}" Margin="10">
             <ListView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -62,8 +47,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </ContentPage>
-    <ContentPage Title="Dateien">
-
-    </ContentPage>
-</TabbedPage>
+    </ContentPage.Content>
+</ContentPage>

@@ -15,7 +15,7 @@
 
     <ContentPage.Content>
         <StackLayout Margin="10">
-            <Label Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
+            <Label x:Name="HeaderLbl" Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
             <ScrollView>
                 <StackLayout>
                     <Label Text="Temperatur" FontSize="Subtitle"/>

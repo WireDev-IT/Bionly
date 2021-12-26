@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31727.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bionly.UWP", "Bionly\Bionly.UWP\Bionly.UWP.csproj", "{BADEB821-3AB5-44C3-B3E3-93066CD7934E}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bionly.Android", "Bionly\Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bionly.iOS", "Bionly\Bionly.iOS\Bionly.iOS.csproj", "{66EB9C64-3125-4F99-964D-AE0489C77F49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bionly", "Bionly\Bionly\Bionly.csproj", "{DC0919E9-B54E-4855-A4AB-39BD120FD4D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bionly", "Bionly\Bionly\Bionly.csproj", "{DC0919E9-B54E-4855-A4AB-39BD120FD4D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

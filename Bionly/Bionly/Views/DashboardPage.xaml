@@ -67,7 +67,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="None" ItemTapped="ListView_ItemTapped" IsVisible="true">
+                <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ImageCell Text="{Binding Name}" Detail="00,0 °C, 00 %" TextColor="Black" ImageSource="{Binding DeviceSymbol}"/>
@@ -84,7 +84,18 @@
                 <StackLayout.IsVisible>
                     <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False"/>
                 </StackLayout.IsVisible>
-                <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="370" HorizontalOptions="Start"/>
+                <Label Text="Guten Tag" FontSize="40"/>
+                <Label Text="1 von 3 Geräten verbunden" FontSize="Medium"/>
+                <StackLayout Margin="0,20,0,0">
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Verbinden" BackgroundColor="Green" WidthRequest="120"/>
+                        <Button Text="Bilder" WidthRequest="120" Clicked="ImagesBtn_Clicked"/>
+                        <Button Text="Messwerte" WidthRequest="120" Clicked="MeasurementsBtn_Clicked"/>
+                        <Button Text="Diagramme" WidthRequest="120" Clicked="ChartsBtn_Clicked"/>
+                        <Button Text="Verwalten" WidthRequest="120" IsVisible="true" Clicked="ConfigBtn_Clicked"/>
+                    </StackLayout>
+                    <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="370" HorizontalOptions="Start" Margin="10"/>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
