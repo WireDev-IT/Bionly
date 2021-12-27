@@ -1,12 +1,9 @@
-﻿using Bionly.ViewModels;
-using Bionly.Views;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using Xamarin.Forms;
 
 namespace Bionly
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {

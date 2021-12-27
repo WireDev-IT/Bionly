@@ -10,6 +10,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Löschen" Clicked="DeleteBtn_Clicked"/>
         <ToolbarItem Text="Speichern" Command="{Binding SaveDevice}"/>
     </ContentPage.ToolbarItems>
 

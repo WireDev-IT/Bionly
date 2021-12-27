@@ -17,5 +17,11 @@ namespace Bionly.Views
         {
             InitializeComponent();
         }
+
+        private async void DeleteBtn_Clicked(object sender, EventArgs e)
+        {
+            ((DeviceSettingsViewModel)BindingContext).DeleteDevice.Execute(null);
+            await Navigation.PopAsync();
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace Bionly.Models
 {
     public class Device : INotifyPropertyChanged
     {
+        public Device() { }
+
         public static string GeneralPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Devices/";
 
         private string _id;
@@ -113,6 +115,8 @@ namespace Bionly.Models
             }
         }
 
+
+
         private float _currentTemp = 0;
         [JsonIgnore]
         public float CurrentTemp
@@ -171,35 +175,13 @@ namespace Bionly.Models
             _ => null,
         };
 
-        /// <param name="type">The type of path that is needed.</param>
-        /// <param name="createDirectory">Creates the path so that it can be used directly.</param>
-        public string GetPath(PathType type, bool createDirectory = true)
-        {
-            string path = type switch
-            {
-                PathType.Device => GeneralPath,
-                PathType.Files => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Files/" + _id,
-                PathType.Images => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Images/" + _id,
-                PathType.Temporary => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/temp/" + _id,
-                _ => GeneralPath,
-            };
 
-            if (createDirectory)
-            {
-                try { Directory.CreateDirectory(path); } catch { }
-            }
-
-            return path;
-        }
-
-
-        public Device() { }
 
         public async Task<bool> Delete()
         {
             try
             {
-                File.Delete(GeneralPath + $"{Id}.json");
+                File.Delete(GetPath(PathType.Device, false) + $"{Id}.json");
                 return true;
             }
             catch (DirectoryNotFoundException)
@@ -215,6 +197,34 @@ namespace Bionly.Models
                 await Application.Current.MainPage.DisplayAlert("Fehler", ex.Message, "OK");
             }
             return false;
+        }
+        public async Task<(bool device, bool contents)> DeleteWithContents()
+        {
+            bool success = true;
+
+            foreach (PathType type in Enum.GetValues(typeof(PathType)))
+            {
+                try
+                {
+                    if (type == PathType.Device) { File.Delete(GetPath(type, false)); }
+                    else { Directory.CreateDirectory(GetPath(type, false)); }
+                }
+                catch (DirectoryNotFoundException)
+                {
+
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Fehler", "Die App besitzt nicht die benötigten Berechtigungen um die Daten dieses Gerätes zu löschen.", "OK");
+                    success = false;
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Fehler", ex.Message, "OK");
+                    success = false;
+                }
+            }
+            return (await Delete(), success);
         }
         public async Task<bool> Save()
         {
@@ -295,6 +305,26 @@ namespace Bionly.Models
             } while (File.Exists(GeneralPath + $"{code}.json"));
             Id = code;
             return Id;
+        }
+        /// <param name="type">The type of path that is needed.</param>
+        /// <param name="createDirectory">Creates the path so that it can be used directly.</param>
+        public string GetPath(PathType type, bool createDirectory = true)
+        {
+            string path = type switch
+            {
+                PathType.Device => GeneralPath + $"/{_id}.json",
+                PathType.Files => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Files/" + _id,
+                PathType.Images => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Images/" + _id,
+                PathType.Temporary => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/temp/" + _id,
+                _ => GeneralPath,
+            };
+
+            if (createDirectory)
+            {
+                try { Directory.CreateDirectory(path); } catch { }
+            }
+
+            return path;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

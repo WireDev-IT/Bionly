@@ -129,7 +129,7 @@
                                 </OnPlatform>
                             </Label.TextColor>
                         </Label>
-                        <Label Text="Copyright © tomo_2403" TextColor="White" FontSize="Caption">
+                        <Label Text="Copyright © tomo2403" TextColor="White" FontSize="Caption">
                             <Label.TextColor>
                                 <OnPlatform x:TypeArguments="Color" Default="White">
                                     <On Platform="Android">Black</On>

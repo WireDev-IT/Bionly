@@ -28,7 +28,7 @@
                     </OnPlatform>
                 </Image.HeightRequest>
             </Image>
-            <Label Text="Copyright © tomo_2403" HorizontalOptions="Center" TextColor="DarkSlateGray" Margin="0,-10,0,10"/>
+            <Label Text="Copyright © tomo2403" HorizontalOptions="Center" TextColor="DarkSlateGray" Margin="0,-10,0,10"/>
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
