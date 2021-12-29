@@ -76,6 +76,11 @@ namespace Bionly.ViewModels
         public ICommand Refresh => new Command(() =>
         {
             SettingsViewModel.LoadAllDevices.Execute(null);
+
+            foreach (Models.Device d in SettingsViewModel.Devices)
+            {
+                _ = d.GetCurrentValues();
+            }
         });
 
         public DashboardViewModel()

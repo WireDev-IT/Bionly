@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -145,6 +146,12 @@ namespace Bionly.Models
                     OnPropertyChanged(nameof(CurrentHumi));
                 }
             }
+        }
+
+        [JsonIgnore]
+        public string CurrentValuesStr
+        {
+            get => CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
         }
 
         private ConnectionStatus _connected = ConnectionStatus.Error;
@@ -326,11 +333,34 @@ namespace Bionly.Models
 
             return path;
         }
+        public async Task GetCurrentValues()
+        {
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/current");
+                response.EnsureSuccessStatusCode();
+                string test = await response.Content.ReadAsStringAsync();
+                CurrentValues values = JsonConvert.DeserializeObject<CurrentValues>(await response.Content.ReadAsStringAsync());
+                CurrentTemp = values.CurrentTemp;
+                CurrentHumi = values.CurrentHumi;
+            }
+            catch (Exception)
+            {
 
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        public struct CurrentValues
+        {
+            [JsonProperty("temperature")]
+            public float CurrentTemp { get; set; }
+            [JsonProperty("humidity")]
+            public float CurrentHumi { get; set; }
         }
     }
 }

@@ -70,7 +70,7 @@
                 <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ImageCell Text="{Binding Name}" Detail="00,0 °C, 00 %" TextColor="Black" ImageSource="{Binding DeviceSymbol}"/>
+                            <ImageCell Text="{Binding Name}" Detail="{Binding CurrentValuesStr}" TextColor="Black" DetailColor="Black" ImageSource="{Binding DeviceSymbol}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
