@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bionly.Views;
+using System;
 using Xamarin.Forms;
 
 namespace Bionly
@@ -10,9 +11,9 @@ namespace Bionly
             InitializeComponent();
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        private async void AccBtn_Clicked(object sender, EventArgs e)
         {
-            await Current.GoToAsync("//LoginPage");
+            await Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }

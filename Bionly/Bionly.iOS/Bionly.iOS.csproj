@@ -146,6 +146,12 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="LibVLCSharp.Forms">
+      <Version>3.6.5</Version>
+    </PackageReference>
+    <PackageReference Include="VideoLAN.LibVLC.iOS">
+      <Version>3.3.17</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
@@ -158,33 +164,41 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bionly_square.ico" />
-    <Content Include="Resources\bionly_square_1024.png" />
-    <Content Include="Resources\icon_Chart.png">
+    <BundleResource Include="Resources\bionly_square_1024.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_cloud_cross.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_cloud_done.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_cloud_cross.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_cloud_sync.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_cloud_done.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_cloud_unavailable.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_cloud_sync.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_Home.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_cloud_unavailable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_info.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_Home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_Settings.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_info.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon_VideoCamera.png">
+    </BundleResource>
+    <BundleResource Include="Resources\icon_logout.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </BundleResource>
+    <BundleResource Include="Resources\icon_Settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\icon_VideoCamera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\bionly_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
 </Project>

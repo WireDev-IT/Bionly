@@ -1,25 +1,41 @@
-﻿using Bionly.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Bionly.Models;
+using Bionly.Views;
+using System.Windows.Input;
 using Xamarin.Forms;
-using System.Linq;
+using static Bionly.Enums.User;
 
 namespace Bionly.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public Command LoginCommand { get; }
+        public static bool IsLoggedIn { get; private set; } = false;
+        public static UserType LoggedInUser { get; private set; } = UserType.Guest;
+        internal static Account Account { get; set; } = new("guest", "guest");
+        internal static Accounts users = new();
 
         public LoginViewModel()
         {
-            LoginCommand = new Command(OnLoginClicked);
+            users = Accounts.Load().Result;
         }
 
-        private async void OnLoginClicked(object obj)
+        public ICommand LoginCommand => new Command(async () =>
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
-        }
+            LoggedInUser = users.GetUserType(Account);
+            if (LoggedInUser == UserType.Guest)
+            {
+                IsLoggedIn = true;
+                await Shell.Current.GoToAsync($"//{nameof(DashboardPage)}");
+            }
+            else if (LoggedInUser == UserType.Admin)
+            {
+                IsLoggedIn = true;
+                await Shell.Current.GoToAsync($"//{nameof(SettingsPage)}");
+            }
+            else
+            {
+                IsLoggedIn = false;
+                await Application.Current.MainPage.DisplayAlert("Fehler", "Benutzername oder Passwort nicht korrekt", "OK");
+            }
+        });
     }
 }

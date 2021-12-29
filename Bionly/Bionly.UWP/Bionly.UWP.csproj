@@ -157,6 +157,9 @@
     <Content Include="icon_info.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icon_logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icon_Settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

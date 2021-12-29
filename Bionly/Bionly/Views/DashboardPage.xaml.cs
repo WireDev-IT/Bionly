@@ -20,10 +20,9 @@ namespace Bionly.Views
             DeviceId = ((Models.Device)e.Item).Id;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-
             RadChart.Chart = ((DashboardViewModel)BindingContext).radChart;
         }
 

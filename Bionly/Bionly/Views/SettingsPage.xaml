@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.SettingsPage"
-             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:vm="clr-namespace:Bionly.ViewModels" xmlns:c="clr-namespace:Bionly.Converter"
              Title="{Binding Title}" Appearing="ContentPage_Appearing">
 
     <ContentPage.BindingContext>
@@ -11,46 +11,61 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Neues Gerät" Clicked="CreateDevice"/>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}" IsEnabled="{Binding ControlsEnabled}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None">
-                <ListView.Header>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Text="ID" HorizontalOptions="Fill"  Grid.Column="0" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                        <Label Text="Name" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                        <Label Text="Beschreibung" HorizontalOptions="Fill"  Grid.Column="2" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                        <Label Text="IP-Adresse" HorizontalOptions="Fill"  Grid.Column="3" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                </ListView.Header>
+        <Grid Margin="10">
+            <Label x:Name="GuestTxt" Text="Als Gast können Sie keine Einstellungen bearbeiten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="false"/>
+            <StackLayout x:Name="MainContainer">
+                <Label Text="Geräte" FontSize="Title"/>
+                <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None" VerticalOptions="Start">
+                    <ListView.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="ID" HorizontalOptions="Fill"  Grid.Column="0" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="Name" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="Beschreibung" HorizontalOptions="Fill"  Grid.Column="2" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="IP-Adresse" HorizontalOptions="Fill"  Grid.Column="3" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </ListView.Header>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid HeightRequest="40">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding Id}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
-                                <Label Grid.Column="1" Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
-                                <Label Grid.Column="2" Text="{Binding Description}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
-                                <Label Grid.Column="3" Text="{Binding IpAddress}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid HeightRequest="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Id}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                    <Label Grid.Column="1" Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                    <Label Grid.Column="2" Text="{Binding Description}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                    <Label Grid.Column="3" Text="{Binding IpAddress}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label Text="Systemverwalter" FontSize="Title" Margin="0,20,0,0"/>
+                <Entry x:Name="UserTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Benutzername"/>
+                <Entry x:Name="OldPassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Altes Passwort" IsPassword="True"/>
+                <Entry x:Name="NewPassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Neues Passwort" IsPassword="True"/>
+                <Entry x:Name="NewPassTxt2" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Neues Passwort wiederholen" IsPassword="True"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Neue Benutzerdaten speichern" Clicked="SaveUserBtn_Clicked"/>
+                    <Button Text="Zurücksetzen" Clicked="ResetUserBtn_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

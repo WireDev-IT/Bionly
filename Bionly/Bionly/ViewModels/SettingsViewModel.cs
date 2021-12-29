@@ -1,7 +1,5 @@
-﻿using Bionly.Views;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -9,6 +7,7 @@ namespace Bionly.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
+        public bool ControlsEnabled { get; set; } = false;
         public static ObservableCollection<Models.Device> Devices { get; set; } = new();
 
         public static ICommand LoadAllDevices => new Command(async () =>
