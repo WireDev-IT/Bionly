@@ -32,16 +32,18 @@ namespace Bionly.Views
 
             if (DeviceId != null)
             {
-                HeaderLbl.Text = $"Graphen für \"{SettingsViewModel.Devices.First(x => x.Id == DeviceId).Name}\"";
+                Models.Device d = SettingsViewModel.Devices.FirstOrDefault(x => x.Id == DeviceId);
+                ((ChartsViewModel)BindingContext).Device = d;
+                HeaderLbl.Text = $"Graphen für \"{d.Name}\"";
+                TempChart.Chart = ((ChartsViewModel)BindingContext).tempChart;
+                HumiChart.Chart = ((ChartsViewModel)BindingContext).humiChart;
+                PresChart.Chart = ((ChartsViewModel)BindingContext).presChart;
+                ((ChartsViewModel)BindingContext).DrawGraphs.Execute(null);
             }
             else
             {
                 HeaderLbl.Text = "Durchschnittswerte der Vergangenheit";
             }
-
-            TempChart.Chart = ((DashboardViewModel)BindingContext).tempChart;
-            HumiChart.Chart = ((DashboardViewModel)BindingContext).humiChart;
-            PresChart.Chart = ((DashboardViewModel)BindingContext).presChart;
         }
 
         protected override void OnDisappearing()

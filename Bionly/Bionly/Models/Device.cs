@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
@@ -117,6 +118,20 @@ namespace Bionly.Models
         }
 
 
+        private List<MeasurementPoint> _mPoints = new();
+        [JsonIgnore]
+        public List<MeasurementPoint> MPoints
+        {
+            get => _mPoints;
+            set
+            {
+                if (_mPoints != value)
+                {
+                    _mPoints = value;
+                    OnPropertyChanged(nameof(MPoints));
+                }
+            }
+        }
 
         private float _currentTemp = 0;
         [JsonIgnore]
@@ -144,6 +159,21 @@ namespace Bionly.Models
                 {
                     _currentHumi = value;
                     OnPropertyChanged(nameof(CurrentHumi));
+                }
+            }
+        }
+
+        private float _currentPres = 0;
+        [JsonIgnore]
+        public float CurrentPres
+        {
+            get => _currentPres;
+            set
+            {
+                if (_currentPres != value)
+                {
+                    _currentPres = value;
+                    OnPropertyChanged(nameof(CurrentPres));
                 }
             }
         }
@@ -343,6 +373,7 @@ namespace Bionly.Models
                 CurrentValues values = JsonConvert.DeserializeObject<CurrentValues>(await response.Content.ReadAsStringAsync());
                 CurrentTemp = values.CurrentTemp;
                 CurrentHumi = values.CurrentHumi;
+                CurrentPres = values.CurrentPres;
             }
             catch (Exception)
             {
@@ -361,6 +392,8 @@ namespace Bionly.Models
             public float CurrentTemp { get; set; }
             [JsonProperty("humidity")]
             public float CurrentHumi { get; set; }
+            [JsonProperty("pressure")]
+            public float CurrentPres { get; set; }
         }
     }
 }

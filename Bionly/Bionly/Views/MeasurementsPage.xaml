@@ -13,7 +13,7 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Values}" Margin="10">
+        <ListView ItemsSource="{Binding Device.MPoints}" Margin="10">
             <ListView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -16,7 +16,7 @@ namespace Bionly.Views
         public MeasurementsPage(string deviceId)
         {
             InitializeComponent();
-            ((MeasurementsViewModel)BindingContext).Setup(deviceId);
+            BindingContext = new MeasurementsViewModel(deviceId);
         }
     }
 }

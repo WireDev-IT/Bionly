@@ -1,6 +1,8 @@
 ﻿using Bionly.Models;
 using FluentFTP;
+using Microcharts;
 using Newtonsoft.Json;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,10 +18,9 @@ namespace Bionly.ViewModels
 {
     public class MeasurementsViewModel : BaseViewModel
     {
-        private Models.Device Device = null;
-        public List<MeasurementPoint> Values { get; internal set; } = new();
+        public Models.Device Device { get; private set; }
 
-        private FtpClient ftp;
+        private readonly FtpClient ftp;
         private CancellationToken token = new();
         public double progress;
 
@@ -28,21 +29,32 @@ namespace Bionly.ViewModels
             Title = "Kein Gerät für Messwerte ausgewählt";
         }
 
-        public void Setup(string deviceId)
+        public MeasurementsViewModel(string deviceId)
         {
-            Device = SettingsViewModel.Devices.First(x => x.Id == deviceId);
-            Title = $"Messwerte von \"{Device.Name}\"";
-
-            foreach (string file in Directory.GetFiles(Device.GetPath(PathType.Files), "*.json"))
+            if (!string.IsNullOrWhiteSpace(deviceId))
             {
-                try
-                {
-                    Values.Add(MeasurementPoint.Load(file));
-                }
-                catch (Exception) { }
-            }
+                Device = SettingsViewModel.Devices.FirstOrDefault(x => x.Id == deviceId);
+                Title = $"Messwerte von \"{Device.Name}\"";
 
-            Values = Values.OrderBy(x => x.Time).ToList();
+                foreach (string file in Directory.GetFiles(Device.GetPath(PathType.Files), "*.json"))
+                {
+                    try
+                    {
+                        MeasurementPoint p = MeasurementPoint.Load(file);
+                        if (!Device.MPoints.Exists(x => x.Time == p.Time))
+                        {
+                            Device.MPoints.Add(p);
+                        }
+                    }
+                    catch (Exception) { }
+                }
+
+                Device.MPoints = Device.MPoints.OrderBy(x => x.Time).ToList();
+            }
+            else
+            {
+                Title = "Kein Gerät für Messwerte ausgewählt";
+            }
         }
 
         private Task GenerateDemoFiles()
@@ -101,32 +113,31 @@ namespace Bionly.ViewModels
                 {
                     JsonMeasurementPoint point = JsonConvert.DeserializeObject<JsonMeasurementPoint>(File.ReadAllText(result.LocalPath));
 
-                    if (!Values.Exists(x => x.Time == point.Time))
+                    if (!Device.MPoints.Exists(x => x.Time == point.Time))
                     {
-                        Values.Add(new MeasurementPoint() { Time = point.Time });
+                        Device.MPoints.Add(new MeasurementPoint() { Time = point.Time });
                     }
 
-                    int index = Values.FindIndex(x => x.Time == point.Time);
+                    int index = Device.MPoints.FindIndex(x => x.Time == point.Time);
                     if (point.SensorType == SensorType.Temperature)
                     {
-                        Values[index].Temperature = point.Value;
+                        Device.MPoints[index].Temperature = point.Value;
                     }
                     else if (point.SensorType == SensorType.Humidity)
                     {
-                        Values[index].Humidity = point.Value;
+                        Device.MPoints[index].Humidity = point.Value;
                     }
                     else if (point.SensorType == SensorType.Pressure)
                     {
-                        Values[index].Pressure = point.Value;
+                        Device.MPoints[index].Pressure = point.Value;
                     }
 
-                    Values[index].Save(Device.GetPath(PathType.Files));
+                    Device.MPoints[index].Save(Device.GetPath(PathType.Files));
                     File.Delete(result.LocalPath);
                 }
             }
 
-            Setup(Device.Id);
+            Device.MPoints = Device.MPoints.OrderBy(x => x.Time).ToList();
         });
-
     }
 }

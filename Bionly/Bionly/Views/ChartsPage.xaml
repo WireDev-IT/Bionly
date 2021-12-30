@@ -6,7 +6,7 @@
              x:Class="Bionly.Views.ChartsPage" Title="Diagramme">
     
     <ContentPage.BindingContext>
-        <vm:DashboardViewModel />
+        <vm:ChartsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>

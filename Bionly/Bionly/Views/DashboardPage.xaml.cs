@@ -20,9 +20,12 @@ namespace Bionly.Views
             DeviceId = ((Models.Device)e.Item).Id;
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
+            WelcomeTxt.Text = ((DashboardViewModel)BindingContext).GetWelcomeText();
+            WelcomeImg.Source = ((DashboardViewModel)BindingContext).GetWelcomeImage();
+            ConnectedTxt.Text = ((DashboardViewModel)BindingContext).GetConnectedText();
             RadChart.Chart = ((DashboardViewModel)BindingContext).radChart;
         }
 
@@ -44,6 +47,20 @@ namespace Bionly.Views
         private async void ConfigBtn_Clicked(object sender, System.EventArgs e)
         {
             await DisplayAlert("Fehler", "Das Gerät unterstützt keine Fernkonfiguration.", "OK");
+        }
+
+        private void DeviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItemIndex < 0)
+            {
+                StartpageContainer.IsVisible = true;
+                DeviceContainer.IsVisible = false;
+            }
+            else
+            {
+                StartpageContainer.IsVisible = false;
+                DeviceContainer.IsVisible = true;
+            }
         }
     }
 }

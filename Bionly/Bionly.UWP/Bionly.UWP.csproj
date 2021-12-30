@@ -136,6 +136,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="bionly_square_1024.png" />
+    <Content Include="icon_afternoon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icon_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -151,6 +154,9 @@
     <Content Include="icon_cloud_unavailable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icon_evening.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icon_Home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -158,6 +164,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icon_logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon_morning.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon_night.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icon_Settings.png">
