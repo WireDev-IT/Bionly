@@ -13,28 +13,18 @@ namespace Bionly.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartsPage : ContentPage
     {
-        private string DeviceId = null;
-
         public ChartsPage()
         {
             InitializeComponent();
-        }
-
-        public ChartsPage(string deviceId)
-        {
-            InitializeComponent();
-            DeviceId = deviceId;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (DeviceId != null)
+            if (RuntimeData.SelectedDeviceIndex >= 0)
             {
-                Models.Device d = SettingsViewModel.Devices.FirstOrDefault(x => x.Id == DeviceId);
-                ((ChartsViewModel)BindingContext).Device = d;
-                HeaderLbl.Text = $"Graphen für \"{d.Name}\"";
+                HeaderLbl.Text = $"Graphen für \"{RuntimeData.SelectedDevice.Name}\"";
                 TempChart.Chart = ((ChartsViewModel)BindingContext).tempChart;
                 HumiChart.Chart = ((ChartsViewModel)BindingContext).humiChart;
                 PresChart.Chart = ((ChartsViewModel)BindingContext).presChart;
@@ -49,7 +39,6 @@ namespace Bionly.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            DeviceId = null;
         }
 
     }

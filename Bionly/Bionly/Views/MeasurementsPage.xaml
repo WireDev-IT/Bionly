@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:l="clr-namespace:Bionly"
              x:Class="Bionly.Views.MeasurementsPage" Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -13,7 +14,7 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Device.MPoints}" Margin="10">
+        <ListView BindingContext="{Binding Source={x:Static l:RuntimeData.SelectedDevice}}" ItemsSource="{Binding MPoints}" Margin="10">
             <ListView.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -71,6 +72,16 @@ namespace Bionly.Models
                 {
                     _ipAdress = value;
                     OnPropertyChanged(nameof(IpAddress));
+
+                    switch (CheckAdress(value))
+                    {
+                        case true:
+                            Connected = ConnectionStatus.Disconnected;
+                            break;
+                        case false:
+                            Connected = ConnectionStatus.Error;
+                            break;
+                    }
                 }
             }
         }
@@ -179,10 +190,7 @@ namespace Bionly.Models
         }
 
         [JsonIgnore]
-        public string CurrentValuesStr
-        {
-            get => CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
-        }
+        public string CurrentValuesStr => CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
 
         private ConnectionStatus _connected = ConnectionStatus.Error;
         [JsonIgnore]
@@ -205,10 +213,10 @@ namespace Bionly.Models
         [JsonIgnore]
         public ImageSource DeviceSymbol => Connected switch
         {
-            ConnectionStatus.Connected => ImageSource.FromFile("Resources/icon_cloud_done.png"),
-            ConnectionStatus.Connecting => ImageSource.FromFile("Resources/icon_cloud_sync.png"),
-            ConnectionStatus.Disconnected => ImageSource.FromFile("Resources/icon_cloud_unavailable.png"),
-            ConnectionStatus.Error => ImageSource.FromFile("Resources/icon_cloud_cross.png"),
+            ConnectionStatus.Connected => ImageSource.FromFile("icon_cloud_done.png"),
+            ConnectionStatus.Connecting => ImageSource.FromFile("icon_cloud_sync.png"),
+            ConnectionStatus.Disconnected => ImageSource.FromFile("icon_cloud_unavailable.png"),
+            ConnectionStatus.Error => ImageSource.FromFile("icon_cloud_cross.png"),
             _ => null,
         };
 
@@ -363,14 +371,23 @@ namespace Bionly.Models
 
             return path;
         }
-        public async Task GetCurrentValues()
+        public async Task LoadCurrentValues(string json = null)
         {
             try
             {
-                HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/current");
-                response.EnsureSuccessStatusCode();
-                string test = await response.Content.ReadAsStringAsync();
-                CurrentValues values = JsonConvert.DeserializeObject<CurrentValues>(await response.Content.ReadAsStringAsync());
+                CurrentValues values;
+                if (string.IsNullOrEmpty(json))
+                {
+                    HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/current");
+                    response.EnsureSuccessStatusCode();
+                    string test = await response.Content.ReadAsStringAsync();
+                    values = JsonConvert.DeserializeObject<CurrentValues>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    values = JsonConvert.DeserializeObject<CurrentValues>(json);
+                }
+
                 CurrentTemp = values.CurrentTemp;
                 CurrentHumi = values.CurrentHumi;
                 CurrentPres = values.CurrentPres;
@@ -379,6 +396,24 @@ namespace Bionly.Models
             {
 
             }
+        }
+        public Task LoadMeasurementPoints()
+        {
+            foreach (string file in Directory.GetFiles(GetPath(PathType.Files), "*.json"))
+            {
+                try
+                {
+                    MeasurementPoint p = MeasurementPoint.Load(file);
+                    if (!MPoints.Exists(x => x.Time == p.Time))
+                    {
+                        MPoints.Add(p);
+                    }
+                }
+                catch (Exception) { }
+            }
+
+            MPoints = MPoints.OrderBy(x => x.Time).ToList();
+            return Task.CompletedTask;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)

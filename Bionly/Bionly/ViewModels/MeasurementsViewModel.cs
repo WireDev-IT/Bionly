@@ -18,8 +18,6 @@ namespace Bionly.ViewModels
 {
     public class MeasurementsViewModel : BaseViewModel
     {
-        public Models.Device Device { get; private set; }
-
         private readonly FtpClient ftp;
         private CancellationToken token = new();
         public double progress;
@@ -27,60 +25,38 @@ namespace Bionly.ViewModels
         public MeasurementsViewModel()
         {
             Title = "Kein Gerät für Messwerte ausgewählt";
-        }
 
-        public MeasurementsViewModel(string deviceId)
-        {
-            if (!string.IsNullOrWhiteSpace(deviceId))
+            if (RuntimeData.SelectedDeviceIndex >= 0)
             {
-                Device = SettingsViewModel.Devices.FirstOrDefault(x => x.Id == deviceId);
-                Title = $"Messwerte von \"{Device.Name}\"";
-
-                foreach (string file in Directory.GetFiles(Device.GetPath(PathType.Files), "*.json"))
-                {
-                    try
-                    {
-                        MeasurementPoint p = MeasurementPoint.Load(file);
-                        if (!Device.MPoints.Exists(x => x.Time == p.Time))
-                        {
-                            Device.MPoints.Add(p);
-                        }
-                    }
-                    catch (Exception) { }
-                }
-
-                Device.MPoints = Device.MPoints.OrderBy(x => x.Time).ToList();
-            }
-            else
-            {
-                Title = "Kein Gerät für Messwerte ausgewählt";
+                Title = $"Messwerte von \"{RuntimeData.SelectedDevice.Name}\"";
+                RuntimeData.SelectedDevice.LoadMeasurementPoints();
             }
         }
 
         private Task GenerateDemoFiles()
         {
             string[] sensors = new string[] { "dht22-temperature", "dht22-humidity", "bmp180-temperature", "bmp180-pressure" };
-            DateTime time = new();
+            DateTime time = DateTime.Now;
 
             for (int i = 0; i < 20; i++)
             {
-                time = time.AddDays(1);
+                time = time.AddDays(-1);
 
                 JsonMeasurementPoint j = new();
                 j.Sensor = sensors[0];
                 j.Value = new Random().Next(10, 30);
                 j.TimeString = time.ToString("yyyy-MM-dd_HH-mm-ss");
-                File.WriteAllText(Device.GetPath(PathType.Temporary) + $"/{sensors[0]}-{i}.json", JsonConvert.SerializeObject(j));
+                File.WriteAllText(RuntimeData.SelectedDevice.GetPath(PathType.Temporary) + $"/{sensors[0]}-{i}.json", JsonConvert.SerializeObject(j));
 
                 j.Sensor = sensors[1];
                 j.Value = new Random().Next(30, 80);
                 j.TimeString = time.ToString("yyyy-MM-dd_HH-mm-ss");
-                File.WriteAllText(Device.GetPath(PathType.Temporary) + $"/{sensors[1]}-{i}.json", JsonConvert.SerializeObject(j));
+                File.WriteAllText(RuntimeData.SelectedDevice.GetPath(PathType.Temporary) + $"/{sensors[1]}-{i}.json", JsonConvert.SerializeObject(j));
 
                 j.Sensor = sensors[3];
                 j.Value = new Random().Next(900, 1500);
                 j.TimeString = time.ToString("yyyy-MM-dd_HH-mm-ss");
-                File.WriteAllText(Device.GetPath(PathType.Temporary) + $"/{sensors[3]}-{i}.json", JsonConvert.SerializeObject(j));
+                File.WriteAllText(RuntimeData.SelectedDevice.GetPath(PathType.Temporary) + $"/{sensors[3]}-{i}.json", JsonConvert.SerializeObject(j));
             }
             return Task.CompletedTask;
         }
@@ -102,7 +78,7 @@ namespace Bionly.ViewModels
 
             await GenerateDemoFiles();
             List<FtpResult> results = new();
-            foreach (string file in Directory.GetFiles(Device.GetPath(PathType.Temporary), "*.json"))
+            foreach (string file in Directory.GetFiles(RuntimeData.SelectedDevice.GetPath(PathType.Temporary), "*.json"))
             {
                 results.Add(new() { IsSuccess = true, LocalPath = file });
             }
@@ -113,31 +89,31 @@ namespace Bionly.ViewModels
                 {
                     JsonMeasurementPoint point = JsonConvert.DeserializeObject<JsonMeasurementPoint>(File.ReadAllText(result.LocalPath));
 
-                    if (!Device.MPoints.Exists(x => x.Time == point.Time))
+                    if (!RuntimeData.SelectedDevice.MPoints.Exists(x => x.Time == point.Time))
                     {
-                        Device.MPoints.Add(new MeasurementPoint() { Time = point.Time });
+                        RuntimeData.SelectedDevice.MPoints.Add(new MeasurementPoint() { Time = point.Time });
                     }
 
-                    int index = Device.MPoints.FindIndex(x => x.Time == point.Time);
+                    int index = RuntimeData.SelectedDevice.MPoints.FindIndex(x => x.Time == point.Time);
                     if (point.SensorType == SensorType.Temperature)
                     {
-                        Device.MPoints[index].Temperature = point.Value;
+                        RuntimeData.SelectedDevice.MPoints[index].Temperature = point.Value;
                     }
                     else if (point.SensorType == SensorType.Humidity)
                     {
-                        Device.MPoints[index].Humidity = point.Value;
+                        RuntimeData.SelectedDevice.MPoints[index].Humidity = point.Value;
                     }
                     else if (point.SensorType == SensorType.Pressure)
                     {
-                        Device.MPoints[index].Pressure = point.Value;
+                        RuntimeData.SelectedDevice.MPoints[index].Pressure = point.Value;
                     }
 
-                    Device.MPoints[index].Save(Device.GetPath(PathType.Files));
+                    RuntimeData.SelectedDevice.MPoints[index].Save(RuntimeData.SelectedDevice.GetPath(PathType.Files));
                     File.Delete(result.LocalPath);
                 }
             }
 
-            Device.MPoints = Device.MPoints.OrderBy(x => x.Time).ToList();
+            RuntimeData.SelectedDevice.MPoints = RuntimeData.SelectedDevice.MPoints.OrderBy(x => x.Time).ToList();
         });
     }
 }

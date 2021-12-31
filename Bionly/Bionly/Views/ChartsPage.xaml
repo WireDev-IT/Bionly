@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:mch="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="Bionly.Views.ChartsPage" Title="Diagramme">
+             x:Class="Bionly.Views.ChartsPage" Title="{Binding Title}">
     
     <ContentPage.BindingContext>
         <vm:ChartsViewModel />
@@ -21,19 +21,19 @@
                     <Label Text="Temperatur" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                        <mch:ChartView x:Name="TempChart" HeightRequest="500"/>
+                        <mch:ChartView x:Name="TempChart" HeightRequest="450"/>
                     </Grid>
                     <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
                     <Label Text="Luftfeuchtigkeit" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                        <mch:ChartView x:Name="HumiChart" HeightRequest="500"/>
+                        <mch:ChartView x:Name="HumiChart" HeightRequest="450"/>
                     </Grid>
                     <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
                     <Label Text="Luftdruck" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                        <mch:ChartView x:Name="PresChart" HeightRequest="500"/>
+                        <mch:ChartView x:Name="PresChart" HeightRequest="450"/>
                     </Grid>
                 </StackLayout>
             </ScrollView>

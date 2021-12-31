@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:Bionly"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:mch="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Bionly.Views.DashboardPage"
@@ -32,42 +33,30 @@
                         <OnIdiom x:TypeArguments="Thickness" Desktop="20,0,0,0" Default="10,0,0,0"/>
                     </Label.Margin>
                 </Label>
-                <ListView Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" SelectionMode="None" ItemTapped="ListView_ItemTapped" IsVisible="false">
+                <ListView x:Name="UWPView" Grid.Row="1" ItemsSource="{Binding Source={x:Static l:RuntimeData.Devices}}" SelectionMode="Single" IsVisible="{x:OnPlatform Default=False, UWP=True}" ItemTapped="ListView_ItemTapped" ItemSelected="DeviceList_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout>
-                                    <Grid>
-                                        <Grid.Margin>
-                                            <OnIdiom x:TypeArguments="Thickness" Default="20" Phone="10"/>
-                                        </Grid.Margin>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Rectangle Grid.Column="0" Fill="green" HeightRequest="20" WidthRequest="20" RadiusX="10" RadiusY="10" VerticalOptions="Center" Margin="10"/>
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Label Grid.Row="0" Text="{Binding Name}" FontSize="Subtitle"/>
-                                            <Grid Grid.Row="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label Grid.Column="0" Text="00,00°C" Margin="0,0,10,0" FontSize="Caption"/>
-                                                <Label Grid.Column="1" Text="00%" Margin="10,0,0,0" FontSize="Caption"/>
-                                            </Grid>
-                                        </Grid>
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" WidthRequest="60" Source="{Binding DeviceSymbol}" Margin="5,0"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="Subtitle"/>
+                                        <Label Grid.Row="1" Text="{Binding CurrentValuesStr}" FontSize="Caption"/>
                                     </Grid>
-                                </StackLayout>
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped" ItemSelected="DeviceList_ItemSelected">
+                <ListView x:Name="DefaultView" Grid.Row="1" ItemsSource="{Binding Source={x:Static l:RuntimeData.Devices}}" SelectionMode="Single" IsVisible="{x:OnPlatform Default=True, UWP=False}" ItemTapped="ListView_ItemTapped" ItemSelected="DeviceList_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ImageCell Text="{Binding Name}" Detail="{Binding CurrentValuesStr}" TextColor="Black" DetailColor="Black" ImageSource="{Binding DeviceSymbol}"/>

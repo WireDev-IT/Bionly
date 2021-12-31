@@ -17,12 +17,5 @@ namespace Bionly.Views
         {
             InitializeComponent();
         }
-
-        public ImagesPage(string deviceId)
-        {
-            InitializeComponent();
-            ((ImagesViewModel)BindingContext).Setup(deviceId);
-        }
-
     }
 }

@@ -3,7 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Bionly.Views"
        Title="Bionly"
-       x:Class="Bionly.AppShell">
+       x:Class="Bionly.AppShell" Navigating="Shell_Navigating">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -110,36 +110,33 @@
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
-            <StackLayout>
-                <Grid Margin="0" Padding="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Image Source="bionly_square_1024.png" WidthRequest="100" HorizontalOptions="Center" Margin="10,0,10,0"/>
-                    <StackLayout Grid.Column="1" VerticalOptions="Center">
-                        <Label Text="Bionly" FontSize="Title">
-                            <Label.TextColor>
-                                <OnPlatform x:TypeArguments="Color" Default="White">
-                                    <On Platform="Android">Black</On>
-                                </OnPlatform>
-                            </Label.TextColor>
-                        </Label>
-                        <Label Text="Copyright © tomo2403" TextColor="White" FontSize="Caption">
-                            <Label.TextColor>
-                                <OnPlatform x:TypeArguments="Color" Default="White">
-                                    <On Platform="Android">Black</On>
-                                </OnPlatform>
-                            </Label.TextColor>
-                        </Label>
-                    </StackLayout>
-                </Grid>
-                <Button Text="Systemverwalter" Margin="10,0,10,10"/>
-            </StackLayout>
+            <Grid Margin="0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="bionly_square_1024.png" WidthRequest="100" HorizontalOptions="Center" Margin="10,0,10,0"/>
+                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="Bionly" FontSize="Title">
+                        <Label.TextColor>
+                            <OnPlatform x:TypeArguments="Color" Default="White">
+                                <On Platform="Android">Black</On>
+                            </OnPlatform>
+                        </Label.TextColor>
+                    </Label>
+                    <Label Text="Copyright © tomo2403" TextColor="White" FontSize="Caption">
+                        <Label.TextColor>
+                            <OnPlatform x:TypeArguments="Color" Default="White">
+                                <On Platform="Android">Black</On>
+                            </OnPlatform>
+                        </Label.TextColor>
+                    </Label>
+                </StackLayout>
+            </Grid>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
    

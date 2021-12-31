@@ -9,8 +9,6 @@ namespace Bionly.ViewModels
 {
     public class ImagesViewModel : BaseViewModel
     {
-        private Models.Device Device = null;
-
         public Dictionary<DateTime, ImageSource> Images { get; internal set; } = new();
 
         public ImagesViewModel()
@@ -21,12 +19,11 @@ namespace Bionly.ViewModels
             }
         }
 
-        public void Setup(string deviceId)
+        public void Setup()
         {
-            Device = SettingsViewModel.Devices.First(x => x.Id == deviceId);
-            Title = $"Aufnahmen von \"{Device.Name}\"";
+            Title = $"Aufnahmen von \"{RuntimeData.SelectedDevice.Name}\"";
 
-            foreach (string file in Directory.GetFiles(Device.GetPath(PathType.Images), "*.jpg"))
+            foreach (string file in Directory.GetFiles(RuntimeData.SelectedDevice.GetPath(PathType.Images), "*.jpg"))
             {
                 try
                 {

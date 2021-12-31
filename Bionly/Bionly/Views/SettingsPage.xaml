@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.SettingsPage"
-             xmlns:vm="clr-namespace:Bionly.ViewModels" xmlns:c="clr-namespace:Bionly.Converter"
-             Title="{Binding Title}" Appearing="ContentPage_Appearing">
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:l="clr-namespace:Bionly"
+             Title="{Binding Title}">
 
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />
@@ -11,7 +12,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Neues Gerät" Clicked="CreateDevice"/>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static vm:SettingsViewModel.LoadAllDevices}}" IsEnabled="{Binding ControlsEnabled}"/>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -19,7 +20,7 @@
             <Label x:Name="GuestTxt" Text="Als Gast können Sie keine Einstellungen bearbeiten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="false"/>
             <StackLayout x:Name="MainContainer">
                 <Label Text="Geräte" FontSize="Title"/>
-                <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Devices}}" ItemTapped="DevicesView_ItemTapped" SelectionMode="None" VerticalOptions="Start">
+                <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static l:RuntimeData.Devices}}" SelectionMode="None" VerticalOptions="Start" ItemTapped="DevicesView_ItemTapped" Refreshing="DevicesView_Refreshing">
                     <ListView.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>

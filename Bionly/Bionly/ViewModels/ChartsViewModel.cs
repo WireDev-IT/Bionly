@@ -10,14 +10,13 @@ namespace Bionly.ViewModels
 {
     public class ChartsViewModel : BaseViewModel
     {
-        public Models.Device Device { get; set; }
-
         public LineChart tempChart;
         public LineChart humiChart;
         public LineChart presChart;
 
         public ChartsViewModel()
         {
+            Title = "Diagramme";
             tempChart = new()
             {
                 LineMode = LineMode.Straight,
@@ -49,26 +48,26 @@ namespace Bionly.ViewModels
             List<ChartEntry> humiEntries = new();
             List<ChartEntry> presEntries = new();
 
-            Device.MPoints = Device.MPoints.OrderBy(x => x.Time).ToList();
+            RuntimeData.SelectedDevice.MPoints = RuntimeData.SelectedDevice.MPoints.OrderBy(x => x.Time).ToList();
 
-            for (int i = 0; i < Device.MPoints.Count; i++)
+            for (int i = 0; i < RuntimeData.SelectedDevice.MPoints.Count; i++)
             {
-                tempEntries.Add(new ChartEntry(Device.MPoints[i].Temperature)
+                tempEntries.Add(new ChartEntry(RuntimeData.SelectedDevice.MPoints[i].Temperature)
                 {
-                    Label = Device.MPoints[i].Time.ToShortDateString(),
-                    ValueLabel = Device.MPoints[i].TemperatureStr,
+                    Label = RuntimeData.SelectedDevice.MPoints[i].Time.ToShortDateString(),
+                    ValueLabel = RuntimeData.SelectedDevice.MPoints[i].TemperatureStr,
                     Color = new SKColor(255, 0, 0)
                 });
-                humiEntries.Add(new ChartEntry(Device.MPoints[i].Humidity)
+                humiEntries.Add(new ChartEntry(RuntimeData.SelectedDevice.MPoints[i].Humidity)
                 {
-                    Label = Device.MPoints[i].Time.ToShortDateString(),
-                    ValueLabel = Device.MPoints[i].HumidityStr,
+                    Label = RuntimeData.SelectedDevice.MPoints[i].Time.ToShortDateString(),
+                    ValueLabel = RuntimeData.SelectedDevice.MPoints[i].HumidityStr,
                     Color = new SKColor(0, 0, 255)
                 });
-                presEntries.Add(new ChartEntry(Device.MPoints[i].Pressure)
+                presEntries.Add(new ChartEntry(RuntimeData.SelectedDevice.MPoints[i].Pressure)
                 {
-                    Label = Device.MPoints[i].Time.ToShortDateString(),
-                    ValueLabel = Device.MPoints[i].PressureStr
+                    Label = RuntimeData.SelectedDevice.MPoints[i].Time.ToShortDateString(),
+                    ValueLabel = RuntimeData.SelectedDevice.MPoints[i].PressureStr
                 });
             }
 

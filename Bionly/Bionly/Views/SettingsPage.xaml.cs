@@ -4,6 +4,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static Bionly.Enums.User;
+using Device = Bionly.Models.Device;
 
 namespace Bionly.Views
 {
@@ -19,23 +20,6 @@ namespace Bionly.Views
         {
             base.OnAppearing();
 
-            ((SettingsViewModel)BindingContext).ControlsEnabled = LoginViewModel.IsLoggedIn;
-        }
-
-        private async void DevicesView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            DeviceSettingsViewModel.Device = (Models.Device)e.Item;
-            await Navigation.PushAsync(new DeviceSettingsPage());
-        }
-
-        private async void CreateDevice(object sender, EventArgs e)
-        {
-            DeviceSettingsViewModel.Device = new();
-            await Navigation.PushAsync(new DeviceSettingsPage());
-        }
-
-        private void ContentPage_Appearing(object sender, EventArgs e)
-        {
             UserTxt.Text = LoginViewModel.Account.Name;
             if (LoginViewModel.LoggedInUser != UserType.Admin)
             {
@@ -55,6 +39,12 @@ namespace Bionly.Views
                 }
                 GuestTxt.IsVisible = false;
             }
+        }
+
+        private async void CreateDevice(object sender, EventArgs e)
+        {
+            DeviceSettingsViewModel.Device = new();
+            await Navigation.PushAsync(new DeviceSettingsPage());
         }
 
         private async void SaveUserBtn_Clicked(object sender, EventArgs e)
@@ -103,6 +93,17 @@ namespace Bionly.Views
         {
             UserTxt.Text = LoginViewModel.Account.Name;
             OldPassTxt.Text = NewPassTxt.Text = NewPassTxt2.Text = "";
+        }
+
+        private async void DevicesView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {   
+            DeviceSettingsViewModel.Device = (Device)e.Item;
+            await Navigation.PushAsync(new DeviceSettingsPage());
+        }
+
+        private async void DevicesView_Refreshing(object sender, EventArgs e)
+        {
+            await RuntimeData.LoadAllCurrentValues();
         }
     }
 }

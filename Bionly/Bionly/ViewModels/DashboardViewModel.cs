@@ -1,5 +1,4 @@
-﻿using Bionly.Models;
-using Microcharts;
+﻿using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -12,41 +11,53 @@ namespace Bionly.ViewModels
     public class DashboardViewModel : BaseViewModel
     {
         public RadialGaugeChart radChart;
-        public Models.Device Device { get; private set; }
-
-        public static List<MeasurementPoint> Values = new();
+        public int SelectedIndex { get; set; } = -1;
 
         public ICommand DrawGraphs => new Command(() =>
         {
             List<ChartEntry> radEntries = new();
 
-            //
-            //TODO: Berechnung
-            //
+            float temperature = 100 - (100 - (RuntimeData.SelectedDevice.CurrentTemp + 30));
+            float pressure = 100 - ((1120 - RuntimeData.SelectedDevice.CurrentPres) / 2);
 
-            byte temperature = 0;
-            byte pressure = 0;
+            if (temperature > 100)
+            {
+                temperature = 100;
+            }
+            else if (temperature < 0)
+            {
+                temperature = 0;
+            }
 
-            radEntries.Add(new ChartEntry(50)
+            if (pressure > 100)
+            {
+                pressure = 100;
+            }
+            else if (pressure < 0)
+            {
+                pressure = 0;
+            }
+
+            radEntries.Add(new ChartEntry(pressure)
             {
                 Color = new SKColor(0, 0, 0),
                 ValueLabelColor = new SKColor(0, 0, 0),
                 ValueLabel = "Luftdruck",
-                Label = pressure.ToString() + " hPa"
+                Label = RuntimeData.SelectedDevice.CurrentPres.ToString() + " hPa"
             });
-            radEntries.Add(new ChartEntry(30)
+            radEntries.Add(new ChartEntry(RuntimeData.SelectedDevice.CurrentHumi)
             {
                 Color = new SKColor(0, 0, 255),
                 ValueLabelColor = new SKColor(0, 0, 255),
                 ValueLabel = "Feuchtigkeit",
-                Label = Device.CurrentHumi.ToString("00") + " %"
+                Label = RuntimeData.SelectedDevice.CurrentHumi.ToString("00") + " %"
             });
             radEntries.Add(new ChartEntry(temperature)
             {
                 Color = new SKColor(255, 0, 0),
                 ValueLabelColor = new SKColor(255, 0, 0),
                 ValueLabel = "Temperatur",
-                Label = temperature.ToString("N1") + " °C"
+                Label = RuntimeData.SelectedDevice.CurrentTemp.ToString("N1") + " °C"
             });
 
             radChart.Entries = radEntries;
@@ -54,12 +65,7 @@ namespace Bionly.ViewModels
 
         public ICommand Refresh => new Command(() =>
         {
-            SettingsViewModel.LoadAllDevices.Execute(null);
-
-            foreach (Models.Device d in SettingsViewModel.Devices)
-            {
-                _ = d.GetCurrentValues();
-            }
+            _ = RuntimeData.LoadAllCurrentValues();
         });
 
         public DashboardViewModel()
@@ -71,17 +77,18 @@ namespace Bionly.ViewModels
                 MinValue = 0,
                 AnimationDuration = TimeSpan.FromMilliseconds(500)
             };
+            Refresh.Execute(null);
         }
 
         public string GetConnectedText()
         {
-            if (SettingsViewModel.Devices != null)
+            if (RuntimeData.Devices != null)
             {
-                int count = SettingsViewModel.Devices.Count;
+                int count = RuntimeData.Devices.Count;
 
                 if (count > 0)
                 {
-                    return SettingsViewModel.Devices.FindAll(x => x.Connected == ConnectionStatus.Connected).Count + $" von {count} Geräten verbunden";
+                    return RuntimeData.Devices.FindAll(x => x.Connected == ConnectionStatus.Connected).Count + $" von {count} Geräten verbunden";
                 }
             }
 

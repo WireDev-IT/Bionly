@@ -37,7 +37,7 @@ namespace Bionly.ViewModels
             if (IsPlatfromOk)
             {
                 Connections.Clear();
-                foreach (Models.Device device in SettingsViewModel.Devices)
+                foreach (Models.Device device in RuntimeData.Devices)
                 {
                     if (!string.IsNullOrEmpty(device.IpAddress)) Connections.Add(device.Name, new Uri($"{device.IpAddress}"));
                 }
