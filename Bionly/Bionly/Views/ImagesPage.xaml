@@ -2,14 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
-             x:Class="Bionly.Views.ImagesPage" Title="{Binding Title}">
+             xmlns:l="clr-namespace:Bionly"
+             x:Class="Bionly.Views.ImagesPage" Title="{Binding Source={x:Static l:RuntimeData.SelectedDevice}, Path=Name, StringFormat='Aufnahmen von &quot;{0}&quot;'}">
 
     <ContentPage.BindingContext>
         <vm:ImagesViewModel />
     </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Aktualisieren" Command="{Binding Refresh}"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Images}" ItemSizingStrategy="MeasureFirstItem" Margin="10">
+        <CollectionView BindingContext="{Binding Source={x:Static l:RuntimeData.SelectedDevice}}" ItemsSource="{Binding Images}" ItemSizingStrategy="MeasureFirstItem" Margin="10">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
             </CollectionView.ItemsLayout>

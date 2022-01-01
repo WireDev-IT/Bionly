@@ -144,6 +144,21 @@ namespace Bionly.Models
             }
         }
 
+        private Dictionary<DateTime, string> _images = new();
+        [JsonIgnore]
+        public Dictionary<DateTime, string> Images
+        {
+            get => _images;
+            set
+            {
+                if (_images != value)
+                {
+                    _images = value;
+                    OnPropertyChanged(nameof(Images));
+                }
+            }
+        }
+
         private float _currentTemp = 0;
         [JsonIgnore]
         public float CurrentTemp
@@ -371,7 +386,7 @@ namespace Bionly.Models
 
             return path;
         }
-        public async Task LoadCurrentValues(string json = null)
+        public async Task<bool> LoadCurrentValues(string json = null)
         {
             try
             {
@@ -380,7 +395,6 @@ namespace Bionly.Models
                 {
                     HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/current");
                     response.EnsureSuccessStatusCode();
-                    string test = await response.Content.ReadAsStringAsync();
                     values = JsonConvert.DeserializeObject<CurrentValues>(await response.Content.ReadAsStringAsync());
                 }
                 else
@@ -391,10 +405,11 @@ namespace Bionly.Models
                 CurrentTemp = values.CurrentTemp;
                 CurrentHumi = values.CurrentHumi;
                 CurrentPres = values.CurrentPres;
+                return true;
             }
             catch (Exception)
             {
-
+                return false;
             }
         }
         public Task LoadMeasurementPoints()
@@ -404,7 +419,7 @@ namespace Bionly.Models
                 try
                 {
                     MeasurementPoint p = MeasurementPoint.Load(file);
-                    if (!MPoints.Exists(x => x.Time == p.Time))
+                    if (p != null && !MPoints.Exists(x => x.Time == p.Time))
                     {
                         MPoints.Add(p);
                     }
@@ -412,9 +427,41 @@ namespace Bionly.Models
                 catch (Exception) { }
             }
 
-            MPoints = MPoints.OrderBy(x => x.Time).ToList();
+            if (MPoints != null)
+            {
+                MPoints = MPoints.OrderBy(x => x.Time).ToList();
+            }
+
             return Task.CompletedTask;
         }
+        public async Task<bool> LoadImages(string json = null)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(json))
+                {
+                    HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/images");
+                    response.EnsureSuccessStatusCode();
+                    Images = JsonConvert.DeserializeObject<Dictionary<DateTime, string>>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    Images = JsonConvert.DeserializeObject<Dictionary<DateTime, string>>(json);
+                }
+
+                if (Images != null)
+                {
+                    Images = Images.OrderBy(kvp => kvp.Key).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)
         {
