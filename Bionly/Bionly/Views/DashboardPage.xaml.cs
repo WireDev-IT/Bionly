@@ -1,4 +1,5 @@
 ﻿using Bionly.ViewModels;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,7 @@ namespace Bionly.Views
         {
             RuntimeData.SelectedDeviceIndex = e.ItemIndex;
             ((DashboardViewModel)BindingContext).DrawGraphs.Execute(null);
+            ConnectBtn.IsEnabled = true;
         }
 
         protected override void OnAppearing()
@@ -26,7 +28,7 @@ namespace Bionly.Views
             WelcomeImg.Source = ((DashboardViewModel)BindingContext).GetWelcomeImage();
             ConnectedTxt.Text = ((DashboardViewModel)BindingContext).GetConnectedText();
             RadChart.Chart = ((DashboardViewModel)BindingContext).radChart;
-            RuntimeData.SelectedDeviceIndex = ((DashboardViewModel)BindingContext).SelectedIndex;
+            DefaultView.SelectedItem = RuntimeData.SelectedDevice;
         }
 
         private async void ChartsBtn_Clicked(object sender, System.EventArgs e)
@@ -51,7 +53,6 @@ namespace Bionly.Views
 
         private void DeviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            RuntimeData.SelectedDeviceIndex = ((DashboardViewModel)BindingContext).SelectedIndex = e.SelectedItemIndex;
             if (e.SelectedItemIndex < 0)
             {
                 StartpageContainer.IsVisible = true;
@@ -62,6 +63,13 @@ namespace Bionly.Views
                 StartpageContainer.IsVisible = false;
                 DeviceContainer.IsVisible = true;
             }
+        }
+
+        private async void ConnectBtn_Clicked(object sender, System.EventArgs e)
+        {
+            ConnectBtn.IsEnabled = false;
+            await Task.Delay(10000);
+            ConnectBtn.IsEnabled = true;
         }
     }
 }

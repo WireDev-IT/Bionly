@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -7,9 +9,21 @@ using Device = Bionly.Models.Device;
 
 namespace Bionly
 {
-    public static class RuntimeData
+    public class RuntimeData
     {
-        public static List<Device> Devices { get; internal set; } = new();
+        private static List<Device> _devices = new();
+        public static List<Device> Devices
+        {
+            get => _devices;
+            set
+            {
+                if (_devices != value)
+                {
+                    _devices = value;
+                }
+            }
+        }
+
         public static int SelectedDeviceIndex { get; internal set; } = -1;
         public static Device SelectedDevice
         {
@@ -24,11 +38,19 @@ namespace Bionly
             internal set => Devices[SelectedDeviceIndex] = value;
         }
 
-        public static async Task LoadAllCurrentValues()
+        public static async Task ConnectAllDevices()
         {
             foreach (Device d in Devices)
             {
-                await d.LoadCurrentValues("{\"temperature\":26.2,\"humidity\":40,\"pressure\":1020}");
+                _ = await d.CheckConnection();
+            }
+        }
+
+        public static async Task LoadAllCurrentValues(bool demo = false)
+        {
+            foreach (Device d in Devices)
+            {
+                await d.LoadCurrentValues(demo ? "{\"temperature\":26.2,\"humidity\":40,\"pressure\":1020}" : null);
             }
         }
         public static async Task LoadAllMeasurementPoints()

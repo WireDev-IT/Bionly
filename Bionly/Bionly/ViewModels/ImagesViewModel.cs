@@ -15,12 +15,11 @@ namespace Bionly.ViewModels
 
         public ICommand Refresh => new Command(async () =>
         {
-            //await RuntimeData.SelectedDevice.LoadImages();
+            if (!await RuntimeData.SelectedDevice.LoadImages()) await Application.Current.MainPage.DisplayAlert("Fehler", "Die Liste der Bilder konnte nicht abgerufen werden!", "OK");
+        });
 
-
-            //
-            //Demo
-            //
+        public ICommand DemoMode => new Command(async () =>
+        {
             Dictionary<DateTime, string> images = new();
             images.Add(DateTime.Now, "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.MrTrcxnBVySnvXWFSOxg6wHaEK%26pid%3DApi&f=1");
             images.Add(DateTime.Now.AddHours(1), "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.7DOCvrN6aQ_IV5Yyo3xnLwHaEd%26pid%3DApi&f=1");

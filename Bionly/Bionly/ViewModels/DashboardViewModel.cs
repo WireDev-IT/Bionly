@@ -1,4 +1,5 @@
-﻿using Microcharts;
+﻿using Bionly.Views;
+using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -63,9 +64,10 @@ namespace Bionly.ViewModels
             radChart.Entries = radEntries;
         });
 
-        public ICommand Refresh => new Command(() =>
+        public ICommand Refresh => new Command(async () =>
         {
-            _ = RuntimeData.LoadAllCurrentValues();
+            await RuntimeData.ConnectAllDevices();
+            _ = RuntimeData.LoadAllCurrentValues(true);
         });
 
         public DashboardViewModel()
