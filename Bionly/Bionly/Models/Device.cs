@@ -19,6 +19,7 @@ namespace Bionly.Models
         public Device() { }
 
         public static string GeneralPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Devices/";
+        private bool ErrorOnCurrentValues = false;
 
         private string _id;
         public string Id
@@ -205,7 +206,7 @@ namespace Bionly.Models
         }
 
         [JsonIgnore]
-        public string CurrentValuesStr => CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
+        public string CurrentValuesStr => ErrorOnCurrentValues ? "Fehler beim Abrufen" : CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
 
         private ConnectionStatus _connected = ConnectionStatus.Error;
         [JsonIgnore]
@@ -393,7 +394,7 @@ namespace Bionly.Models
                 CurrentValues values;
                 if (string.IsNullOrEmpty(json))
                 {
-                    HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/current");
+                    HttpResponseMessage response = await new HttpClient().GetAsync("http://" + IpAddress + "/json/current");
                     response.EnsureSuccessStatusCode();
                     values = JsonConvert.DeserializeObject<CurrentValues>(await response.Content.ReadAsStringAsync());
                 }
@@ -405,10 +406,13 @@ namespace Bionly.Models
                 CurrentTemp = values.CurrentTemp;
                 CurrentHumi = values.CurrentHumi;
                 CurrentPres = values.CurrentPres;
+
+                ErrorOnCurrentValues = false;
                 return true;
             }
             catch (Exception)
             {
+                ErrorOnCurrentValues = true;
                 return false;
             }
         }
@@ -440,7 +444,7 @@ namespace Bionly.Models
             {
                 if (string.IsNullOrEmpty(json))
                 {
-                    HttpResponseMessage response = await new HttpClient().GetAsync(IpAddress + "/json/images");
+                    HttpResponseMessage response = await new HttpClient().GetAsync("http://" + IpAddress + "/json/images");
                     response.EnsureSuccessStatusCode();
                     Images = JsonConvert.DeserializeObject<Dictionary<DateTime, string>>(await response.Content.ReadAsStringAsync());
                 }
@@ -460,6 +464,24 @@ namespace Bionly.Models
             {
                 return false;
             }
+        }
+        public async Task<ConnectionStatus> CheckConnection()
+        {
+            if (CheckAdress(IpAddress))
+            {
+                Connected = ConnectionStatus.Connecting;
+
+                try
+                {
+                    HttpResponseMessage response = await new HttpClient().GetAsync("http://" + IpAddress);
+                    return Connected = ConnectionStatus.Connected;
+                }
+                catch (Exception) { }
+
+                return Connected = ConnectionStatus.Disconnected;
+            }
+
+            return Connected = ConnectionStatus.Error;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

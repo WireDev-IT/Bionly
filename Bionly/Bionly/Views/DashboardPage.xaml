@@ -89,16 +89,17 @@
                     </Grid>
                 </Grid>
                 <StackLayout x:Name="StartpageContainer">
-                    <Label Text="Wählen Sie ein Gerät aus, um Werzeuge und Daten angezeigt zu bekommen." FontSize="Small" Margin="0,40,0,0"/>
+                    <Label Text="Wählen Sie ein Gerät aus, um Werzeuge und Daten anzuzeigen." FontSize="Small" Margin="0,40,0,0"/>
                 </StackLayout>
                 <StackLayout x:Name="DeviceContainer" Margin="0,20,0,0" IsVisible="false">
                     <FlexLayout Wrap="Wrap">
-                        <Button Text="Verbinden" BackgroundColor="Green" WidthRequest="120" Margin="2"/>
+                        <Button x:Name="ConnectBtn" Text="Verbinden" BackgroundColor="Green" WidthRequest="120" Margin="2" Clicked="ConnectBtn_Clicked"/>
                         <Button Text="Bilder" WidthRequest="120" Margin="2" Clicked="ImagesBtn_Clicked"/>
                         <Button Text="Messwerte" WidthRequest="120" Margin="2" Clicked="MeasurementsBtn_Clicked"/>
                         <Button Text="Diagramme" WidthRequest="120" Margin="2" Clicked="ChartsBtn_Clicked"/>
                         <Button Text="Verwalten" WidthRequest="120" Margin="2" IsVisible="true" Clicked="ConfigBtn_Clicked"/>
                     </FlexLayout>
+                    <Label BindingContext="{Binding Source={x:Static l:RuntimeData.SelectedDevice}}" Text="{Binding Connected, StringFormat='Verbindungsstatus: {0}'}" Margin="5"/>
                     <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="370" HorizontalOptions="Start" Margin="10"/>
                 </StackLayout>
             </StackLayout>
