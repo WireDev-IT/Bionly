@@ -18,9 +18,9 @@ namespace Bionly.ViewModels
 {
     public class MeasurementsViewModel : BaseViewModel
     {
-        private readonly FtpClient ftp;
-        private CancellationToken token = new();
-        public double progress;
+        //private readonly FtpClient ftp;
+        //private CancellationToken token = new();
+        //private double progress;
 
         public MeasurementsViewModel()
         {

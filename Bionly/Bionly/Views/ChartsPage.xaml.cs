@@ -25,15 +25,18 @@ namespace Bionly.Views
             if (RuntimeData.SelectedDeviceIndex >= 0)
             {
                 HeaderLbl.Text = $"Graphen für \"{RuntimeData.SelectedDevice.Name}\"";
-                TempChart.Chart = ((ChartsViewModel)BindingContext).tempChart;
-                HumiChart.Chart = ((ChartsViewModel)BindingContext).humiChart;
-                PresChart.Chart = ((ChartsViewModel)BindingContext).presChart;
-                ((ChartsViewModel)BindingContext).DrawGraphs.Execute(null);
+                ((ChartsViewModel)BindingContext).DrawGraphs.Execute(RuntimeData.SelectedDevice.MPoints);
             }
             else
             {
                 HeaderLbl.Text = "Durchschnittswerte der Vergangenheit";
+                ((ChartsViewModel)BindingContext).CalcAverage.Execute(null);
+                ((ChartsViewModel)BindingContext).DrawGraphs.Execute(null);
             }
+
+            TempChart.Chart = ((ChartsViewModel)BindingContext).tempChart;
+            HumiChart.Chart = ((ChartsViewModel)BindingContext).humiChart;
+            PresChart.Chart = ((ChartsViewModel)BindingContext).presChart;
         }
 
         protected override void OnDisappearing()

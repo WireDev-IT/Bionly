@@ -101,14 +101,14 @@ namespace Bionly.ViewModels
         {
             if (DateTime.Now.Hour < 9)
             {
-                return "Guten Morgen!";
+                return Resx.Language.GoodMorning;
             }
             else if (DateTime.Now.Hour < 18)
             {
-                return "Guten Tag!";
+                return Resx.Language.GoodDay;
             }
 
-            return "Guten Abend!";
+            return Resx.Language.GoodEvening;
         }
 
         public ImageSource GetWelcomeImage()

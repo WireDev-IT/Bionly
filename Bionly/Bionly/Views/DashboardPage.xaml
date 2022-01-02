@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:l="clr-namespace:Bionly"
+             xmlns:resx="clr-namespace:Bionly.Resx"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:mch="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Bionly.Views.DashboardPage"
@@ -12,7 +13,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding Refresh}"/>
+        <ToolbarItem Text="{x:Static resx:Language.Refresh}" Command="{Binding Refresh}"/>
         <ToolbarItem Text="Grafiken neu zeichnen" Command="{Binding DrawGraphs}"/>
     </ContentPage.ToolbarItems>
 
