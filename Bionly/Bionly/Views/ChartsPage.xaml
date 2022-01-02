@@ -3,34 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:mch="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:resx="clr-namespace:Bionly.Resx"
              x:Class="Bionly.Views.ChartsPage" Title="{Binding Title}">
-    
+
     <ContentPage.BindingContext>
         <vm:ChartsViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Grafiken neu zeichnen" Command="{Binding DrawGraphs}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.RedrawGraphics}" Command="{Binding DrawGraphs}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout Margin="10">
-            <Label x:Name="HeaderLbl" Text="Durchschnittswerte der Vergangenheit" FontSize="Title"/>
+            <Label x:Name="HeaderLbl" Text="{x:Static resx:Strings.AverageValues}" FontSize="Title"/>
             <ScrollView>
                 <StackLayout>
-                    <Label Text="Temperatur" FontSize="Subtitle"/>
+                    <Label Text="{x:Static resx:Strings.Temperatur}" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
                         <mch:ChartView x:Name="TempChart" HeightRequest="450"/>
                     </Grid>
                     <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
-                    <Label Text="Luftfeuchtigkeit" FontSize="Subtitle"/>
+                    <Label Text="{x:Static resx:Strings.Humidity}" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
                         <mch:ChartView x:Name="HumiChart" HeightRequest="450"/>
                     </Grid>
                     <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
-                    <Label Text="Luftdruck" FontSize="Subtitle"/>
+                    <Label Text="{x:Static resx:Strings.AirPressure}" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
                         <mch:ChartView x:Name="PresChart" HeightRequest="450"/>

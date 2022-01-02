@@ -4,6 +4,7 @@
              x:Class="Bionly.Views.SettingsPage"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:l="clr-namespace:Bionly"
+             xmlns:resx="clr-namespace:Bionly.Resx"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -11,15 +12,15 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Neues Gerät" Clicked="CreateDevice"/>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.NewDevice}" Clicked="CreateDevice"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <Grid Margin="10">
-            <Label x:Name="GuestTxt" Text="Als Gast können Sie keine Einstellungen bearbeiten" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="false"/>
+            <Label x:Name="GuestTxt" Text="{x:Static resx:Strings.NoSettingsGuest}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="false"/>
             <StackLayout x:Name="MainContainer">
-                <Label Text="Geräte" FontSize="Title"/>
+                <Label Text="{x:Static resx:Strings.Devices}" FontSize="Title"/>
                 <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static l:RuntimeData.Devices}}" SelectionMode="None" VerticalOptions="Start" ItemTapped="DevicesView_ItemTapped" Refreshing="DevicesView_Refreshing">
                     <ListView.Header>
                         <Grid>
@@ -29,10 +30,10 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Text="ID" HorizontalOptions="Fill"  Grid.Column="0" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                            <Label Text="Name" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                            <Label Text="Beschreibung" HorizontalOptions="Fill"  Grid.Column="2" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
-                            <Label Text="IP-Adresse" HorizontalOptions="Fill"  Grid.Column="3" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="{x:Static resx:Strings.ID}" HorizontalOptions="Fill"  Grid.Column="0" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="{x:Static resx:Strings.Name}" HorizontalOptions="Fill"  Grid.Column="1" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="{x:Static resx:Strings.Description}" HorizontalOptions="Fill"  Grid.Column="2" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
+                            <Label Text="{x:Static resx:Strings.IpAdress}" HorizontalOptions="Fill"  Grid.Column="3" FontSize="Medium" BackgroundColor="{StaticResource Primary}" TextColor="White" HorizontalTextAlignment="Center"/>
                         </Grid>
                     </ListView.Header>
 
@@ -56,14 +57,17 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <Label Text="Systemverwalter" FontSize="Title" Margin="0,20,0,0"/>
-                <Entry x:Name="UserTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Benutzername"/>
-                <Entry x:Name="OldPassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Altes Passwort" IsPassword="True"/>
-                <Entry x:Name="NewPassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Neues Passwort" IsPassword="True"/>
-                <Entry x:Name="NewPassTxt2" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Neues Passwort wiederholen" IsPassword="True"/>
+                <Label Text="Sprache" FontSize="Title" Margin="0,20,0,0"/>
+                <Picker ItemsSource="{Binding Source={x:Static resx:LocalizationHelper.SupportedLanguages}}" SelectedItem="{Binding Source={x:Static resx:LocalizationHelper.CurrentLanguage}}"/>
+
+                <Label Text="{x:Static resx:Strings.Administrator}" FontSize="Title" Margin="0,20,0,0"/>
+                <Entry x:Name="UserTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.Username}"/>
+                <Entry x:Name="OldPassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.OldPassword}" IsPassword="True"/>
+                <Entry x:Name="NewPassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.NewPassword}" IsPassword="True"/>
+                <Entry x:Name="NewPassTxt2" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.RepeatNewPassword}" IsPassword="True"/>
                 <StackLayout Orientation="Horizontal">
-                    <Button Text="Neue Benutzerdaten speichern" Clicked="SaveUserBtn_Clicked"/>
-                    <Button Text="Zurücksetzen" Clicked="ResetUserBtn_Clicked"/>
+                    <Button Text="{x:Static resx:Strings.SaveUser}" Clicked="SaveUserBtn_Clicked"/>
+                    <Button Text="{x:Static resx:Strings.Reset}" Clicked="ResetUserBtn_Clicked"/>
                 </StackLayout>
             </StackLayout>
 

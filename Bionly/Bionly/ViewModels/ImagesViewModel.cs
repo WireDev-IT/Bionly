@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bionly.Resx;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -15,7 +16,7 @@ namespace Bionly.ViewModels
 
         public ICommand Refresh => new Command(async () =>
         {
-            if (!await RuntimeData.SelectedDevice.LoadImages()) await Application.Current.MainPage.DisplayAlert("Fehler", "Die Liste der Bilder konnte nicht abgerufen werden!", "OK");
+            if (!await RuntimeData.SelectedDevice.LoadImages()) await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.ErrorOnImageLoading, Strings.OK);
         });
 
         public ICommand DemoMode => new Command(async () =>

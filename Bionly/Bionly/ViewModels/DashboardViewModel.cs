@@ -1,4 +1,5 @@
-﻿using Bionly.Views;
+﻿using Bionly.Resx;
+using Bionly.Views;
 using Microcharts;
 using SkiaSharp;
 using System;
@@ -43,21 +44,21 @@ namespace Bionly.ViewModels
             {
                 Color = new SKColor(0, 0, 0),
                 ValueLabelColor = new SKColor(0, 0, 0),
-                ValueLabel = "Luftdruck",
+                ValueLabel = Strings.Temperatur,
                 Label = RuntimeData.SelectedDevice.CurrentPres.ToString() + " hPa"
             });
             radEntries.Add(new ChartEntry(RuntimeData.SelectedDevice.CurrentHumi)
             {
                 Color = new SKColor(0, 0, 255),
                 ValueLabelColor = new SKColor(0, 0, 255),
-                ValueLabel = "Feuchtigkeit",
+                ValueLabel = Strings.Humidity,
                 Label = RuntimeData.SelectedDevice.CurrentHumi.ToString("00") + " %"
             });
             radEntries.Add(new ChartEntry(temperature)
             {
                 Color = new SKColor(255, 0, 0),
                 ValueLabelColor = new SKColor(255, 0, 0),
-                ValueLabel = "Temperatur",
+                ValueLabel = Strings.AirPressure,
                 Label = RuntimeData.SelectedDevice.CurrentTemp.ToString("N1") + " °C"
             });
 
@@ -72,7 +73,7 @@ namespace Bionly.ViewModels
 
         public DashboardViewModel()
         {
-            Title = "Dashboard";
+            Title = Strings.Dashboard;
             radChart = new()
             {
                 MaxValue = 100,
@@ -90,25 +91,25 @@ namespace Bionly.ViewModels
 
                 if (count > 0)
                 {
-                    return RuntimeData.Devices.FindAll(x => x.Connected == ConnectionStatus.Connected).Count + $" von {count} Geräten verbunden";
+                    return string.Format(Strings.ConnectedDevicesCountTxt, RuntimeData.Devices.FindAll(x => x.Connected == ConnectionStatus.Connected).Count, count);
                 }
             }
 
-            return "Keine Geräte konfiguriert";
+            return Strings.NoDevicesConfigured;
         }
 
         public string GetWelcomeText()
         {
             if (DateTime.Now.Hour < 9)
             {
-                return Resx.Language.GoodMorning;
+                return Strings.GoodMorning;
             }
             else if (DateTime.Now.Hour < 18)
             {
-                return Resx.Language.GoodDay;
+                return Strings.GoodDay;
             }
 
-            return Resx.Language.GoodEvening;
+            return Strings.GoodEvening;
         }
 
         public ImageSource GetWelcomeImage()

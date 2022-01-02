@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>System administrator</value>
+  </data>
+  <data name="AirPressure" xml:space="preserve">
+    <value>Air pressure</value>
+  </data>
+  <data name="AverageValues" xml:space="preserve">
+    <value>Average values of the past</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="ChartsOf_Name" xml:space="preserve">
+    <value>Graphs for "{0}"</value>
+  </data>
+  <data name="CloseAppForLanguage" xml:space="preserve">
+    <value>Please restart the app to fully apply the language.</value>
+  </data>
+  <data name="CloseNow" xml:space="preserve">
+    <value>Close app now</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ConnectedDevicesCountTxt" xml:space="preserve">
+    <value>{0} of {1} devices connected</value>
+    <comment>Subtitle on Dashboard</comment>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="ConnectionState" xml:space="preserve">
+    <value>Connection state: {0}</value>
+  </data>
+  <data name="CustomerLinkTxt" xml:space="preserve">
+    <value>Website School Biology Center Leipzig</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteDeviceContentsFailed" xml:space="preserve">
+    <value>Not all content related to this device could be removed.</value>
+  </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>Delete failed</value>
+  </data>
+  <data name="Delete_Name" xml:space="preserve">
+    <value>Delete "{0}"</value>
+  </data>
+  <data name="Dependencies" xml:space="preserve">
+    <value>Dependencies</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Developer</value>
+  </data>
+  <data name="DeveloperLinkTxt" xml:space="preserve">
+    <value>Developer on GitHub</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>This device was not found.</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Devices</value>
+  </data>
+  <data name="DeviceWithContents" xml:space="preserve">
+    <value>Device with contents</value>
+    <comment>In the context for deleting the device</comment>
+  </data>
+  <data name="EditDevice" xml:space="preserve">
+    <value>Edit device</value>
+  </data>
+  <data name="EndVideo" xml:space="preserve">
+    <value>End video</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorOnCall" xml:space="preserve">
+    <value>Error during fetching</value>
+  </data>
+  <data name="ErrorOnImageLoading" xml:space="preserve">
+    <value>The list of images could not be fetched!</value>
+  </data>
+  <data name="ErrorOnUserLoad" xml:space="preserve">
+    <value>Loading users not possible</value>
+  </data>
+  <data name="ErrorOnUserSave" xml:space="preserve">
+    <value>The user cannot be saved.</value>
+  </data>
+  <data name="FtpPort" xml:space="preserve">
+    <value>FTP port</value>
+  </data>
+  <data name="GoodDay" xml:space="preserve">
+    <value>Good day</value>
+    <comment>Used as welcome text on dashboard</comment>
+  </data>
+  <data name="GoodEvening" xml:space="preserve">
+    <value>Good evening</value>
+    <comment>Used as welcome text on dashboard</comment>
+  </data>
+  <data name="GoodMorning" xml:space="preserve">
+    <value>Good morning</value>
+    <comment>Used as welcome text on dashboard</comment>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="IncorrectUserCredits" xml:space="preserve">
+    <value>Username or password not correct</value>
+  </data>
+  <data name="IpAdress" xml:space="preserve">
+    <value>IP address</value>
+  </data>
+  <data name="IpAdressDomain" xml:space="preserve">
+    <value>IP adress / Domain</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Liveview" xml:space="preserve">
+    <value>Liveview</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginAsGuest" xml:space="preserve">
+    <value>Continue as guest</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="MeasurementsOf_Name" xml:space="preserve">
+    <value>Measurements from {0}</value>
+  </data>
+  <data name="Measurments" xml:space="preserve">
+    <value>Measurments</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewDevice" xml:space="preserve">
+    <value>New device</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NewPasswordNoMatch" xml:space="preserve">
+    <value>New password does not match</value>
+  </data>
+  <data name="NewPasswordSavedFor_Name" xml:space="preserve">
+    <value>The new password for user {0} has been saved!</value>
+  </data>
+  <data name="NewUserIs_Name" xml:space="preserve">
+    <value>The new username is now "{0}".</value>
+  </data>
+  <data name="NoDeviceForMeasurements" xml:space="preserve">
+    <value>No device selected for measurements</value>
+  </data>
+  <data name="NoDevicesConfigured" xml:space="preserve">
+    <value>No devices configured</value>
+  </data>
+  <data name="NoLiveviewWin" xml:space="preserve">
+    <value>The live view is unfortunately not available under Windows</value>
+  </data>
+  <data name="NoPermissionToDeleteDevice" xml:space="preserve">
+    <value>The app does not have the required permissions to delete this device.</value>
+  </data>
+  <data name="NoPermissionToDeleteDeviceContents" xml:space="preserve">
+    <value>The app does not have the required permissions to delete the data of this device.</value>
+  </data>
+  <data name="NoPermissionToLoadDevice" xml:space="preserve">
+    <value>The app does not have the required permissions to load this device.</value>
+  </data>
+  <data name="NoPermissionToSaveDevice" xml:space="preserve">
+    <value>The app does not have the required permissions to save this device.</value>
+  </data>
+  <data name="NoRemoteConfig" xml:space="preserve">
+    <value>The device does not support remote configuration.</value>
+  </data>
+  <data name="NoSettingsGuest" xml:space="preserve">
+    <value>You cannot edit settings as a guest</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="OldPasswordIncorrect" xml:space="preserve">
+    <value>Old password not correct</value>
+  </data>
+  <data name="OnlyDevice" xml:space="preserve">
+    <value>Only device</value>
+    <comment>In the context for deleting the device</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PhotosFrom_Name" xml:space="preserve">
+    <value>Photos from "{0}"</value>
+  </data>
+  <data name="Pictures" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="ProjectLinkTxt" xml:space="preserve">
+    <value>Project on GitHub</value>
+  </data>
+  <data name="RedrawGraphics" xml:space="preserve">
+    <value>Redraw graphics</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="RestartRequired" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="RtspPort" xml:space="preserve">
+    <value>RTSP port</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="SaveUser" xml:space="preserve">
+    <value>Save new user data</value>
+  </data>
+  <data name="SelectDeviceToGetTools" xml:space="preserve">
+    <value>Select a device to show tools and data.</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Temperatur" xml:space="preserve">
+    <value>Temperatur</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="UseCam" xml:space="preserve">
+    <value>Use camera</value>
+  </data>
+  <data name="UserEmpty" xml:space="preserve">
+    <value>Username can not be empty</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UseValues" xml:space="preserve">
+    <value>Use measurements</value>
+  </data>
+</root>

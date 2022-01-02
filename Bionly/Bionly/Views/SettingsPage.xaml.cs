@@ -1,4 +1,5 @@
 ﻿using Bionly.Models;
+using Bionly.Resx;
 using Bionly.ViewModels;
 using System;
 using Xamarin.Forms;
@@ -20,25 +21,25 @@ namespace Bionly.Views
         {
             base.OnAppearing();
 
-            UserTxt.Text = LoginViewModel.Account.Name;
-            if (LoginViewModel.LoggedInUser != UserType.Admin)
-            {
-                MainContainer.IsVisible = false;
-                foreach (ToolbarItem t in ToolbarItems)
-                {
-                    t.IsEnabled = false;
-                }
-                GuestTxt.IsVisible = true;
-            }
-            else
-            {
-                MainContainer.IsVisible = true;
-                foreach (ToolbarItem t in ToolbarItems)
-                {
-                    t.IsEnabled = true;
-                }
-                GuestTxt.IsVisible = false;
-            }
+            //UserTxt.Text = LoginViewModel.Account.Name;
+            //if (LoginViewModel.LoggedInUser != UserType.Admin)
+            //{
+            //    MainContainer.IsVisible = false;
+            //    foreach (ToolbarItem t in ToolbarItems)
+            //    {
+            //        t.IsEnabled = false;
+            //    }
+            //    GuestTxt.IsVisible = true;
+            //}
+            //else
+            //{
+            //    MainContainer.IsVisible = true;
+            //    foreach (ToolbarItem t in ToolbarItems)
+            //    {
+            //        t.IsEnabled = true;
+            //    }
+            //    GuestTxt.IsVisible = false;
+            //}
         }
 
         private async void CreateDevice(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace Bionly.Views
                         LoginViewModel.users.Add(a);
                         LoginViewModel.Account = a;
                         await LoginViewModel.users.Save();
-                        await DisplayAlert("Gespeichert", $"Der neue Benutzername ist jetzt \"{UserTxt.Text}\"!", "OK");
+                        await DisplayAlert(Strings.Saved, string.Format(Strings.NewUserIs_Name, UserTxt.Text), Strings.OK);
                         ResetUserBtn_Clicked(sender, e);
                     }
                     else if (NewPassTxt.Text == NewPassTxt2.Text)
@@ -70,22 +71,22 @@ namespace Bionly.Views
                         LoginViewModel.users.Add(a);
                         LoginViewModel.Account = a;
                         await LoginViewModel.users.Save();
-                        await DisplayAlert("Gespeichert", $"Das neues Passwort für den Benutzer \"{UserTxt.Text}\" wurde gespeichert!", "OK");
+                        await DisplayAlert(Strings.Saved, string.Format(Strings.NewPasswordSavedFor_Name, UserTxt.Text), Strings.OK);
                         ResetUserBtn_Clicked(sender, e);
                     }
                     else
                     {
-                        await DisplayAlert("Fehler", "Neues Passwort stimmt nicht überein", "OK");
+                        await DisplayAlert(Strings.Error, Strings.NewPasswordNoMatch, Strings.OK);
                     }
                 }
                 else
                 {
-                    await DisplayAlert("Fehler", "Altes Passwort nicht korrekt", "OK");
+                    await DisplayAlert(Strings.Error, Strings.OldPasswordIncorrect, Strings.OK);
                 }
             }
             else
             {
-                await DisplayAlert("Fehler", "Benutzername darf nicht leer sein", "OK");
+                await DisplayAlert(Strings.Error, Strings.UserEmpty, Strings.OK);
             }
         }
 

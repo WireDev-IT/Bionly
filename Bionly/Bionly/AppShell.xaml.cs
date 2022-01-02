@@ -1,4 +1,5 @@
-﻿using Bionly.Views;
+﻿using Bionly.Resx;
+using Bionly.Views;
 using System;
 using Xamarin.Forms;
 
@@ -10,6 +11,7 @@ namespace Bionly
         {
             InitializeComponent();
             RuntimeData.LoadAllDevices.Execute(null);
+            LocalizationHelper.Initialize();
         }
 
         private async void AccBtn_Clicked(object sender, EventArgs e)
@@ -23,6 +25,11 @@ namespace Bionly
             {
                 RuntimeData.SelectedDeviceIndex = -1;
             }
+        }
+
+        private void LangBtn_Clicked(object sender, EventArgs e)
+        {
+            DisplayActionSheet(Strings.ChangeLanguage, Strings.Cancel, null, "Deutsch", "English");
         }
     }
 }

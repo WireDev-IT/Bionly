@@ -1,10 +1,12 @@
-﻿namespace Bionly.ViewModels
+﻿using Bionly.Resx;
+
+namespace Bionly.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
         public SettingsViewModel()
         {
-            Title = "Einstellungen";
+            Title = Strings.Settings;
         }
     }
 }

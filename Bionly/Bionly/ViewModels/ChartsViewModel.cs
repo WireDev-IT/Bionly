@@ -1,4 +1,5 @@
 ﻿using Bionly.Models;
+using Bionly.Resx;
 using Microcharts;
 using Newtonsoft.Json;
 using SkiaSharp;
@@ -17,7 +18,7 @@ namespace Bionly.ViewModels
     {
         public static string AveragePath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Files/";
 
-        private Dictionary<DateTime, AverageMeasurementPoint> averagePoints = new();
+        private readonly Dictionary<DateTime, AverageMeasurementPoint> averagePoints = new();
 
         public LineChart tempChart;
         public LineChart humiChart;
@@ -25,7 +26,7 @@ namespace Bionly.ViewModels
 
         public ChartsViewModel()
         {
-            Title = "Diagramme";
+            Title = Strings.Charts;
             tempChart = new()
             {
                 LineMode = LineMode.Straight,
@@ -131,7 +132,7 @@ namespace Bionly.ViewModels
                 }
             }
 
-            await SaveAverageMeasurementPoint();
+            //await SaveAverageMeasurementPoint();
         });
 
         private async Task<bool> SaveAverageMeasurementPoint()
@@ -144,7 +145,7 @@ namespace Bionly.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler beim Speichern der Durchschnittswerte", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, ex.Message, Strings.OK);
             }
             return false;
         }

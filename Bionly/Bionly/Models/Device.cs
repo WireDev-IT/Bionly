@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bionly.Resx;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -206,7 +207,7 @@ namespace Bionly.Models
         }
 
         [JsonIgnore]
-        public string CurrentValuesStr => ErrorOnCurrentValues ? "Fehler beim Abrufen" : CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
+        public string CurrentValuesStr => ErrorOnCurrentValues ? Strings.ErrorOnCall : CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
 
         private ConnectionStatus _connected = ConnectionStatus.Error;
         [JsonIgnore]
@@ -251,11 +252,11 @@ namespace Bionly.Models
             }
             catch (UnauthorizedAccessException)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", "Die App besitzt nicht die benötigten Berechtigungen um dieses Gerät zu löschen.", "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.NoPermissionToDeleteDevice, Strings.OK);
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, ex.Message, Strings.OK);
             }
             return false;
         }
@@ -276,12 +277,12 @@ namespace Bionly.Models
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Fehler", "Die App besitzt nicht die benötigten Berechtigungen um die Daten dieses Gerätes zu löschen.", "OK");
+                    await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.NoPermissionToDeleteDeviceContents, Strings.OK);
                     success = false;
                 }
                 catch (Exception ex)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Fehler", ex.Message, "OK");
+                    await Application.Current.MainPage.DisplayAlert(Strings.Error, ex.Message, Strings.OK);
                     success = false;
                 }
             }
@@ -302,11 +303,11 @@ namespace Bionly.Models
             }
             catch (UnauthorizedAccessException)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", "Die App besitzt nicht die benötigten Berechtigungen um dieses Gerät zu speichern.", "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.NoPermissionToSaveDevice, Strings.OK);
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, ex.Message, Strings.OK);
             }
             return false;
         }
@@ -319,15 +320,15 @@ namespace Bionly.Models
             }
             catch (UnauthorizedAccessException)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", "Die App besitzt nicht die benötigten Berechtigungen um dieses Gerät zu laden.", "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.NoPermissionToLoadDevice, Strings.OK);
             }
             catch (FileNotFoundException)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", "Dieses Gerät wurde nicht gefunden.", "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.DeviceNotFound, Strings.OK);
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Fehler", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, ex.Message, Strings.OK);
             }
             return new();
         }

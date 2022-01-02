@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:l="clr-namespace:Bionly"
+             xmlns:resx="clr-namespace:Bionly.Resx"
              x:Class="Bionly.Views.MeasurementsPage" Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -23,10 +24,10 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="Zeit"/>
-                    <Label Grid.Column="1" Text="Temperatur"/>
-                    <Label Grid.Column="2" Text="Luftfeuchtigkeit"/>
-                    <Label Grid.Column="3" Text="Luftdruck"/>
+                    <Label Grid.Column="0" Text="{x:Static resx:Strings.Time}"/>
+                    <Label Grid.Column="1" Text="{x:Static resx:Strings.Temperatur}"/>
+                    <Label Grid.Column="2" Text="{x:Static resx:Strings.Humidity}"/>
+                    <Label Grid.Column="3" Text="{x:Static resx:Strings.AirPressure}"/>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>

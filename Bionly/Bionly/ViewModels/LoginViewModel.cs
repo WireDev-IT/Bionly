@@ -1,4 +1,5 @@
 ﻿using Bionly.Models;
+using Bionly.Resx;
 using Bionly.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -34,7 +35,7 @@ namespace Bionly.ViewModels
             else
             {
                 IsLoggedIn = false;
-                await Application.Current.MainPage.DisplayAlert("Fehler", "Benutzername oder Passwort nicht korrekt", "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.Error, Strings.IncorrectUserCredits, Strings.OK);
             }
         });
     }

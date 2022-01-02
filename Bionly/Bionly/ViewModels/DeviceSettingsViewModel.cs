@@ -1,4 +1,5 @@
-﻿using Bionly.Views;
+﻿using Bionly.Resx;
+using Bionly.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -18,15 +19,15 @@ namespace Bionly.ViewModels
         {
             if (!string.IsNullOrEmpty(Device.Id))
             {
-                string result = await Application.Current.MainPage.DisplayActionSheet($"\"{Device.Name}\" löschen", "Abbrechen", "Nur Gerät", new string[] { "Gerät mit Inhalten" });
-                if (result == "Gerät mit Inhalten")
+                string result = await Application.Current.MainPage.DisplayActionSheet(string.Format(Strings.Delete_Name, Device.Name), Strings.Cancel, Strings.OnlyDevice, Strings.DeviceWithContents);
+                if (result == Strings.DeviceWithContents)
                 {
                     if (!(await Device.DeleteWithContents()).contents)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Löschen fehlgeschlagen", "Nicht alle Inhalte zu diesem Gerät konnten entfernt werden.", "OK");
+                        await Application.Current.MainPage.DisplayAlert(Strings.DeleteFailed, Strings.DeleteDeviceContentsFailed, Strings.OK);
                     }
                 }
-                else if (result == "Nur Gerät")
+                else if (result == Strings.OnlyDevice)
                 {
                     await Device.Delete();
                 }
@@ -38,7 +39,7 @@ namespace Bionly.ViewModels
 
         public DeviceSettingsViewModel()
         {
-            Title = "Gerät bearbeiten";
+            Title = Strings.EditDevice;
         }
     }
 }

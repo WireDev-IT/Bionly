@@ -1,4 +1,5 @@
-﻿using LibVLCSharp.Shared;
+﻿using Bionly.Resx;
+using LibVLCSharp.Shared;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -12,7 +13,7 @@ namespace Bionly.ViewModels
 
         public LiveviewViewModel()
         {
-            Title = "Liveansicht";
+            Title = Strings.Liveview;
 
             if (IsPlatfromOk)
             {

@@ -1,4 +1,5 @@
-﻿using Bionly.ViewModels;
+﻿using Bionly.Resx;
+using Bionly.ViewModels;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -48,7 +49,7 @@ namespace Bionly.Views
 
         private async void ConfigBtn_Clicked(object sender, System.EventArgs e)
         {
-            await DisplayAlert("Fehler", "Das Gerät unterstützt keine Fernkonfiguration.", "OK");
+            await DisplayAlert(Strings.Error, Strings.NoRemoteConfig, Strings.OK);
         }
 
         private void DeviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)

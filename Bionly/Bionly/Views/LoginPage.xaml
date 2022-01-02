@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vm="clr-namespace:Bionly.ViewModels"
-             mc:Ignorable="d"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Bionly.ViewModels"
+             mc:Ignorable="d" xmlns:resx="clr-namespace:Bionly.Resx"
              x:Class="Bionly.Views.LoginPage"
              Shell.NavBarIsVisible="False">
 
@@ -16,12 +17,12 @@
             <StackLayout Padding="10,0,10,0" WidthRequest="400">
                 <Image Source="bionly_logo.png" WidthRequest="150" HorizontalOptions="Center" Margin="10"/>
 
-                <Entry x:Name="UserTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Benutzername" Margin="0,20,0,0"/>
-                <Entry x:Name="PassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="Passwort" IsPassword="True"/>
+                <Entry x:Name="UserTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.Username}" Margin="0,20,0,0"/>
+                <Entry x:Name="PassTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.Password}" IsPassword="True"/>
 
-                <Button VerticalOptions="Center" Text="Anmelden" Clicked="LoginBtn_Clicked" Margin="0,0,0,10"/>
+                <Button VerticalOptions="Center" Text="{x:Static resx:Strings.Login}" Clicked="LoginBtn_Clicked" Margin="0,0,0,10"/>
                 <Line HeightRequest="1" BackgroundColor="gray" Margin="100,0"/>
-                <Button VerticalOptions="Center" Text="Als Gast fortfahren" Margin="20,10,20,80" BackgroundColor="LightSlateGray" Clicked="GuestBtn_Clicked"/>
+                <Button VerticalOptions="Center" Text="{x:Static resx:Strings.LoginAsGuest}" Margin="20,10,20,80" BackgroundColor="LightSlateGray" Clicked="GuestBtn_Clicked"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

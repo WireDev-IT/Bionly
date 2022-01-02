@@ -1,4 +1,5 @@
 ﻿using Bionly.Properties;
+using Bionly.Resx;
 using System;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -10,7 +11,7 @@ namespace Bionly.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "Über";
+            Title = Strings.About;
             AboutText = Resources.AboutText;
         }
 

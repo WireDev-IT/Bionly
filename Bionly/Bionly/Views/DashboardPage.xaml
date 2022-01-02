@@ -13,8 +13,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resx:Language.Refresh}" Command="{Binding Refresh}"/>
-        <ToolbarItem Text="Grafiken neu zeichnen" Command="{Binding DrawGraphs}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Refresh}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.RedrawGraphics}" Command="{Binding DrawGraphs}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -29,7 +29,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Geräte" FontSize="Title" HorizontalOptions="Start" VerticalOptions="Start">
+                <Label Text="{x:Static resx:Strings.Devices}" FontSize="Title" HorizontalOptions="Start" VerticalOptions="Start">
                     <Label.Margin>
                         <OnIdiom x:TypeArguments="Thickness" Desktop="20,0,0,0" Default="10,0,0,0"/>
                     </Label.Margin>
@@ -86,21 +86,21 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label x:Name="WelcomeTxt" Text="Guten Tag" FontSize="40"/>
-                        <Label x:Name="ConnectedTxt" Grid.Row="1" Text="1 von 3 Geräten verbunden" FontSize="Medium"/>
+                        <Label x:Name="ConnectedTxt" Grid.Row="1" FontSize="Medium"/>
                     </Grid>
                 </Grid>
                 <StackLayout x:Name="StartpageContainer">
-                    <Label Text="Wählen Sie ein Gerät aus, um Werzeuge und Daten anzuzeigen." FontSize="Small" Margin="0,40,0,0"/>
+                    <Label Text="{x:Static resx:Strings.SelectDeviceToGetTools}" FontSize="Small" Margin="0,40,0,0"/>
                 </StackLayout>
                 <StackLayout x:Name="DeviceContainer" Margin="0,20,0,0" IsVisible="false">
                     <FlexLayout Wrap="Wrap">
-                        <Button x:Name="ConnectBtn" Text="Verbinden" BackgroundColor="Green" WidthRequest="120" Margin="2" Clicked="ConnectBtn_Clicked"/>
-                        <Button Text="Bilder" WidthRequest="120" Margin="2" Clicked="ImagesBtn_Clicked"/>
-                        <Button Text="Messwerte" WidthRequest="120" Margin="2" Clicked="MeasurementsBtn_Clicked"/>
-                        <Button Text="Diagramme" WidthRequest="120" Margin="2" Clicked="ChartsBtn_Clicked"/>
-                        <Button Text="Verwalten" WidthRequest="120" Margin="2" IsVisible="true" Clicked="ConfigBtn_Clicked"/>
+                        <Button x:Name="ConnectBtn" Text="{x:Static resx:Strings.Connect}" BackgroundColor="Green" WidthRequest="120" Margin="2" Clicked="ConnectBtn_Clicked"/>
+                        <Button Text="{x:Static resx:Strings.Pictures}" WidthRequest="120" Margin="2" Clicked="ImagesBtn_Clicked"/>
+                        <Button Text="{x:Static resx:Strings.Measurments}" WidthRequest="120" Margin="2" Clicked="MeasurementsBtn_Clicked"/>
+                        <Button Text="{x:Static resx:Strings.Charts}" WidthRequest="120" Margin="2" Clicked="ChartsBtn_Clicked"/>
+                        <Button Text="{x:Static resx:Strings.Manage}" WidthRequest="120" Margin="2" IsVisible="true" Clicked="ConfigBtn_Clicked"/>
                     </FlexLayout>
-                    <Label BindingContext="{Binding Source={x:Static l:RuntimeData.SelectedDevice}}" Text="{Binding Connected, StringFormat='Verbindungsstatus: {0}'}" Margin="5"/>
+                    <Label BindingContext="{Binding Source={x:Static l:RuntimeData.SelectedDevice}}" Text="{Binding Connected, StringFormat={x:Static resx:Strings.ConnectionState}}" Margin="5"/>
                     <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="370" HorizontalOptions="Start" Margin="10"/>
                 </StackLayout>
             </StackLayout>

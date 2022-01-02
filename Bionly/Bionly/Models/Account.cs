@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bionly.Resx;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,7 +117,7 @@ namespace Bionly.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Der Benutzer kann nicht gespeichert werden.", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.ErrorOnUserSave, ex.Message, Strings.OK);
             }
             return false;
         }
@@ -136,7 +137,7 @@ namespace Bionly.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Laden der Benutzer nicht möglich", ex.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert(Strings.ErrorOnUserLoad, ex.Message, Strings.OK);
             }
             return new();
         }

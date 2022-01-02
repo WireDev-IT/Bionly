@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              x:Class="Bionly.Views.DeviceSettingsPage"
+             xmlns:resx="clr-namespace:Bionly.Resx"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -10,25 +11,25 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Löschen" Command="{Binding DeleteDevice}"/>
-        <ToolbarItem Text="Speichern" Command="{Binding SaveDevice}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Delete}" Command="{Binding DeleteDevice}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Save}" Command="{Binding SaveDevice}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <TableView Intent="Settings" BindingContext="{Binding Source={x:Static vm:DeviceSettingsViewModel.Device}}" Margin="10">
             <TableRoot>
-                <TableSection Title="Einstellungen" TextColor="Black">
-                    <EntryCell Label="Name" Text="{Binding Name}" LabelColor="Black"/>
-                    <EntryCell Label="Beschreibung" Text="{Binding Description}" LabelColor="Black"/>
-                    <SwitchCell Text="Kamera verwenden" On="{Binding Settings[0]}"/>
-                    <SwitchCell Text="Messwerte verwenden" On="{Binding Settings[1]}"/>
+                <TableSection Title="{x:Static resx:Strings.Settings}" TextColor="Black">
+                    <EntryCell Label="{x:Static resx:Strings.Name}" Text="{Binding Name}" LabelColor="Black"/>
+                    <EntryCell Label="{x:Static resx:Strings.Description}" Text="{Binding Description}" LabelColor="Black"/>
+                    <SwitchCell Text="{x:Static resx:Strings.UseCam}" On="{Binding Settings[0]}"/>
+                    <SwitchCell Text="{x:Static resx:Strings.UseValues}" On="{Binding Settings[1]}"/>
                 </TableSection>
-                <TableSection x:Name="connectionsection" Title="Verbindung" TextColor="Black">
-                    <EntryCell Label="IP-Adresse / Domain" Text="{Binding IpAddress}" LabelColor="Black" Keyboard="Url"/>
-                    <EntryCell Label="RSTP Port" Text="{Binding CameraPort}" LabelColor="Black" Keyboard="Numeric"/>
-                    <EntryCell Label="FTP Port" Text="{Binding FtpPort}" LabelColor="Black" Keyboard="Numeric"/>
+                <TableSection x:Name="connectionsection" Title="{x:Static resx:Strings.Connection}" TextColor="Black">
+                    <EntryCell Label="{x:Static resx:Strings.IpAdressDomain}" Text="{Binding IpAddress}" LabelColor="Black" Keyboard="Url"/>
+                    <EntryCell Label="{x:Static resx:Strings.RtspPort}" Text="{Binding CameraPort}" LabelColor="Black" Keyboard="Numeric"/>
+                    <EntryCell Label="{x:Static resx:Strings.FtpPort}" Text="{Binding FtpPort}" LabelColor="Black" Keyboard="Numeric"/>
                 </TableSection>
-                <TableSection Title="Entwickler" TextColor="Black">
+                <TableSection Title="{x:Static resx:Strings.Developer}" TextColor="Black">
                     <TextCell Detail="{Binding Id}" Text="ID" TextColor="{StaticResource Primary}" DetailColor="Black"/>
                 </TableSection>
             </TableRoot>

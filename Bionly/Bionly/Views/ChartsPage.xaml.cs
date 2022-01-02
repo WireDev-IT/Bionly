@@ -1,4 +1,5 @@
-﻿using Bionly.ViewModels;
+﻿using Bionly.Resx;
+using Bionly.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +25,12 @@ namespace Bionly.Views
 
             if (RuntimeData.SelectedDeviceIndex >= 0)
             {
-                HeaderLbl.Text = $"Graphen für \"{RuntimeData.SelectedDevice.Name}\"";
+                HeaderLbl.Text = string.Format(Strings.ChartsOf_Name, RuntimeData.SelectedDevice.Name);
                 ((ChartsViewModel)BindingContext).DrawGraphs.Execute(RuntimeData.SelectedDevice.MPoints);
             }
             else
             {
-                HeaderLbl.Text = "Durchschnittswerte der Vergangenheit";
+                HeaderLbl.Text = Strings.AverageValues;
                 ((ChartsViewModel)BindingContext).CalcAverage.Execute(null);
                 ((ChartsViewModel)BindingContext).DrawGraphs.Execute(null);
             }

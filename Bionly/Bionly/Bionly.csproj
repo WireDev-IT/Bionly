@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/tomo2403/Bionly</RepositoryUrl>
     <LangVersion>10.0</LangVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <NeutralLanguage>de</NeutralLanguage>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -67,10 +67,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resx\Language.Designer.cs">
+    <Compile Update="Resx\Strings.de.Designer.cs">
+      <DependentUpon>Strings.de.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resx\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Update="Views\DeviceSettingsPage.xaml.cs">
       <DependentUpon>DeviceSettingsPage.xaml</DependentUpon>
@@ -82,9 +87,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resx\Language.resx">
+    <EmbeddedResource Update="Resx\Strings.de.resx">
+      <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Language.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resx\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ChartsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

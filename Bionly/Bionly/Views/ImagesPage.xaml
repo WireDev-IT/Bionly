@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
              xmlns:l="clr-namespace:Bionly"
-             x:Class="Bionly.Views.ImagesPage" Title="{Binding Source={x:Static l:RuntimeData.SelectedDevice}, Path=Name, StringFormat='Aufnahmen von &quot;{0}&quot;'}">
+             x:Class="Bionly.Views.ImagesPage"
+             xmlns:resx="clr-namespace:Bionly.Resx"
+             Title="{Binding Source={x:Static l:RuntimeData.SelectedDevice}, Path=Name, StringFormat={x:Static resx:Strings.PhotosFrom_Name}}">
 
     <ContentPage.BindingContext>
         <vm:ImagesViewModel />
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Aktualisieren" Command="{Binding Refresh}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Refresh}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

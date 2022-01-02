@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Systemverwalter</value>
+  </data>
+  <data name="AirPressure" xml:space="preserve">
+    <value>Luftdruck</value>
+  </data>
+  <data name="AverageValues" xml:space="preserve">
+    <value>Durchschnittswerte der Vergangenheit</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Sprache ändern</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Diagramme</value>
+  </data>
+  <data name="ChartsOf_Name" xml:space="preserve">
+    <value>Graphen für "{0}"</value>
+  </data>
+  <data name="CloseAppForLanguage" xml:space="preserve">
+    <value>Bitte starten Sie die App neu, um die Sprache vollständig anzuwenden.</value>
+  </data>
+  <data name="CloseNow" xml:space="preserve">
+    <value>App jetzt schließen</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Verbinden</value>
+  </data>
+  <data name="ConnectedDevicesCountTxt" xml:space="preserve">
+    <value>{0} von {1} Geräten verbunden</value>
+    <comment>Subtitle on Dashboard</comment>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Verbindung</value>
+  </data>
+  <data name="ConnectionState" xml:space="preserve">
+    <value>Verbindungsstatus: {0}</value>
+  </data>
+  <data name="CustomerLinkTxt" xml:space="preserve">
+    <value>Website Schulbiolobiezentrum Leipzig</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="DeleteDeviceContentsFailed" xml:space="preserve">
+    <value>Nicht alle Inhalte dieses Geräts konnten entfernt werden.</value>
+  </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="Delete_Name" xml:space="preserve">
+    <value>"{0}" löschen</value>
+  </data>
+  <data name="Dependencies" xml:space="preserve">
+    <value>Abhängigkeiten</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Entwickler</value>
+  </data>
+  <data name="DeveloperLinkTxt" xml:space="preserve">
+    <value>Entwickler auf GitHub</value>
+  </data>
+  <data name="DeviceNotFound" xml:space="preserve">
+    <value>Das Gerät wurde nicht gefudnen.</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Geräte</value>
+  </data>
+  <data name="DeviceWithContents" xml:space="preserve">
+    <value>Gerät mit Inahlten</value>
+    <comment>In the context for deleting the device</comment>
+  </data>
+  <data name="EditDevice" xml:space="preserve">
+    <value>Gerät bearbeiten</value>
+  </data>
+  <data name="EndVideo" xml:space="preserve">
+    <value>Video beenden</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="ErrorOnCall" xml:space="preserve">
+    <value>Fehler beim Abrufen</value>
+  </data>
+  <data name="ErrorOnImageLoading" xml:space="preserve">
+    <value>Die Liste der Bilder konnte nicht abgerufen werden!</value>
+  </data>
+  <data name="ErrorOnUserLoad" xml:space="preserve">
+    <value>Laden der Benutzern nicht möglich</value>
+  </data>
+  <data name="ErrorOnUserSave" xml:space="preserve">
+    <value>Der Benutzer kann nicht gespeichert werden.</value>
+  </data>
+  <data name="FtpPort" xml:space="preserve">
+    <value>FTP Port</value>
+  </data>
+  <data name="GoodDay" xml:space="preserve">
+    <value>Guten Tag</value>
+    <comment>Used as welcome text on dashboard</comment>
+  </data>
+  <data name="GoodEvening" xml:space="preserve">
+    <value>Guten Abend</value>
+    <comment>Used as welcome text on dashboard</comment>
+  </data>
+  <data name="GoodMorning" xml:space="preserve">
+    <value>Guten Morgen</value>
+    <comment>Used as welcome text on dashboard</comment>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Luftfeuchtigkeit</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="IncorrectUserCredits" xml:space="preserve">
+    <value>Benutzername oder Passwort nicht korrekt</value>
+  </data>
+  <data name="IpAdress" xml:space="preserve">
+    <value>IP-Adresse</value>
+  </data>
+  <data name="IpAdressDomain" xml:space="preserve">
+    <value>IP-Adresse / Domain</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Liveview" xml:space="preserve">
+    <value>Liveansicht</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="LoginAsGuest" xml:space="preserve">
+    <value>Als Gast fortfahren</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Verwalten</value>
+  </data>
+  <data name="MeasurementsOf_Name" xml:space="preserve">
+    <value>Messwerte von {0}</value>
+  </data>
+  <data name="Measurments" xml:space="preserve">
+    <value>Messwerte</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewDevice" xml:space="preserve">
+    <value>Neues Gerät</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="NewPasswordNoMatch" xml:space="preserve">
+    <value>Neues Passwort stimmt nicht überein</value>
+  </data>
+  <data name="NewPasswordSavedFor_Name" xml:space="preserve">
+    <value>Das neue Passwort für Benutzer {0} wurde gespeichert!</value>
+  </data>
+  <data name="NewUserIs_Name" xml:space="preserve">
+    <value>Der neue Benutzername lautet nun "{0}".</value>
+  </data>
+  <data name="NoDeviceForMeasurements" xml:space="preserve">
+    <value>Kein Gerät für Messwerte ausgewählt</value>
+  </data>
+  <data name="NoDevicesConfigured" xml:space="preserve">
+    <value>Keine Geräte konfiguriert</value>
+  </data>
+  <data name="NoLiveviewWin" xml:space="preserve">
+    <value>Die Live-Ansicht ist unter Windows leider nicht verfügbar</value>
+  </data>
+  <data name="NoPermissionToDeleteDevice" xml:space="preserve">
+    <value>Die App verfügt nicht über die erforderlichen Berechtigungen zum Löschen dieses Geräts.</value>
+  </data>
+  <data name="NoPermissionToDeleteDeviceContents" xml:space="preserve">
+    <value>Die App verfügt nicht über die erforderlichen Berechtigungen, um die Daten dieses Geräts zu löschen.</value>
+  </data>
+  <data name="NoPermissionToLoadDevice" xml:space="preserve">
+    <value>Die App verfügt nicht über die erforderlichen Berechtigungen zum Laden dieses Geräts.</value>
+  </data>
+  <data name="NoPermissionToSaveDevice" xml:space="preserve">
+    <value>Die App verfügt nicht über die erforderlichen Berechtigungen zum Speichern dieses Geräts.</value>
+  </data>
+  <data name="NoRemoteConfig" xml:space="preserve">
+    <value>Das Gerät unterstützt keine Fernkonfiguration.</value>
+  </data>
+  <data name="NoSettingsGuest" xml:space="preserve">
+    <value>Sie können als Gast keine Einstellungen bearbeiten</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Altes Passwort</value>
+  </data>
+  <data name="OldPasswordIncorrect" xml:space="preserve">
+    <value>Altes Passwort nicht korrekt</value>
+  </data>
+  <data name="OnlyDevice" xml:space="preserve">
+    <value>Nur Gerät</value>
+    <comment>In the context for deleting the device</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="PhotosFrom_Name" xml:space="preserve">
+    <value>Aufnahmen von "{0}"</value>
+  </data>
+  <data name="Pictures" xml:space="preserve">
+    <value>Bilder</value>
+  </data>
+  <data name="ProjectLinkTxt" xml:space="preserve">
+    <value>Projekt auf GitHub</value>
+  </data>
+  <data name="RedrawGraphics" xml:space="preserve">
+    <value>Grafiken neu zeichnen</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Neues Passwort wiederholen</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="RestartRequired" xml:space="preserve">
+    <value>Neustart erforderlich</value>
+  </data>
+  <data name="RtspPort" xml:space="preserve">
+    <value>RTSP Port</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Gespeichert</value>
+  </data>
+  <data name="SaveUser" xml:space="preserve">
+    <value>Neue Benutzerdaten speichern</value>
+  </data>
+  <data name="SelectDeviceToGetTools" xml:space="preserve">
+    <value>Wählen Sie ein Gerät aus, um Werkzeuge und Daten anzuzeigen.</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Temperatur" xml:space="preserve">
+    <value>Temperatur</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="UseCam" xml:space="preserve">
+    <value>Kamera benutzen</value>
+  </data>
+  <data name="UserEmpty" xml:space="preserve">
+    <value>Der Benutzername darf nicht leer sein</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="UseValues" xml:space="preserve">
+    <value>Messwerte verwenden</value>
+  </data>
+</root>

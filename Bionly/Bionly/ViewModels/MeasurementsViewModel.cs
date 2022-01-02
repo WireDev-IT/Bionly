@@ -1,13 +1,11 @@
 ﻿using Bionly.Models;
+using Bionly.Resx;
 using FluentFTP;
-using Microcharts;
 using Newtonsoft.Json;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -24,11 +22,11 @@ namespace Bionly.ViewModels
 
         public MeasurementsViewModel()
         {
-            Title = "Kein Gerät für Messwerte ausgewählt";
+            Title = Strings.NoDeviceForMeasurements;
 
             if (RuntimeData.SelectedDeviceIndex >= 0)
             {
-                Title = $"Messwerte von \"{RuntimeData.SelectedDevice.Name}\"";
+                Title = string.Format(Strings.MeasurementsOf_Name, RuntimeData.SelectedDevice.Name);
                 RuntimeData.SelectedDevice.LoadMeasurementPoints();
             }
         }

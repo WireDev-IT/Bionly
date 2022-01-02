@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.AboutPage"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:resx="clr-namespace:Bionly.Resx"
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
@@ -38,21 +39,21 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Margin="0,10,0,0" Text="Projekt auf GitHub"
+                    <Button Grid.Column="0" Margin="0,10,0,0" Text="{x:Static resx:Strings.ProjectLinkTxt}"
                         Command="{Binding OpenWebCommand}" CommandParameter="{Binding RepoLink}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"/>
-                    <Button Grid.Column="1" Margin="0,10,0,0" Text="Entwickler auf GitHub"
+                    <Button Grid.Column="1" Margin="0,10,0,0" Text="{x:Static resx:Strings.DeveloperLinkTxt}"
                         Command="{Binding OpenWebCommand}" CommandParameter="{Binding DeveloperLink}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"/>
-                    <Button Grid.Column="2" Margin="0,10,0,0" Text="Website Schulbiologiezentrum Leipzig"
+                    <Button Grid.Column="2" Margin="0,10,0,0" Text="{x:Static resx:Strings.CustomerLinkTxt}"
                         Command="{Binding OpenWebCommand}" CommandParameter="{Binding ProjectLeaderLink}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"/>
                 </Grid>
                 <Label Text="{Binding AboutText}" FontSize="16" Margin="0,20,0,0"/>
-                <Label Text="Abhängigkeiten" FontSize="Large" Margin="0,50,0,0"/>
+                <Label Text="{x:Static resx:Strings.Dependencies}" FontSize="Large" Margin="0,50,0,0"/>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill" Padding="0,0,0,20">
                     <StackLayout Orientation="Horizontal">
                         <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
@@ -98,7 +99,7 @@
                         <Frame BorderColor="Gray" Padding="10" WidthRequest="300">
                             <StackLayout>
                                 <Label Text="Icons" FontSize="Title"/>
-                                <Label Text="Symbole von Icons8.com" FontSize="Micro"/>
+                                <Label Text="Icons by Icons8.com" FontSize="Micro"/>
                                 <Label Text="Copyright (c) Icons8" FontSize="Micro"/>
                             </StackLayout>
                         </Frame>
