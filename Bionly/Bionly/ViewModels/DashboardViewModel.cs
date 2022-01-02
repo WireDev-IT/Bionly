@@ -44,7 +44,7 @@ namespace Bionly.ViewModels
             {
                 Color = new SKColor(0, 0, 0),
                 ValueLabelColor = new SKColor(0, 0, 0),
-                ValueLabel = Strings.Temperatur,
+                ValueLabel = Strings.AirPressure,
                 Label = RuntimeData.SelectedDevice.CurrentPres.ToString() + " hPa"
             });
             radEntries.Add(new ChartEntry(RuntimeData.SelectedDevice.CurrentHumi)
@@ -58,7 +58,7 @@ namespace Bionly.ViewModels
             {
                 Color = new SKColor(255, 0, 0),
                 ValueLabelColor = new SKColor(255, 0, 0),
-                ValueLabel = Strings.AirPressure,
+                ValueLabel = Strings.Temperatur,
                 Label = RuntimeData.SelectedDevice.CurrentTemp.ToString("N1") + " °C"
             });
 

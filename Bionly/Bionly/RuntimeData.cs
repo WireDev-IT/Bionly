@@ -11,6 +11,12 @@ namespace Bionly
 {
     public class RuntimeData
     {
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        private static void OnStaticPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
+        }
+
         private static List<Device> _devices = new();
         public static List<Device> Devices
         {
@@ -20,11 +26,25 @@ namespace Bionly
                 if (_devices != value)
                 {
                     _devices = value;
+                    OnStaticPropertyChanged(nameof(Devices));
                 }
             }
         }
 
-        public static int SelectedDeviceIndex { get; internal set; } = -1;
+        private static int _selectedDeviceIndex= -1;
+        public static int SelectedDeviceIndex
+        {
+            get => _selectedDeviceIndex;
+            set
+            {
+                if (_selectedDeviceIndex != value)
+                {
+                    _selectedDeviceIndex = value;
+                    OnStaticPropertyChanged(nameof(SelectedDeviceIndex));
+                }
+            }
+        }
+
         public static Device SelectedDevice
         {
             get
@@ -35,7 +55,14 @@ namespace Bionly
                 }
                 return Devices[SelectedDeviceIndex];
             }
-            internal set => Devices[SelectedDeviceIndex] = value;
+            internal set
+            {
+                if (Devices[SelectedDeviceIndex] != value)
+                {
+                    Devices[SelectedDeviceIndex] = value;
+                    OnStaticPropertyChanged(nameof(SelectedDevice));
+                }
+            }
         }
 
         public static async Task ConnectAllDevices()
