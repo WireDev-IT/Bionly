@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>Über</value>
   </data>
+  <data name="AboutTxt" xml:space="preserve">
+    <value>Bionly ist eine Anwendung zur Auswertung von Livebildern und von Sensoren erfassten Messwerten, die im Rahmen eines Projekts am Schulbiologiezentrum Leipzig (Deutschland) generiert werden. Infrarotkameras und Sensoren, die in Nistkästen für Vögel platziert sind, können über diese App abgerufen und verwaltet werden. Sie wurde von einem Schüler im Zuge seiner Belegarbeit in der Klassenstufe 12 an der Arwed-Rossbach-Schule entwickelt.</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Systemverwalter</value>
   </data>

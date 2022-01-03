@@ -13,7 +13,7 @@ namespace Bionly.Resx
 {
     internal class LocalizationHelper
     {
-        public class JsonSettings : INotifyPropertyChanged
+        public class LanguageSettings : INotifyPropertyChanged
         {
             [JsonIgnore]
             public static string Path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/settings.json";
@@ -53,8 +53,8 @@ namespace Bionly.Resx
             }
         }
 
-        private static JsonSettings _settings = new();
-        public static JsonSettings Settings
+        private static LanguageSettings _settings = new();
+        public static LanguageSettings Settings
         {
             get => _settings;
             set
@@ -101,7 +101,7 @@ namespace Bionly.Resx
             SupportedLanguages = GetAllSupportedLanguages();
             try
             {
-                JsonSettings settings = JsonConvert.DeserializeObject<JsonSettings>(File.ReadAllText(JsonSettings.Path));
+                LanguageSettings settings = JsonConvert.DeserializeObject<LanguageSettings>(File.ReadAllText(LanguageSettings.Path));
                 CurrentLanguage = SupportedLanguages.First(x => x.ToString() == settings.TwoLetterISOLanguageName);
             }
             catch (Exception)

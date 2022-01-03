@@ -52,7 +52,7 @@
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White"/>
                 </Grid>
-                <Label Text="{Binding AboutText}" FontSize="16" Margin="0,20,0,0"/>
+                <Label Text="{x:Static resx:Strings.AboutTxt}" FontSize="16" Margin="0,20,0,0"/>
                 <Label Text="{x:Static resx:Strings.Dependencies}" FontSize="Large" Margin="0,50,0,0"/>
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill" Padding="0,0,0,20">
                     <StackLayout Orientation="Horizontal">

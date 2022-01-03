@@ -1,5 +1,4 @@
-﻿using Bionly.Properties;
-using Bionly.Resx;
+﻿using Bionly.Resx;
 using System;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -12,7 +11,6 @@ namespace Bionly.ViewModels
         public AboutViewModel()
         {
             Title = Strings.About;
-            AboutText = Resources.AboutText;
         }
 
         public string AboutText { get; }
@@ -23,7 +21,7 @@ namespace Bionly.ViewModels
 
         public ICommand OpenWebCommand => new Command<string>((url) =>
         {
-            _ = Launcher.OpenAsync(new Uri(url));
+            _ = Browser.OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
         });
     }
 }

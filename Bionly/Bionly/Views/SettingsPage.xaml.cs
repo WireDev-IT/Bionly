@@ -21,25 +21,25 @@ namespace Bionly.Views
         {
             base.OnAppearing();
 
-            //UserTxt.Text = LoginViewModel.Account.Name;
-            //if (LoginViewModel.LoggedInUser != UserType.Admin)
-            //{
-            //    MainContainer.IsVisible = false;
-            //    foreach (ToolbarItem t in ToolbarItems)
-            //    {
-            //        t.IsEnabled = false;
-            //    }
-            //    GuestTxt.IsVisible = true;
-            //}
-            //else
-            //{
-            //    MainContainer.IsVisible = true;
-            //    foreach (ToolbarItem t in ToolbarItems)
-            //    {
-            //        t.IsEnabled = true;
-            //    }
-            //    GuestTxt.IsVisible = false;
-            //}
+            UserTxt.Text = LoginViewModel.Account.Name;
+            if (LoginViewModel.LoggedInUser != UserType.Admin)
+            {
+                MainContainer.IsVisible = false;
+                foreach (ToolbarItem t in ToolbarItems)
+                {
+                    t.IsEnabled = false;
+                }
+                GuestTxt.IsVisible = true;
+            }
+            else
+            {
+                MainContainer.IsVisible = true;
+                foreach (ToolbarItem t in ToolbarItems)
+                {
+                    t.IsEnabled = true;
+                }
+                GuestTxt.IsVisible = false;
+            }
         }
 
         private async void CreateDevice(object sender, EventArgs e)
@@ -105,6 +105,11 @@ namespace Bionly.Views
         private async void DevicesView_Refreshing(object sender, EventArgs e)
         {
             await RuntimeData.LoadAllCurrentValues();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            LocalizationHelper.Settings.Save();
         }
     }
 }

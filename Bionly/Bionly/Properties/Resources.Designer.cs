@@ -19,7 +19,7 @@ namespace Bionly.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,15 +57,6 @@ namespace Bionly.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bionly ist eine Anwendung zur Auswertung von Livebildern und von Sensoren erfassten Messwerten, die im Rahmen eines Projekts am Schulbiologiezentrum Leipzig (Deutschland) generiert werden. Infrarotkameras und Sensoren, die in Nistkästen für Vögel platziert sind, können über diese App abgerufen und verwaltet werden. Darüber hinaus kann die App Schnappschüsse der Kameras erstellen, gespeicherte Messwerte verwalten und den Speicherverbrauch der einzelnen Sensorgeräte im Netzwerk überwachen. Sie wurde von einem [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string AboutText {
-            get {
-                return ResourceManager.GetString("AboutText", resourceCulture);
             }
         }
         
