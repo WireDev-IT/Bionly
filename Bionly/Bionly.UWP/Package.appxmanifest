@@ -8,7 +8,7 @@
   IgnorableNamespaces="uap mp uap3">
 
   <Identity
-    Name="18114e98-975b-44cc-b9cb-5ced47214d7e"
+    Name="tomo2403.Bionly.UWP"
     Publisher="CN=tomo2403"
     Version="0.1.0.0" />
 
@@ -16,7 +16,7 @@
 
   <Properties>
     <DisplayName>Bionly.UWP</DisplayName>
-    <PublisherDisplayName>5542b484-b1c0-4f67-bb2b-09d044161301</PublisherDisplayName>
+    <PublisherDisplayName>tomo2403</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -47,7 +47,8 @@
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="lightGray"/>
         <uap:InitialRotationPreference>
-          <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/>
+          <uap:Rotation Preference="landscapeFlipped"/></uap:InitialRotationPreference>
         <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png"/>
       </uap:VisualElements>
     </Application>

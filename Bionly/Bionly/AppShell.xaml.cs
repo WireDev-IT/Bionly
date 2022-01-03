@@ -37,6 +37,9 @@ namespace Bionly
                 {
                     LocalizationHelper.Settings.TwoLetterISOLanguageName = LocalizationHelper.SupportedLanguages.First(x => x.DisplayName == result).TwoLetterISOLanguageName;
                     if (!await LocalizationHelper.Settings.Save()) throw new Exception();
+
+                    await DisplayAlert(Strings.RestartRequired, Strings.CloseAppForLanguage, Strings.OK);
+
                     Application.Current.MainPage = new AppShell();
                 }
                 catch (Exception)

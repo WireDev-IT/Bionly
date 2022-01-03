@@ -33,7 +33,7 @@
             https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="{x:OnPlatform UWP=White, Default=Black}"/>
             </Style>
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -42,12 +42,13 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{x:OnPlatform UWP=White, Default={StaticResource Secondary}}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="White" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -123,20 +124,8 @@
                 </Grid.RowDefinitions>
                 <Image Source="bionly_square_1024.png" WidthRequest="100" HorizontalOptions="Center" Margin="10,0,10,0"/>
                 <StackLayout Grid.Column="1" VerticalOptions="Center">
-                    <Label Text="Bionly" FontSize="Title">
-                        <Label.TextColor>
-                            <OnPlatform x:TypeArguments="Color" Default="White">
-                                <On Platform="Android">Black</On>
-                            </OnPlatform>
-                        </Label.TextColor>
-                    </Label>
-                    <Label Text="Copyright © tomo2403" TextColor="White" FontSize="Caption">
-                        <Label.TextColor>
-                            <OnPlatform x:TypeArguments="Color" Default="White">
-                                <On Platform="Android">Black</On>
-                            </OnPlatform>
-                        </Label.TextColor>
-                    </Label>
+                    <Label Text="Bionly" FontSize="Title" StyleClass="FlyoutItemLabelStyle"/>
+                    <Label Text="Copyright © tomo2403" FontSize="Caption" StyleClass="FlyoutItemLabelStyle"/>
                 </StackLayout>
             </Grid>
         </DataTemplate>
