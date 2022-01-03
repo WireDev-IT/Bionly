@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,8 +19,8 @@ namespace Bionly
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
         }
 
-        private static List<Device> _devices = new();
-        public static List<Device> Devices
+        private static ObservableCollection<Device> _devices = new();
+        public static ObservableCollection<Device> Devices
         {
             get => _devices;
             set
@@ -98,7 +100,9 @@ namespace Bionly
                 Devices.Add(d);
             }
 
-            Devices.Sort((x, y) => (x.Name ?? "").CompareTo(y.Name ?? ""));
+            List<Device> dl = Devices.ToList();
+            dl.Sort((x, y) => (x.Name ?? "").CompareTo(y.Name ?? ""));
+            Devices = new ObservableCollection<Device>(dl);
         });
     }
 }

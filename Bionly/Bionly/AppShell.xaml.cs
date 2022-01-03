@@ -1,6 +1,7 @@
 ﻿using Bionly.Resx;
 using Bionly.Views;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Bionly
@@ -9,9 +10,9 @@ namespace Bionly
     {
         public AppShell()
         {
+            LocalizationHelper.Initialize();
             InitializeComponent();
             RuntimeData.LoadAllDevices.Execute(null);
-            LocalizationHelper.Initialize();
         }
 
         private async void AccBtn_Clicked(object sender, EventArgs e)
@@ -27,9 +28,22 @@ namespace Bionly
             }
         }
 
-        private void LangBtn_Clicked(object sender, EventArgs e)
+        private async void LangBtn_Clicked(object sender, EventArgs e)
         {
-            DisplayActionSheet(Strings.ChangeLanguage, Strings.Cancel, null, "Deutsch", "English");
+            string result = await DisplayActionSheet(Strings.ChangeLanguage, Strings.Cancel, null, LocalizationHelper.SupportedLanguagesStr);
+            if (!string.IsNullOrWhiteSpace(result) && result != Strings.Cancel)
+            {
+                try
+                {
+                    LocalizationHelper.Settings.TwoLetterISOLanguageName = LocalizationHelper.SupportedLanguages.First(x => x.DisplayName == result).TwoLetterISOLanguageName;
+                    if (!await LocalizationHelper.Settings.Save()) throw new Exception();
+                    Application.Current.MainPage = new AppShell();
+                }
+                catch (Exception)
+                {
+                    await DisplayAlert(Strings.Error, Strings.NewLangError, Strings.OK);
+                }
+            }
         }
     }
 }

@@ -1,22 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Resources;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Bionly.Resx
 {
     internal class LocalizationHelper
     {
-        private static LanguageInfo _currentLanguage;
+        public class JsonSettings : INotifyPropertyChanged
+        {
+            [JsonIgnore]
+            public static string Path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/settings.json";
 
-        public static LanguageInfo CurrentLanguage
+            private string _twoLetterISOLanguageName = null;
+            [JsonProperty("language")]
+            public string TwoLetterISOLanguageName
+            {
+                get => _twoLetterISOLanguageName;
+                set
+                {
+                    if (_twoLetterISOLanguageName != value)
+                    {
+                        _twoLetterISOLanguageName = value;
+                        OnPropertyChanged(nameof(TwoLetterISOLanguageName));
+                    }
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            private void OnPropertyChanged(string property)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+            }
+
+            public Task<bool> Save()
+            {
+                try
+                {
+                    File.WriteAllText(Path, JsonConvert.SerializeObject(Settings, Formatting.Indented));
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+                return Task.FromResult(true);
+            }
+        }
+
+        private static JsonSettings _settings = new();
+        public static JsonSettings Settings
+        {
+            get => _settings;
+            set
+            {
+                if (_settings != value)
+                {
+                    _settings = value;
+                    OnStaticPropertyChanged(nameof(Settings));
+                }
+            }
+        }
+
+        private static CultureInfo _currentLanguage;
+        public static CultureInfo CurrentLanguage
         {
             get => _currentLanguage;
             set
@@ -24,38 +76,47 @@ namespace Bionly.Resx
                 if (_currentLanguage != value)
                 {
                     _currentLanguage = value;
-                    Thread.CurrentThread.CurrentUICulture = value.CultureInfo;
-                    OnStaticPropertyChanged();
-
-                    if (Shell.Current != null)
-                    {
-                        if (Shell.Current.DisplayAlert(Strings.RestartRequired, Strings.CloseAppForLanguage, Strings.CloseNow, Strings.OK).Result)
-                        {
-                            Application.Current.Quit();
-                        }
-                    }
+                    Thread.CurrentThread.CurrentUICulture = value;
+                    OnStaticPropertyChanged(nameof(CurrentLanguage));
                 }
+            }
+        }
+
+        public static string[] SupportedLanguagesStr
+        {
+            get
+            {
+                string[] result = new string[] { };
+                foreach (CultureInfo culture in SupportedLanguages)
+                {
+                    Array.Resize(ref result, result.Length + 1);
+                    result[result.Length - 1] = culture.DisplayName;
+                }
+                return result;
             }
         }
 
         public static void Initialize()
         {
             SupportedLanguages = GetAllSupportedLanguages();
-            string language = null ?? "en";
             try
             {
-                CurrentLanguage = SupportedLanguages.FirstOrDefault(x => x.LanguageName == language);
+                JsonSettings settings = JsonConvert.DeserializeObject<JsonSettings>(File.ReadAllText(JsonSettings.Path));
+                CurrentLanguage = SupportedLanguages.First(x => x.ToString() == settings.TwoLetterISOLanguageName);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                CurrentLanguage = CultureInfo.GetCultureInfo("en");
+            }
 
-            Thread.CurrentThread.CurrentUICulture = CurrentLanguage.CultureInfo;
+            Thread.CurrentThread.CurrentUICulture = CurrentLanguage;
         }
 
-        public static ObservableCollection<LanguageInfo> SupportedLanguages { get; private set; }
+        public static ObservableCollection<CultureInfo> SupportedLanguages { get; private set; }
 
-        private static ObservableCollection<LanguageInfo> GetAllSupportedLanguages()
+        private static ObservableCollection<CultureInfo> GetAllSupportedLanguages()
         {
-            ObservableCollection<LanguageInfo> supportedLanguages = new();
+            ObservableCollection<CultureInfo> supportedLanguages = new();
 
             ResourceManager resourceManager = Strings.ResourceManager;
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.NeutralCultures);
@@ -71,7 +132,7 @@ namespace Bionly.Resx
                     ResourceSet resourceSet = resourceManager.GetResourceSet(culture, true, false);
                     if (resourceSet != null)
                     {
-                        supportedLanguages.Add(new LanguageInfo(culture));
+                        supportedLanguages.Add(culture);
                     }
                 }
                 catch (CultureNotFoundException) { }
@@ -80,30 +141,11 @@ namespace Bionly.Resx
             return supportedLanguages;
         }
 
-        public class LanguageInfo
-        {
-            public LanguageInfo(CultureInfo cultureInfo)
-            {
-                CultureInfo = cultureInfo;
-            }
-
-            public CultureInfo CultureInfo { get; private set; }
-
-            public string DisplayName => CultureInfo.NativeName;
-
-            public string LanguageName => CultureInfo.Name;
-
-            public override string ToString()
-            {
-                return DisplayName;
-            }
-        }
-
         public static event PropertyChangedEventHandler StaticPropertyChanged;
 
-        private static void OnStaticPropertyChanged([CallerMemberName] string propertyName = "")
+        private static void OnStaticPropertyChanged(string propertyName)
         {
-            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
+            StaticPropertyChanged?.Invoke(propertyName, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

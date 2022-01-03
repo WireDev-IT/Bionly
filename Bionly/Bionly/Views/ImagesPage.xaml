@@ -12,7 +12,8 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Refresh}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Refresh}" IconImageSource="icon_refresh.png"/>
+        <ToolbarItem Text="Demo" Command="{Binding DemoMode}" IconImageSource="icon_flipboard.png"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

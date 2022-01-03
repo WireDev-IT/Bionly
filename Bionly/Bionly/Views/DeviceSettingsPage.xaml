@@ -11,8 +11,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resx:Strings.Delete}" Command="{Binding DeleteDevice}"/>
-        <ToolbarItem Text="{x:Static resx:Strings.Save}" Command="{Binding SaveDevice}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Delete}" Command="{Binding DeleteDevice}" IconImageSource="icon_trash.png"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Save}" Command="{Binding SaveDevice}" IconImageSource="icon_save.png"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

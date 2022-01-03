@@ -538,6 +538,15 @@ namespace Bionly.Resx {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New language could not be saved ähnelt.
+        /// </summary>
+        internal static string NewLangError {
+            get {
+                return ResourceManager.GetString("NewLangError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die New password ähnelt.
         /// </summary>
         internal static string NewPassword {

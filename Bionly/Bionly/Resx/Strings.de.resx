@@ -281,6 +281,9 @@
   <data name="NewDevice" xml:space="preserve">
     <value>Neues Gerät</value>
   </data>
+  <data name="NewLangError" xml:space="preserve">
+    <value>Neue Sprache konnte nicht gespeichert werden</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Neues Passwort</value>
   </data>

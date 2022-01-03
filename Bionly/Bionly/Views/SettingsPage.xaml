@@ -12,8 +12,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resx:Strings.NewDevice}" Clicked="CreateDevice"/>
-        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.NewDevice}" Clicked="CreateDevice" IconImageSource="icon_add.png"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}" IconImageSource="icon_refresh.png"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -56,9 +56,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <Label Text="Sprache" FontSize="Title" Margin="0,20,0,0"/>
-                <Picker ItemsSource="{Binding Source={x:Static resx:LocalizationHelper.SupportedLanguages}}" SelectedItem="{Binding Source={x:Static resx:LocalizationHelper.CurrentLanguage}}"/>
 
                 <Label Text="{x:Static resx:Strings.Administrator}" FontSize="Title" Margin="0,20,0,0"/>
                 <Entry x:Name="UserTxt" ClearButtonVisibility="WhileEditing" Keyboard="Text" Placeholder="{x:Static resx:Strings.Username}"/>

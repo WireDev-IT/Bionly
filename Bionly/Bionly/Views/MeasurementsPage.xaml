@@ -11,7 +11,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Demo" Command="{Binding RefreshFiles}"/>
+        <ToolbarItem Text="Demo" Command="{Binding RefreshFiles}" IconImageSource="icon_flipboard.png"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

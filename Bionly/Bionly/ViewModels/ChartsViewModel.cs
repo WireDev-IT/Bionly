@@ -95,7 +95,7 @@ namespace Bionly.ViewModels
             presChart.Entries = presEntries;
         });
 
-        public ICommand CalcAverage => new Command(async () =>
+        public ICommand CalcAverage => new Command(() =>
         {
             foreach (Device d in RuntimeData.Devices)
             {
@@ -131,23 +131,6 @@ namespace Bionly.ViewModels
                     }
                 }
             }
-
-            //await SaveAverageMeasurementPoint();
         });
-
-        private async Task<bool> SaveAverageMeasurementPoint()
-        {
-            try
-            {
-                _ = Directory.CreateDirectory(AveragePath);
-                File.WriteAllText(AveragePath + "average.json", JsonConvert.SerializeObject(averagePoints, Formatting.Indented));
-                return true;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert(Strings.Error, ex.Message, Strings.OK);
-            }
-            return false;
-        }
     }
 }

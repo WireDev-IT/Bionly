@@ -215,5 +215,17 @@
     <BundleResource Include="Resources\icon_language.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\icon_flipboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\icon_draw.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\icon_refresh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\icon_trash.png" />
+    <BundleResource Include="Resources\icon_save.png" />
+    <BundleResource Include="Resources\icon_add.png" />
   </ItemGroup>
 </Project>

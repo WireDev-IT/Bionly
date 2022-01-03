@@ -220,22 +220,25 @@ namespace Bionly.Models
                 {
                     _connected = value;
                     OnPropertyChanged(nameof(Connected));
+
+                    _deviceSymbol = value switch
+                    {
+                        ConnectionStatus.Connected => ImageSource.FromFile("icon_cloud_done.png"),
+                        ConnectionStatus.Connecting => ImageSource.FromFile("icon_cloud_sync.png"),
+                        ConnectionStatus.Disconnected => ImageSource.FromFile("icon_cloud_unavailable.png"),
+                        ConnectionStatus.Error => ImageSource.FromFile("icon_cloud_cross.png"),
+                        _ => null,
+                    };
                 }
             }
         }
 
+        private ImageSource _deviceSymbol = ImageSource.FromFile("icon_cloud_cross.png");
         /// <returns>
         /// Returns the matching image of the connection state.
         /// </returns>
         [JsonIgnore]
-        public ImageSource DeviceSymbol => Connected switch
-        {
-            ConnectionStatus.Connected => ImageSource.FromFile("icon_cloud_done.png"),
-            ConnectionStatus.Connecting => ImageSource.FromFile("icon_cloud_sync.png"),
-            ConnectionStatus.Disconnected => ImageSource.FromFile("icon_cloud_unavailable.png"),
-            ConnectionStatus.Error => ImageSource.FromFile("icon_cloud_cross.png"),
-            _ => null,
-        };
+        public ImageSource DeviceSymbol => _deviceSymbol;
 
 
 
@@ -243,7 +246,7 @@ namespace Bionly.Models
         {
             try
             {
-                File.Delete(GetPath(PathType.Device, false) + $"{Id}.json");
+                File.Delete(GetPath(PathType.Device, false));
                 return true;
             }
             catch (DirectoryNotFoundException)

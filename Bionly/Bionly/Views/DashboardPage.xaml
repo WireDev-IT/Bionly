@@ -13,8 +13,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Refresh}"/>
-        <ToolbarItem Text="{x:Static resx:Strings.RedrawGraphics}" Command="{Binding DrawGraphs}"/>
+        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Refresh}" IconImageSource="icon_refresh.png"/>
+        <ToolbarItem Text="{x:Static resx:Strings.RedrawGraphics}" Command="{Binding DrawGraphs}" IconImageSource="icon_draw.png"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
