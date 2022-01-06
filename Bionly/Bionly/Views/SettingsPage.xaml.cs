@@ -102,9 +102,9 @@ namespace Bionly.Views
             await Navigation.PushAsync(new DeviceSettingsPage());
         }
 
-        private async void DevicesView_Refreshing(object sender, EventArgs e)
+        private void DevicesView_Refreshing(object sender, EventArgs e)
         {
-            await RuntimeData.LoadAllCurrentValues();
+            _ = RuntimeData.LoadAllCurrentValuesAsync(true);
         }
 
         private void Button_Clicked(object sender, EventArgs e)

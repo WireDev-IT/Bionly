@@ -3,16 +3,31 @@ using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Input;
 using Xamarin.Forms;
-using static Bionly.Enums.Connection;
 
 namespace Bionly.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        public RadialGaugeChart radChart;
+        private int lastHour = 0;
+
+        private RadialGaugeChart _gauge = new();
+        public RadialGaugeChart Gauge
+        {
+            get => _gauge;
+            set
+            {
+                if (_gauge != value)
+                {
+                    _gauge = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public int SelectedIndex { get; set; } = -1;
 
         public ICommand DrawGraphs => new Command(() =>
@@ -63,73 +78,80 @@ namespace Bionly.ViewModels
                     Label = RuntimeData.SelectedDevice.CurrentTemp.ToString("N1") + " °C"
                 });
 
-                radChart.Entries = radEntries;
+                Gauge.Entries = radEntries;
             }
         });
 
         public ICommand Refresh => new Command(async () =>
         {
-            await RuntimeData.ConnectAllDevices();
-            await RuntimeData.LoadAllCurrentValues(true);
+            await RuntimeData.ConnectAllDevicesAsync(true);
         });
 
         public DashboardViewModel()
         {
             Title = Strings.Dashboard;
-            radChart = new()
+            Gauge = new()
             {
                 MaxValue = 100,
                 MinValue = 0,
                 AnimationDuration = TimeSpan.FromMilliseconds(500)
             };
             Refresh.Execute(null);
+
+            System.Timers.Timer HourTimer = new(5000); //0.5 minute
+            int lastHour = DateTime.Now.Hour;
+            HourTimer.Elapsed += new ElapsedEventHandler(OnHourEvent);
+            HourTimer.Start();
         }
 
-        public string GetConnectedText()
+        private void OnHourEvent(object source, ElapsedEventArgs e)
         {
-            if (RuntimeData.Devices != null)
+            if (lastHour < DateTime.Now.Hour || (lastHour == 23 && DateTime.Now.Hour == 0))
             {
-                int count = RuntimeData.Devices.Count;
+                lastHour = DateTime.Now.Hour;
+                OnPropertyChanged(nameof(WelcomeImage));
+                OnPropertyChanged(nameof(WelcomeText));
+            }
+        }
 
-                if (count > 0)
+        public string WelcomeText
+        {
+            get
+            {
+                if (DateTime.Now.Hour < 9)
                 {
-                    return string.Format(Strings.ConnectedDevicesCountTxt, RuntimeData.Devices.ToList().FindAll(x => x.Connected == ConnectionStatus.Connected).Count, count);
+                    return Strings.GoodMorning;
                 }
-            }
+                else if (DateTime.Now.Hour < 18)
+                {
+                    return Strings.GoodDay;
+                }
 
-            return Strings.NoDevicesConfigured;
+                return Strings.GoodEvening;
+            }
         }
 
-        public string GetWelcomeText()
+        public ImageSource WelcomeImage
         {
-            if (DateTime.Now.Hour < 9)
+            get
             {
-                return Strings.GoodMorning;
-            }
-            else if (DateTime.Now.Hour < 18)
-            {
-                return Strings.GoodDay;
-            }
+                if (DateTime.Now.Hour >= 22 || DateTime.Now.Hour < 5)
+                {
+                    return "icon_night.png";
+                }
+                else if (DateTime.Now.Hour >= 5 && DateTime.Now.Hour < 10)
+                {
+                    return "icon_morning.png";
+                }
+                else if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 22)
+                {
+                    return "icon_evening.png";
+                }
 
-            return Strings.GoodEvening;
+                return "icon_afternoon.png";
+            }
         }
 
-        public ImageSource GetWelcomeImage()
-        {
-            if (DateTime.Now.Hour >= 22 || DateTime.Now.Hour < 5)
-            {
-                return "icon_night.png";
-            }
-            else if (DateTime.Now.Hour >= 5 && DateTime.Now.Hour < 10)
-            {
-                return "icon_morning.png";
-            }
-            else if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 22)
-            {
-                return "icon_evening.png";
-            }
 
-            return "icon_afternoon.png";
-        }
     }
 }

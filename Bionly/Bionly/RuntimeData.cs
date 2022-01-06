@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Bionly.Resx;
+using Bionly.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -7,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using static Bionly.Enums.Connection;
 using Device = Bionly.Models.Device;
 
 namespace Bionly
@@ -19,6 +23,17 @@ namespace Bionly
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
         }
 
+        private static OutputData _outputData = new();
+        public static OutputData OutputData
+        {
+            get => _outputData;
+            set
+            {
+                _outputData = value;
+                OnStaticPropertyChanged();
+            }
+        }
+
         private static ObservableCollection<Device> _devices = new();
         public static ObservableCollection<Device> Devices
         {
@@ -28,12 +43,12 @@ namespace Bionly
                 if (_devices != value)
                 {
                     _devices = value;
-                    OnStaticPropertyChanged(nameof(Devices));
+                    OnStaticPropertyChanged();
                 }
             }
         }
 
-        private static int _selectedDeviceIndex= -1;
+        private static int _selectedDeviceIndex = -1;
         public static int SelectedDeviceIndex
         {
             get => _selectedDeviceIndex;
@@ -42,7 +57,7 @@ namespace Bionly
                 if (_selectedDeviceIndex != value)
                 {
                     _selectedDeviceIndex = value;
-                    OnStaticPropertyChanged(nameof(SelectedDeviceIndex));
+                    OnStaticPropertyChanged();
                 }
             }
         }
@@ -62,27 +77,22 @@ namespace Bionly
                 if (Devices[SelectedDeviceIndex] != value)
                 {
                     Devices[SelectedDeviceIndex] = value;
-                    OnStaticPropertyChanged(nameof(SelectedDevice));
+                    OnStaticPropertyChanged();
                 }
             }
         }
 
-        public static async Task ConnectAllDevices()
+        public static async Task ConnectAllDevicesAsync(bool loadCurrentValues = false)
         {
-            foreach (Device d in Devices)
-            {
-                _ = await d.CheckConnection();
-            }
+            await Task.WhenAll(Devices.Select(i => i.CheckConnection(loadCurrentValues, loadCurrentValues)));
         }
 
-        public static async Task LoadAllCurrentValues(bool demo = false)
+        public static async Task LoadAllCurrentValuesAsync(bool demo = false)
         {
-            foreach (Device d in Devices)
-            {
-                await d.LoadCurrentValues(demo ? "{\"temperature\":26.2,\"humidity\":40,\"pressure\":1020}" : null);
-            }
+            await Task.WhenAll(Devices.Select(i => i.LoadCurrentValues(demo ? "{\"temperature\":" + new Random().Next(-10, 30) + ".3,\"humidity\":" + new Random().Next(20, 90) + ",\"pressure\":" + new Random().Next(900, 1200) + "}" : null)));
         }
-        public static async Task LoadAllMeasurementPoints()
+
+        public static async Task LoadAllMeasurementPointsAsync()
         {
             foreach (Device d in Devices)
             {
@@ -90,7 +100,7 @@ namespace Bionly
             }
         }
 
-        public static ICommand LoadAllDevices => new Command(async () =>
+        public static async Task LoadAllDevices()
         {
             Devices.Clear();
             _ = Directory.CreateDirectory(Device.GeneralPath);
@@ -103,6 +113,41 @@ namespace Bionly
             List<Device> dl = Devices.ToList();
             dl.Sort((x, y) => (x.Name ?? "").CompareTo(y.Name ?? ""));
             Devices = new ObservableCollection<Device>(dl);
-        });
+        }
+    }
+
+    public class OutputData : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        internal void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Task RefreshConnectedDevices()
+        {
+            OnPropertyChanged(nameof(ConnectedDevices));
+            OnPropertyChanged(nameof(ConnectedDevicesText));
+            return Task.CompletedTask;
+        }
+
+        public string ConnectedDevicesText
+        {
+            get
+            {
+                if (RuntimeData.Devices != null)
+                {
+                    int i = RuntimeData.Devices.Count;
+                    if (i > 0)
+                    {
+                        return string.Format(Strings.ConnectedDevicesCountTxt, RuntimeData.OutputData.ConnectedDevices, i);
+                    }
+                }
+
+                return Strings.NoDevicesConfigured;
+            }
+        }
+
+        public int ConnectedDevices => (RuntimeData.Devices == null || RuntimeData.Devices.Count == 0) ? 0 : RuntimeData.Devices.ToList().FindAll(x => x.Connected == ConnectionStatus.Connected).Count;
     }
 }

@@ -20,7 +20,7 @@
     <ContentPage.Content>
         <Grid Margin="10" Padding="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -79,14 +79,14 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="WelcomeImg" Source="icon_morning.png" WidthRequest="110"/>
+                    <Image x:Name="WelcomeImg" Source="{Binding WelcomeImage}" WidthRequest="110"/>
                     <Grid Grid.Column="1" Margin="0,10,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label x:Name="WelcomeTxt" Text="Guten Tag" FontSize="40"/>
-                        <Label x:Name="ConnectedTxt" Grid.Row="1" FontSize="Medium"/>
+                        <Label Text="{Binding WelcomeText}" FontSize="40"/>
+                        <Label Grid.Row="1" FontSize="Medium" Text="{Binding Source={x:Static l:RuntimeData.OutputData}, Path=ConnectedDevicesText}"/>
                     </Grid>
                 </Grid>
                 <StackLayout x:Name="StartpageContainer">
@@ -100,8 +100,7 @@
                         <Button Text="{x:Static resx:Strings.Charts}" WidthRequest="120" Margin="2" Clicked="ChartsBtn_Clicked"/>
                         <Button Text="{x:Static resx:Strings.Manage}" WidthRequest="120" Margin="2" IsVisible="true" Clicked="ConfigBtn_Clicked"/>
                     </FlexLayout>
-                    <Label BindingContext="{Binding Source={x:Static l:RuntimeData.SelectedDevice}}" Text="{Binding Connected, StringFormat={x:Static resx:Strings.ConnectionState}}" Margin="5"/>
-                    <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="370" HorizontalOptions="Start" Margin="10"/>
+                    <mch:ChartView x:Name="RadChart" HeightRequest="150" WidthRequest="400" HorizontalOptions="Start" Margin="10" Chart="{Binding Gauge}"/>
                 </StackLayout>
             </StackLayout>
         </Grid>

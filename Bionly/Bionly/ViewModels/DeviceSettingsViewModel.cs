@@ -1,5 +1,6 @@
 ﻿using Bionly.Resx;
 using Bionly.Views;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,8 +12,17 @@ namespace Bionly.ViewModels
 
         public ICommand SaveDevice => new Command(async () =>
         {
-            await Device.Save();
-            RuntimeData.LoadAllDevices.Execute(null);
+            if (await Device.Save())
+            {
+                if (RuntimeData.Devices.ToList().Exists(x => x.Id == Device.Id))
+                {
+                    RuntimeData.Devices[RuntimeData.Devices.ToList().FindIndex(x => x.Id == Device.Id)] = Device;
+                }
+                else
+                {
+                    RuntimeData.Devices.Add(Device);
+                }
+            }
         });
 
         public ICommand DeleteDevice => new Command(async () =>
@@ -33,7 +43,8 @@ namespace Bionly.ViewModels
                 }
 
                 RuntimeData.Devices.Remove(Device);
-                await Shell.Current.GoToAsync($"//{nameof(SettingsPage)}");
+                await Shell.Current.Navigation.PopAsync();
+                //await Shell.Current.GoToAsync($"//{nameof(SettingsPage)}");
             }
         });
 

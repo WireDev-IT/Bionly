@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -18,6 +19,12 @@ namespace Bionly.Models
     public class Device : INotifyPropertyChanged
     {
         public Device() { }
+
+        public override string ToString()
+        {
+            base.ToString(); 
+            return Name;
+        }
 
         public static string GeneralPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create) + "/Devices/";
         private bool ErrorOnCurrentValues = false;
@@ -130,7 +137,6 @@ namespace Bionly.Models
             }
         }
 
-
         private List<MeasurementPoint> _mPoints = new();
         [JsonIgnore]
         public List<MeasurementPoint> MPoints
@@ -207,7 +213,28 @@ namespace Bionly.Models
         }
 
         [JsonIgnore]
-        public string CurrentValuesStr => ErrorOnCurrentValues ? Strings.ErrorOnCall : CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %";
+        public string CurrentValuesStr
+        {
+            get
+            {
+                if (Connected == ConnectionStatus.Disconnected)
+                {
+                    return "Nicht Verbunden";
+                }
+                else if (Connected == ConnectionStatus.Connecting)
+                {
+                    return "Verbinden...";
+                }
+                else if (Connected == ConnectionStatus.Connected)
+                {
+                    return ErrorOnCurrentValues ? Strings.ErrorOnCall : CurrentTemp.ToString("N1") + " °C, " + CurrentHumi.ToString("00") + " %, " + CurrentPres + " hPa";
+                }
+                else
+                {
+                    return Strings.ErrorOnCall;
+                }
+            }
+        }    
 
         private ConnectionStatus _connected = ConnectionStatus.Error;
         [JsonIgnore]
@@ -220,27 +247,24 @@ namespace Bionly.Models
                 {
                     _connected = value;
                     OnPropertyChanged(nameof(Connected));
-
-                    _deviceSymbol = value switch
-                    {
-                        ConnectionStatus.Connected => ImageSource.FromFile("icon_cloud_done.png"),
-                        ConnectionStatus.Connecting => ImageSource.FromFile("icon_cloud_sync.png"),
-                        ConnectionStatus.Disconnected => ImageSource.FromFile("icon_cloud_unavailable.png"),
-                        ConnectionStatus.Error => ImageSource.FromFile("icon_cloud_cross.png"),
-                        _ => null,
-                    };
+                    OnPropertyChanged(nameof(CurrentValuesStr));
+                    OnPropertyChanged(nameof(DeviceSymbol));
                 }
             }
         }
 
-        private ImageSource _deviceSymbol = ImageSource.FromFile("icon_cloud_cross.png");
         /// <returns>
         /// Returns the matching image of the connection state.
         /// </returns>
         [JsonIgnore]
-        public ImageSource DeviceSymbol => _deviceSymbol;
-
-
+        public ImageSource DeviceSymbol => Connected switch
+        {
+            ConnectionStatus.Connected => ImageSource.FromFile("icon_cloud_done.png"),
+            ConnectionStatus.Connecting => ImageSource.FromFile("icon_cloud_sync.png"),
+            ConnectionStatus.Disconnected => ImageSource.FromFile("icon_cloud_unavailable.png"),
+            ConnectionStatus.Error => ImageSource.FromFile("icon_cloud_cross.png"),
+            _ => null,
+        };
 
         public async Task<bool> Delete()
         {
@@ -297,7 +321,17 @@ namespace Bionly.Models
             {
                 if (string.IsNullOrEmpty(Id))
                 {
-                    NewId();
+                    byte[] codebytes = new byte[8];
+                    string code;
+                    do
+                    {
+                        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+                        {
+                            rng.GetBytes(codebytes);
+                        }
+                        code = BitConverter.ToString(codebytes).ToLower().Replace("-", "");
+                    } while (File.Exists(GeneralPath + $"{code}.json"));
+                    Id = code;
                 }
 
                 _ = Directory.CreateDirectory(GeneralPath);
@@ -356,21 +390,7 @@ namespace Bionly.Models
                 return null;
             }
         }
-        public string NewId()
-        {
-            byte[] codebytes = new byte[8];
-            string code;
-            do
-            {
-                using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
-                {
-                    rng.GetBytes(codebytes);
-                }
-                code = BitConverter.ToString(codebytes).ToLower().Replace("-", "");
-            } while (File.Exists(GeneralPath + $"{code}.json"));
-            Id = code;
-            return Id;
-        }
+
         /// <param name="type">The type of path that is needed.</param>
         /// <param name="createDirectory">Creates the path so that it can be used directly.</param>
         public string GetPath(PathType type, bool createDirectory = true)
@@ -412,6 +432,7 @@ namespace Bionly.Models
                 CurrentPres = values.CurrentPres;
 
                 ErrorOnCurrentValues = false;
+                OnPropertyChanged(nameof(CurrentValuesStr));
                 return true;
             }
             catch (Exception)
@@ -469,7 +490,7 @@ namespace Bionly.Models
                 return false;
             }
         }
-        public async Task<ConnectionStatus> CheckConnection()
+        public async Task<ConnectionStatus> CheckConnection(bool loadCurrentValues = false, bool demo = false)
         {
             if (CheckAdress(IpAddress))
             {
@@ -478,20 +499,27 @@ namespace Bionly.Models
                 try
                 {
                     HttpResponseMessage response = await new HttpClient().GetAsync("http://" + IpAddress);
-                    return Connected = ConnectionStatus.Connected;
+                    if (loadCurrentValues) _ = LoadCurrentValues(demo ? "{\"temperature\":" + new Random().Next(-10, 30) + "." + new Random().Next(0, 9) + ",\"humidity\":" + new Random().Next(20, 90) + ",\"pressure\":" + new Random().Next(900, 1200) + "}" : null);
+                    Connected = ConnectionStatus.Connected;
                 }
-                catch (Exception) { }
-
-                return Connected = ConnectionStatus.Disconnected;
+                catch (Exception)
+                {
+                    Connected = ConnectionStatus.Disconnected;
+                }
+            }
+            else
+            {
+                Connected = ConnectionStatus.Error;
             }
 
-            return Connected = ConnectionStatus.Error;
+            await RuntimeData.OutputData.RefreshConnectedDevices();
+            return Connected;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string property)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public struct CurrentValues

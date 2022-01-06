@@ -25,10 +25,6 @@ namespace Bionly.Views
         {
             base.OnAppearing();
 
-            WelcomeTxt.Text = ((DashboardViewModel)BindingContext).GetWelcomeText();
-            WelcomeImg.Source = ((DashboardViewModel)BindingContext).GetWelcomeImage();
-            ConnectedTxt.Text = ((DashboardViewModel)BindingContext).GetConnectedText();
-            RadChart.Chart = ((DashboardViewModel)BindingContext).radChart;
             DefaultView.SelectedItem = RuntimeData.SelectedDevice;
         }
 
@@ -69,6 +65,7 @@ namespace Bionly.Views
         private async void ConnectBtn_Clicked(object sender, System.EventArgs e)
         {
             ConnectBtn.IsEnabled = false;
+            await RuntimeData.SelectedDevice.CheckConnection();
             await Task.Delay(10000);
             ConnectBtn.IsEnabled = true;
         }

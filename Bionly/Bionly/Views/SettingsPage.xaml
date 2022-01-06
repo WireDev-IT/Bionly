@@ -13,7 +13,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resx:Strings.NewDevice}" Clicked="CreateDevice" IconImageSource="icon_add.png"/>
-        <ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}" IconImageSource="icon_refresh.png"/>
+        <!--<ToolbarItem Text="{x:Static resx:Strings.Refresh}" Command="{Binding Source={x:Static l:RuntimeData.LoadAllDevices}}" IconImageSource="icon_refresh.png"/>-->
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

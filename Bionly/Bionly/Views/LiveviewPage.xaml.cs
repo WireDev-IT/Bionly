@@ -1,5 +1,4 @@
 ﻿using Bionly.ViewModels;
-using LibVLCSharp.Shared;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -27,41 +26,19 @@ namespace Bionly.Views
             StopButton_Clicked(new object(), new EventArgs());
         }
 
-        private void VideoView_MediaPlayerChanged(object sender, MediaPlayerChangedEventArgs e)
-        {
-            ActIndicator.IsRunning = true;
-            VidView.MediaPlayer.Play();
-            StopBtn.IsEnabled = true;
-            ((LiveviewViewModel)BindingContext).IsPlaying = true;
-            //DeviceList.IsEnabled = false;
-        }
-
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if (((LiveviewViewModel)BindingContext).IsPlaying)
-            {
-                VidView.MediaPlayer.Stop();
-                VidView.MediaPlayer.Dispose();
-            }
-            VidView.MediaPlayer = ((LiveviewViewModel)BindingContext).GetPlayer(((KeyValuePair<string, Uri>)e.Item).Value);
-            VidView.MediaPlayer.Playing += MediaPlayer_Playing;
-        }
-
-        private void MediaPlayer_Playing(object sender, EventArgs e)
-        {
-            ActIndicator.IsRunning = false;
+            ((LiveviewViewModel)BindingContext).SetPlayer(((KeyValuePair<string, Uri>)e.Item).Value);
         }
 
         private void StopButton_Clicked(object sender, EventArgs e)
         {
-            if (VidView.MediaPlayer != null)
+            if (((LiveviewViewModel)BindingContext).Player != null)
             {
-                VidView.MediaPlayer.Dispose();
+                ((LiveviewViewModel)BindingContext).Player.Dispose();
             }
             DeviceList.SelectedItem = null;
             StopBtn.IsEnabled = false;
-            ((LiveviewViewModel)BindingContext).IsPlaying = false;
-            //DeviceList.IsEnabled = true;
         }
     }
 }

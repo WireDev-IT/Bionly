@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bionly.Views.LiveviewPage"
              xmlns:vm="clr-namespace:Bionly.ViewModels"
+             xmlns:conv="clr-namespace:Bionly.Converter"
              xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              xmlns:resx="clr-namespace:Bionly.Resx"
              Title="{Binding Title}">
@@ -13,19 +14,8 @@
 
     <ContentPage.Content>
         <Grid>
-            <Label Text="{x:Static resx:Strings.NoLiveviewWin}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large">
-                <Label.IsVisible>
-                    <OnPlatform x:TypeArguments="x:Boolean" Default="False">
-                        <On Platform="UWP" Value="True"/>
-                    </OnPlatform>
-                </Label.IsVisible>
-            </Label>
-            <Grid>
-                <Grid.IsVisible>
-                    <OnPlatform x:TypeArguments="x:Boolean" Default="True">
-                        <On Platform="UWP" Value="False"/>
-                    </OnPlatform>
-                </Grid.IsVisible>
+            <Label Text="{x:Static resx:Strings.NoLiveviewWin}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large" IsVisible="{Binding IsPlatfromOk, Converter={conv:BooleanInverter}}"/>
+            <Grid IsVisible="{Binding IsPlatfromOk}" IsEnabled="{Binding IsPlatfromOk, Converter={conv:BooleanInverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -35,7 +25,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="StopBtn" Grid.Row="0" Text="{x:Static resx:Strings.EndVideo}" Clicked="StopButton_Clicked" Margin="5" IsEnabled="False"/>
+                    <Button x:Name="StopBtn" Grid.Row="0" Text="{x:Static resx:Strings.EndVideo}" Clicked="StopButton_Clicked" Margin="5" IsEnabled="{Binding IsPlaying}"/>
                     <ListView x:Name="DeviceList" Grid.Row="1" ItemsSource="{Binding Connections}" VerticalOptions="Start" HorizontalOptions="Start" SelectionMode="Single" ItemTapped="ListView_ItemTapped" WidthRequest="200">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -46,8 +36,8 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
-                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayerChanged="VideoView_MediaPlayerChanged"/>
-                <ActivityIndicator x:Name="ActIndicator" Grid.Column="1" Color="Blue"/>
+                <vlc:VideoView x:Name="VidView" Grid.Column="1" MediaPlayer="{Binding Player}"/>
+                <ActivityIndicator x:Name="ActIndicator" Grid.Column="1" Color="Blue" IsRunning="{Binding IsBuffering}"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -12,7 +12,7 @@ namespace Bionly
         {
             LocalizationHelper.Initialize();
             InitializeComponent();
-            RuntimeData.LoadAllDevices.Execute(null);
+            _ = RuntimeData.LoadAllDevices();
         }
 
         private async void AccBtn_Clicked(object sender, EventArgs e)
@@ -36,7 +36,10 @@ namespace Bionly
                 try
                 {
                     LocalizationHelper.Settings.TwoLetterISOLanguageName = LocalizationHelper.SupportedLanguages.First(x => x.DisplayName == result).TwoLetterISOLanguageName;
-                    if (!await LocalizationHelper.Settings.Save()) throw new Exception();
+                    if (!await LocalizationHelper.Settings.Save())
+                    {
+                        throw new Exception();
+                    }
 
                     await DisplayAlert(Strings.RestartRequired, Strings.CloseAppForLanguage, Strings.OK);
 
