@@ -26,17 +26,16 @@ namespace Bionly.Views
             StopButton_Clicked(new object(), new EventArgs());
         }
 
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            ((LiveviewViewModel)BindingContext).SetPlayer(((KeyValuePair<string, Uri>)e.Item).Value);
+            VidView.MediaPlayer?.Stop();
+            await ((LiveviewViewModel)BindingContext).SetPlayer(((KeyValuePair<string, Uri>)e.Item).Value);
+            VidView.MediaPlayer?.Play();
         }
 
         private void StopButton_Clicked(object sender, EventArgs e)
         {
-            if (((LiveviewViewModel)BindingContext).Player != null)
-            {
-                ((LiveviewViewModel)BindingContext).Player.Dispose();
-            }
+            VidView.MediaPlayer?.Stop();
             DeviceList.SelectedItem = null;
             StopBtn.IsEnabled = false;
         }

@@ -14,8 +14,8 @@
 
     <ContentPage.Content>
         <Grid>
-            <Label Text="{x:Static resx:Strings.NoLiveviewWin}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large" IsVisible="{Binding IsPlatfromOk, Converter={conv:BooleanInverter}}"/>
-            <Grid IsVisible="{Binding IsPlatfromOk}" IsEnabled="{Binding IsPlatfromOk, Converter={conv:BooleanInverter}}">
+            <Label Text="{x:Static resx:Strings.NoLiveviewWin}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large" IsVisible="{Binding IsPlatformOk, Converter={conv:BooleanInverter}}"/>
+            <Grid IsVisible="{Binding IsPlatformOk}" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>

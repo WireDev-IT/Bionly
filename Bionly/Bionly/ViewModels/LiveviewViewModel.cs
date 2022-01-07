@@ -2,6 +2,7 @@
 using LibVLCSharp.Shared;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Bionly.ViewModels
@@ -19,7 +20,7 @@ namespace Bionly.ViewModels
                 if (_isBuffering != value)
                 {
                     _isBuffering = value;
-                    OnPropertyChanged(nameof(IsBuffering));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -33,7 +34,7 @@ namespace Bionly.ViewModels
                 if (_isPlaying != value)
                 {
                     _isPlaying = value;
-                    OnPropertyChanged(nameof(IsPlaying));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -47,15 +48,18 @@ namespace Bionly.ViewModels
                 if (_player != value)
                 {
                     _player = value;
-                    OnPropertyChanged(nameof(Player));
+                    OnPropertyChanged();
 
                     Player.Playing += Player_Playing;
                     Player.Stopped += Player_Stopped;
-
-                    IsBuffering = true;
-                    Player.Play();
+                    Player.Opening += Player_Opening;
                 }
             }
+        }
+
+        private void Player_Opening(object sender, EventArgs e)
+        {
+            IsBuffering = true;
         }
 
         private void Player_Stopped(object sender, EventArgs e)
@@ -81,17 +85,19 @@ namespace Bionly.ViewModels
         {
             Title = Strings.Liveview;
 
-            if (IsPlatfromOk)
+            if (IsPlatformOk)
             {
                 Core.Initialize();
                 LibVLC = new LibVLC();
             }
+
         }
 
         /// <param name="uri">The uri for the stream</param>
-        internal void SetPlayer(Uri uri)
+        internal Task SetPlayer(Uri uri)
         {
             Player = new MediaPlayer(new Media(LibVLC, uri));
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -99,7 +105,7 @@ namespace Bionly.ViewModels
         /// </summary>
         internal void OnAppearing()
         {
-            if (IsPlatfromOk)
+            if (IsPlatformOk)
             {
                 Connections.Clear();
                 foreach (Models.Device device in RuntimeData.Devices)
@@ -112,7 +118,7 @@ namespace Bionly.ViewModels
         /// <summary>
         /// true, if the runtime platform is compatible with VLC
         /// </summary>
-        public bool IsPlatfromOk
+        public bool IsPlatformOk
         {
             get => Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS;
         }
