@@ -1,5 +1,4 @@
 ﻿using Bionly.Resx;
-using Bionly.Views;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,6 +8,11 @@ namespace Bionly.ViewModels
     public class DeviceSettingsViewModel : BaseViewModel
     {
         public static Models.Device Device { get; set; } = new();
+
+        public DeviceSettingsViewModel()
+        {
+            Title = Strings.EditDevice;
+        }
 
         public ICommand SaveDevice => new Command(async () =>
         {
@@ -44,13 +48,7 @@ namespace Bionly.ViewModels
 
                 RuntimeData.Devices.Remove(Device);
                 await Shell.Current.Navigation.PopAsync();
-                //await Shell.Current.GoToAsync($"//{nameof(SettingsPage)}");
             }
         });
-
-        public DeviceSettingsViewModel()
-        {
-            Title = Strings.EditDevice;
-        }
     }
 }

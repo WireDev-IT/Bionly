@@ -14,17 +14,9 @@ namespace Bionly.Views
             InitializeComponent();
         }
 
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            RuntimeData.SelectedDeviceIndex = e.ItemIndex;
-            ((DashboardViewModel)BindingContext).DrawGraphs.Execute(null);
-            ConnectBtn.IsEnabled = true;
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             DefaultView.SelectedItem = RuntimeData.SelectedDevice;
         }
 
@@ -48,6 +40,19 @@ namespace Bionly.Views
             await DisplayAlert(Strings.Error, Strings.NoRemoteConfig, Strings.OK);
         }
 
+        /// <summary>
+        /// Actions that are executed when a device is selected.
+        /// </summary>
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            RuntimeData.SelectedDeviceIndex = e.ItemIndex;
+            ((DashboardViewModel)BindingContext).DrawGraphs.Execute(null);
+            ConnectBtn.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Sets the device view to be displayed.
+        /// </summary>
         private void DeviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItemIndex < 0)
@@ -62,10 +67,15 @@ namespace Bionly.Views
             }
         }
 
+        /// <summary>
+        /// Connects to the selected device.
+        /// </summary>
         private async void ConnectBtn_Clicked(object sender, System.EventArgs e)
         {
             ConnectBtn.IsEnabled = false;
             await RuntimeData.SelectedDevice.CheckConnection();
+
+            //cooldown for connection
             await Task.Delay(10000);
             ConnectBtn.IsEnabled = true;
         }

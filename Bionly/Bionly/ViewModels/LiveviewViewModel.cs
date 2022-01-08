@@ -12,6 +12,12 @@ namespace Bionly.ViewModels
         private static LibVLC LibVLC { get; set; }
 
         private bool _isBuffering = false;
+        /// <summary>
+        /// Can be bound to the UI even if player is null.
+        /// </summary>
+        /// <returns>
+        /// true, when a video is starting to play, otherwise false
+        /// </returns>
         public bool IsBuffering
         {
             get => _isBuffering;
@@ -26,6 +32,12 @@ namespace Bionly.ViewModels
         }
 
         private bool _isPlaying = false;
+        /// <summary>
+        /// Can be bound to the UI even if player is null.
+        /// </summary>
+        /// <returns>
+        /// true, when a video is playing, otherwise false
+        /// </returns>
         public bool IsPlaying
         {
             get => _isPlaying;
@@ -40,6 +52,9 @@ namespace Bionly.ViewModels
         }
 
         private MediaPlayer _player;
+        /// <summary>
+        /// The MediaPlayer object that can be bound to the user interface.
+        /// </summary>
         public MediaPlayer Player
         {
             get => _player;

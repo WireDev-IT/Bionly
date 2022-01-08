@@ -26,6 +26,9 @@ namespace Bionly.Views
             StopButton_Clicked(new object(), new EventArgs());
         }
 
+        /// <summary>
+        /// Actions that are executed when a device is selected.
+        /// </summary>
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             VidView.MediaPlayer?.Stop();
@@ -33,6 +36,9 @@ namespace Bionly.Views
             VidView.MediaPlayer?.Play();
         }
 
+        /// <summary>
+        /// Actions to stop the player.
+        /// </summary>
         private void StopButton_Clicked(object sender, EventArgs e)
         {
             VidView.MediaPlayer?.Stop();

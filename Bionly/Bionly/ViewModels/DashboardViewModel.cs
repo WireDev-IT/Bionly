@@ -3,16 +3,17 @@ using Microcharts;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Timer = System.Timers.Timer;
 
 namespace Bionly.ViewModels
 {
     public class DashboardViewModel : BaseViewModel
     {
-        private int lastHour = 0;
+        private int lastHour = DateTime.Now.Hour;
+        private readonly Timer HourTimer = new(5000);
 
         private RadialGaugeChart _gauge = new();
         public RadialGaugeChart Gauge
@@ -98,12 +99,13 @@ namespace Bionly.ViewModels
             };
             Refresh.Execute(null);
 
-            System.Timers.Timer HourTimer = new(5000); //0.5 minute
-            int lastHour = DateTime.Now.Hour;
             HourTimer.Elapsed += new ElapsedEventHandler(OnHourEvent);
             HourTimer.Start();
         }
 
+        /// <summary>
+        /// Refreshes the welcome screen at every new hour
+        /// </summary>
         private void OnHourEvent(object source, ElapsedEventArgs e)
         {
             if (lastHour < DateTime.Now.Hour || (lastHour == 23 && DateTime.Now.Hour == 0))
@@ -114,6 +116,9 @@ namespace Bionly.ViewModels
             }
         }
 
+        /// <returns>
+        /// The welcome text as a System.String
+        /// </returns>
         public string WelcomeText
         {
             get
@@ -131,6 +136,9 @@ namespace Bionly.ViewModels
             }
         }
 
+        /// <returns>
+        /// The welcome image as a Xamarin.Forms.ImageSource
+        /// </returns>
         public ImageSource WelcomeImage
         {
             get
@@ -151,7 +159,5 @@ namespace Bionly.ViewModels
                 return "icon_afternoon.png";
             }
         }
-
-
     }
 }

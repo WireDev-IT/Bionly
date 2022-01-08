@@ -22,19 +22,19 @@
                     <Label Text="{x:Static resx:Strings.Temperatur}" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                        <mch:ChartView x:Name="TempChart" HeightRequest="450"/>
+                        <mch:ChartView HeightRequest="450" Chart="{Binding TempChart}"/>
                     </Grid>
                     <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
                     <Label Text="{x:Static resx:Strings.Humidity}" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                        <mch:ChartView x:Name="HumiChart" HeightRequest="450"/>
+                        <mch:ChartView HeightRequest="450" Chart="{Binding HumiChart}"/>
                     </Grid>
                     <Line HeightRequest="1" Background="Gray" Margin="0,0,0,20"/>
                     <Label Text="{x:Static resx:Strings.AirPressure}" FontSize="Subtitle"/>
                     <Grid>
                         <ActivityIndicator IsRunning="True" Margin="0,50"/>
-                        <mch:ChartView x:Name="PresChart" HeightRequest="450"/>
+                        <mch:ChartView HeightRequest="450" Chart="{Binding PresChart}"/>
                     </Grid>
                 </StackLayout>
             </ScrollView>

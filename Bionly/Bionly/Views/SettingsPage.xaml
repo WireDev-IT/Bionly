@@ -21,7 +21,7 @@
             <Label x:Name="GuestTxt" Text="{x:Static resx:Strings.NoSettingsGuest}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="false"/>
             <StackLayout x:Name="MainContainer">
                 <Label Text="{x:Static resx:Strings.Devices}" FontSize="Title"/>
-                <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static l:RuntimeData.Devices}}" SelectionMode="None" VerticalOptions="Start" ItemTapped="DevicesView_ItemTapped" Refreshing="DevicesView_Refreshing">
+                <ListView x:Name="DevicesView" ItemsSource="{Binding Source={x:Static l:RuntimeData.Devices}}" SelectionMode="None" VerticalOptions="Start" ItemTapped="DevicesView_ItemTapped">
                     <ListView.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>

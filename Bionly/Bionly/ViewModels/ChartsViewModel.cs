@@ -1,13 +1,10 @@
 ﻿using Bionly.Models;
 using Bionly.Resx;
 using Microcharts;
-using Newtonsoft.Json;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Device = Bionly.Models.Device;
@@ -20,14 +17,52 @@ namespace Bionly.ViewModels
 
         private readonly Dictionary<DateTime, AverageMeasurementPoint> averagePoints = new();
 
-        public LineChart tempChart;
-        public LineChart humiChart;
-        public LineChart presChart;
+        private LineChart _tempChart;
+        public LineChart TempChart
+        {
+            get => _tempChart;
+            set
+            {
+                if (_tempChart != value)
+                {
+                    _tempChart = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private LineChart _humiChart;
+        public LineChart HumiChart
+        {
+            get => _humiChart;
+            set
+            {
+                if (_humiChart != value)
+                {
+                    _humiChart = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public LineChart _presChart;
+        public LineChart PresChart
+        {
+            get => _presChart;
+            set
+            {
+                if (_presChart != value)
+                {
+                    _presChart = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public ChartsViewModel()
         {
             Title = Strings.Charts;
-            tempChart = new()
+            TempChart = new()
             {
                 LineMode = LineMode.Straight,
                 LabelOrientation = Orientation.Default,
@@ -35,7 +70,7 @@ namespace Bionly.ViewModels
                 AnimationDuration = TimeSpan.FromMilliseconds(500),
                 //BackgroundColor = new SKColor().WithAlpha(0),
             };
-            humiChart = new()
+            HumiChart = new()
             {
                 LineMode = LineMode.Straight,
                 LabelOrientation = Orientation.Default,
@@ -43,7 +78,7 @@ namespace Bionly.ViewModels
                 AnimationDuration = TimeSpan.FromMilliseconds(500),
                 //BackgroundColor = new SKColor().WithAlpha(0)
             };
-            presChart = new()
+            PresChart = new()
             {
                 LineMode = LineMode.Straight,
                 LabelOrientation = Orientation.Default,
@@ -90,9 +125,9 @@ namespace Bionly.ViewModels
                 });
             }
 
-            tempChart.Entries = tempEntries;
-            humiChart.Entries = humiEntries;
-            presChart.Entries = presEntries;
+            TempChart.Entries = tempEntries;
+            HumiChart.Entries = humiEntries;
+            PresChart.Entries = presEntries;
         });
 
         public ICommand CalcAverage => new Command(() =>

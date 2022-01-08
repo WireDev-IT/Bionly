@@ -97,14 +97,9 @@ namespace Bionly.Views
         }
 
         private async void DevicesView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {   
+        {
             DeviceSettingsViewModel.Device = (Device)e.Item;
             await Navigation.PushAsync(new DeviceSettingsPage());
-        }
-
-        private void DevicesView_Refreshing(object sender, EventArgs e)
-        {
-            _ = RuntimeData.LoadAllCurrentValuesAsync(true);
         }
 
         private void Button_Clicked(object sender, EventArgs e)

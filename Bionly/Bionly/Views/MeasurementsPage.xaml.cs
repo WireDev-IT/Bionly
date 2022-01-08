@@ -1,6 +1,4 @@
-﻿using Bionly.ViewModels;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Bionly.Views

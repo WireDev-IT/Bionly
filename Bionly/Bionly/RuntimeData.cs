@@ -1,5 +1,4 @@
 ﻿using Bionly.Resx;
-using Bionly.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,8 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Forms;
 using static Bionly.Enums.Connection;
 using Device = Bionly.Models.Device;
 

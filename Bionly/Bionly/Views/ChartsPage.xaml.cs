@@ -1,11 +1,5 @@
 ﻿using Bionly.Resx;
 using Bionly.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -34,16 +28,6 @@ namespace Bionly.Views
                 ((ChartsViewModel)BindingContext).CalcAverage.Execute(null);
                 ((ChartsViewModel)BindingContext).DrawGraphs.Execute(null);
             }
-
-            TempChart.Chart = ((ChartsViewModel)BindingContext).tempChart;
-            HumiChart.Chart = ((ChartsViewModel)BindingContext).humiChart;
-            PresChart.Chart = ((ChartsViewModel)BindingContext).presChart;
         }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-        }
-
     }
 }
